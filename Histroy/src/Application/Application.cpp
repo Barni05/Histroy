@@ -1,10 +1,12 @@
 #include "hspch.h"
 #include <Histroy.h>
-#include "plog/Initializers/RollingFileInitializer.h"
+
 int main()
 {
-	Histroy::Window* window = new Histroy::Window({ "Histroy Engine", 640, 480 });
-	window->Appear();
+	HS_SET_LOG_DIR(plog::warning, "F:\\DEV\\Projektek\\Histroy Engine\\Histroy\\Logs\\Logs.txt", 10000, 1);
+	Histroy::WindowResize resize(640, 480);
+	std::cout << resize.ToString() << std::endl;
+	HS_WARNING(resize.ToString());
 	std::cin.get();
 	return 0;
 }

@@ -8,26 +8,23 @@ namespace Histroy
 		NONE = 0,
 		Application,
 		WindowResize, WindowClose,
-		KeyPressed, KeyReleased,
-		MouseButton, MouseScroll,
+		KeyEvent, KeyPressed, KeyReleased,
+		MouseButton, MouseButtonPressed, MouseButtonReleased, MouseScroll,
 		MouseMove
 	};
-
+#define HS_EVENT_FUNCTIONS(name, type)		std::string GetName() override {return name;}\
+										EventType GetType() override {return type;}
 	class Event
 	{
 	public:
-		Event()
-		{
-			mType = EventType::NONE;
-		}
+		Event(){}
 
 		~Event() {}
 
 		virtual std::string GetName() = 0;
 		virtual EventType GetType() = 0;
 
-		virtual std::string ToString() { HS_INFO("Default event"); }
+		virtual std::string ToString() { return "Default event"; }
 	private:
-		EventType mType;
 	};
 }
