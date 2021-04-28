@@ -18,4 +18,13 @@ namespace Histroy
 	private:
 		int mWidth, mHeight;
 	};
+
+	class WindowClose : public Event
+	{
+	public:
+		WindowClose() {}
+		~WindowClose() {}
+
+		HS_EVENT_FUNCTIONS("Window Close", EventType::WindowClose)
+	};
 }

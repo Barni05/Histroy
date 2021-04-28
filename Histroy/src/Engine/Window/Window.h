@@ -3,7 +3,7 @@
 #include "GLFW/glfw3.h"
 #include "Engine/Events/Event.h"
 
-typedef void(*EventCallback)(Histroy::Event*);
+typedef std::function<void(Histroy::Event&)> EventCallback;
 namespace Histroy
 {
 	typedef 
@@ -20,7 +20,7 @@ namespace Histroy
 		~Window();
 
 		void Init();
-		void Appear();
+		void Update();
 		void Close();
 
 		GLFWwindow* GetWindow() const { return mWindow; }

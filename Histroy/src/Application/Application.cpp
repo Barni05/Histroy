@@ -1,39 +1,55 @@
 #include "hspch.h"
 #include "Core.h"
+#include "Application.h"
 #include <Histroy.h>
 
+#define BIND_EVENT_FUNCTION(func) std::bind(&Application::func, this, std::placeholders::_1)
 
-void OnEventHappened(Histroy::Event* e)
+namespace Histroy
 {
-	std::cout << e->ToString() << std::endl;
-}
-
-
-class Application
-{
-public:
-	Application() {
+	Application::Application() {
 		mWindow = new Histroy::Window({ "Histroy", 900, 600 });
 	}
-	~Application() {}
+	Application::~Application() { delete mWindow; }
 
-	inline void Run() {
+	void Application::Run() {
 		HS_SET_LOG_DIR(plog::warning, "F:\\DEV\\Projektek\\Histroy Engine\\Histroy\\Logs\\Logs.txt", 10000, 1);
 		mWindow->Init();
-		mWindow->SetCallback(OnEventHappened);
-		while (!glfwWindowShouldClose(mWindow->GetWindow()))
+		mWindow->SetCallback(BIND_EVENT_FUNCTION(OnEventHappened));
+		while (!mShouldClose)
 		{
-			mWindow->Appear();
+			glClear(GL_COLOR_BUFFER_BIT);
+			mWindow->Update();
 		}
 	}
-private:
-	Histroy::Window* mWindow;
-};
+
+
+	bool Application::OnWindowClose(Histroy::Event& e)
+	{
+		mShouldClose = true;
+		return true;
+	}
+
+	bool Application::OnKeyPressed(Event& e)
+	{
+		std::cout<<e.ToString() << std::endl;
+		return true;
+	}
+
+	void Application::OnEventHappened(Histroy::Event& e)
+	{
+		EventDispatcher dispatcher(e);
+		dispatcher.Dispatch<WindowClose>(BIND_EVENT_FUNCTION(OnWindowClose));
+		dispatcher.Dispatch<KeyPressed>(BIND_EVENT_FUNCTION(OnKeyPressed));
+	}
+
+}
+
 int main()
 {
-	Application* application = new Application();
-	application->Run();
-	delete application;
+	Histroy::Application* app = new Histroy::Application();
+	app->Run();
+	delete app;
 	std::cin.get();
 	return 0;
 }

@@ -13,9 +13,11 @@ namespace Histroy
 		MouseMove
 	};
 #define HS_EVENT_FUNCTIONS(name, type)		std::string GetName() override {return name;}\
-										EventType GetType() override {return type;}
+										static EventType GetStaticType() {return type;}\
+										EventType GetType() override { return GetStaticType(); }
 	class Event
 	{
+		friend class EventDispatcher;
 	public:
 		Event(){}
 
@@ -24,7 +26,31 @@ namespace Histroy
 		virtual std::string GetName() = 0;
 		virtual EventType GetType() = 0;
 
-		virtual std::string ToString() { return "Default event"; }
+		virtual std::string ToString() { return GetName(); }
 	private:
+	protected:
+		bool mHandled;
+	};
+
+	class EventDispatcher
+	{
+		template<typename T>
+		using EventFunction = std::function<bool(T&)>;
+	public:
+		EventDispatcher(Event& e) : mEvent(e) {}
+
+		template<typename T>
+		bool Dispatch(EventFunction<T> function)
+		{
+			if (mEvent.GetType() == T::GetStaticType())
+			{
+				mEvent.mHandled = function(*(T*)&mEvent);
+				return true;
+			}
+			return false;
+		}
+	private:
+		Event& mEvent;
+
 	};
 }
