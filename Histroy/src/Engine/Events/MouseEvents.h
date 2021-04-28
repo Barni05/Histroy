@@ -20,7 +20,11 @@ namespace Histroy
 	public:
 		MouseButtonPressed(int button) :MouseButton(button) {}
 		HS_EVENT_FUNCTIONS("Mouse Button Pressed", EventType::MouseButtonPressed)
-		std::string ToString() override { return "Mouse Button Pressed: " + mButton; }
+		std::string ToString() override {
+			std::stringstream ss;
+			ss << "Mouse button pressed: " << mButton;
+			return ss.str();
+		}
 
 	};
 
@@ -29,7 +33,11 @@ namespace Histroy
 	public:
 		MouseButtonReleased(int button) :MouseButton(button) {}
 		HS_EVENT_FUNCTIONS("Mouse Button Released", EventType::MouseButtonReleased)
-		std::string ToString() override { return "Mouse Button Released: " + mButton; }
+		std::string ToString() override {
+			std::stringstream ss;
+			ss << "Mouse button released: " << mButton;
+			return ss.str();
+		}
 	};
 
 

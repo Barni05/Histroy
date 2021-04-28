@@ -1,12 +1,17 @@
 #pragma once
 #include <iostream>
 #include "GLFW/glfw3.h"
+#include "Engine/Events/Event.h"
+
+typedef void(*EventCallback)(Histroy::Event*);
 namespace Histroy
 {
+	typedef 
 	struct WindowData
 	{
 		std::string title = "Histroy Engine";
 		int width, height;
+		EventCallback mCallback;
 	};
 	class Window
 	{
@@ -14,11 +19,19 @@ namespace Histroy
 		Window(WindowData);
 		~Window();
 
+		void Init();
 		void Appear();
 		void Close();
+
+		GLFWwindow* GetWindow() const { return mWindow; }
+		EventCallback GetCallback() const { return mData.mCallback; }
+
+		void SetCallback(EventCallback callback);
+
 	private:
 		GLFWwindow* mWindow;
 		WindowData mData;
 		static bool sIsInitialised;
 	};
+
 }

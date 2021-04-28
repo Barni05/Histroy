@@ -37,6 +37,11 @@ namespace Histroy
 		KeyReleased(int key) : KeyEvent(key) {}
 		HS_EVENT_FUNCTIONS("Key Released", EventType::KeyReleased);
 
-		std::string ToString() override { HS_INFO("Key Released: " + mKey); }
+		std::string ToString() override 
+		{ 
+			std::stringstream ss;
+			ss << "Key Released: " << GetKey();
+			return ss.str();
+		}
 	};
 }
