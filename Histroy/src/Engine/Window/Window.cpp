@@ -1,4 +1,5 @@
 #include "hspch.h"
+#include <GL/glew.h>
 #include "Window.h"
 #include <GLFW/glfw3.h>
 #include "Core.h"
@@ -22,11 +23,13 @@ namespace Histroy
 		HS_ASSERT(sIsInitialised, false)
 		mWindow = glfwCreateWindow(mData.width, mData.height, mData.title.c_str(), NULL, NULL);
 
+
 		HS_ASSERT(mWindow, nullptr)
 		glfwSetWindowUserPointer(mWindow, &mData);
 		glfwMakeContextCurrent(mWindow);
 
-		//INPUT CALLBACKS
+		if (glewInit() != GLEW_OK)
+			std::cout << "Glew Error" << std::endl;
 
 		glfwSetWindowCloseCallback(GetWindow(), [](GLFWwindow* window) {
 			Histroy::WindowData& data = *(Histroy::WindowData*)glfwGetWindowUserPointer(window);
