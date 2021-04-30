@@ -20,8 +20,24 @@ namespace Histroy
 		while (!mShouldClose)
 		{
 			glClear(GL_COLOR_BUFFER_BIT);
+			HistroyGui::Init(mWindow->GetWindow());
+			HistroyGui::NewFrame();
+
+			glBegin(GL_TRIANGLES);
+			glVertex2f(0.5f, -0.5f);
+			glVertex2f(-0.5f, -0.5f);
+			glVertex2f(0.0f, 0.5f);
+			glEnd();
+			HistroyGui::BeginRender("Test window");
+			HistroyGui::Button("Test Button");
+			HistroyGui::EndRender();
+
+			HistroyGui::Render();
+
 			mWindow->Update();
 		}
+		HistroyGui::Shutdown();
+		glfwTerminate();
 	}
 
 

@@ -89,8 +89,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Application\Application.cpp" />
+    <ClCompile Include="src\Engine\GUI\imgui\HistroyGui.cpp" />
     <ClCompile Include="src\hspch.cpp" />
     <ClCompile Include="src\Engine\Window\Window.cpp" />
+    <ClCompile Include="src\vendor\imgui\imgui.cpp" />
+    <ClCompile Include="src\vendor\imgui\imgui_demo.cpp" />
+    <ClCompile Include="src\vendor\imgui\imgui_draw.cpp" />
+    <ClCompile Include="src\vendor\imgui\imgui_impl_glfw.cpp" />
+    <ClCompile Include="src\vendor\imgui\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="src\vendor\imgui\imgui_tables.cpp" />
+    <ClCompile Include="src\vendor\imgui\imgui_widgets.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Application\Application.h" />
@@ -99,9 +107,18 @@
     <ClInclude Include="src\Engine\Events\KeyEvents.h" />
     <ClInclude Include="src\Engine\Events\MouseEvents.h" />
     <ClInclude Include="src\Engine\Events\WindowEvents.h" />
+    <ClInclude Include="src\Engine\GUI\imgui\HistroyGui.h" />
     <ClInclude Include="src\Histroy.h" />
     <ClInclude Include="src\hspch.h" />
     <ClInclude Include="src\Engine\Window\Window.h" />
+    <ClInclude Include="src\vendor\imgui\imconfig.h" />
+    <ClInclude Include="src\vendor\imgui\imgui.h" />
+    <ClInclude Include="src\vendor\imgui\imgui_impl_glfw.h" />
+    <ClInclude Include="src\vendor\imgui\imgui_impl_opengl3.h" />
+    <ClInclude Include="src\vendor\imgui\imgui_internal.h" />
+    <ClInclude Include="src\vendor\imgui\imstb_rectpack.h" />
+    <ClInclude Include="src\vendor\imgui\imstb_textedit.h" />
+    <ClInclude Include="src\vendor\imgui\imstb_truetype.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

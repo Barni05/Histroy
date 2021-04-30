@@ -103,8 +103,8 @@ namespace Histroy
 	}
 	void Window::Update()
 	{
-		glfwPollEvents();
 		glfwSwapBuffers(mWindow);
+		glfwPollEvents();
 	}
 	void Window::Close()
 	{
