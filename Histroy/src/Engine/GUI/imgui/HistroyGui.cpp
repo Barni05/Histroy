@@ -44,9 +44,4 @@ namespace Histroy
 		ImGui_ImplGlfw_Shutdown();
 		ImGui::DestroyContext();
 	}
-
-	void HistroyGui::Button(const std::string& title)
-	{
-		ImGui::Button(title.c_str());
-	}
 }

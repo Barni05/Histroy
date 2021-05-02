@@ -9,7 +9,7 @@
 namespace Histroy
 {
 	Application::Application() {
-		mWindow = new Histroy::Window({ "Histroy", 900, 600 });
+		mWindow = new Histroy::Window({ "Histroy", 1400, 900 });
 	}
 	Application::~Application() { delete mWindow; }
 
@@ -21,17 +21,7 @@ namespace Histroy
 		{
 			glClear(GL_COLOR_BUFFER_BIT);
 			HistroyGui::Init(mWindow->GetWindow());
-			HistroyGui::NewFrame();
-
-			glBegin(GL_TRIANGLES);
-			glVertex2f(0.5f, -0.5f);
-			glVertex2f(-0.5f, -0.5f);
-			glVertex2f(0.0f, 0.5f);
-			glEnd();
-			HistroyGui::BeginRender("Test window");
-			HistroyGui::Button("Test Button");
-			HistroyGui::EndRender();
-
+			Menus::MainMenu();
 			HistroyGui::Render();
 
 			mWindow->Update();

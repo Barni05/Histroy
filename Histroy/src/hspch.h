@@ -4,6 +4,7 @@
 #include <vector>
 #include <functional>
 #include <sstream>
+#include <thread>
 
 #include <plog/Log.h>
 #include "plog/Initializers/RollingFileInitializer.h"
@@ -18,3 +19,6 @@
 #include "vendor/imgui/imgui_impl_opengl3.h"
 
 #include "SGL.h"
+
+#include "Engine/GUI/imgui/HistroyGui.h"
+#include "Engine/GUI/Menus/Menus.h"
