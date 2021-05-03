@@ -15,6 +15,8 @@ namespace Histroy
 		bool OnWindowClose(Event& e);
 		bool OnKeyPressed(Event& e);
 		//Events
+
+		static int mWindowHeight, mWindowWidth;
 	private:
 		Histroy::Window* mWindow;
 		bool mShouldClose = false;

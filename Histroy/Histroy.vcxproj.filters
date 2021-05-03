@@ -78,6 +78,9 @@
     <ClCompile Include="src\Engine\GUI\Renderer\HistroyRenderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Engine\GUI\Renderer\Elements\Triangle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\hspch.h">
@@ -1022,6 +1025,9 @@
     <ClInclude Include="src\Engine\GUI\Renderer\HistroyRenderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Engine\GUI\Renderer\Elements\Triangle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\vendor\sgl\glm\detail\func_common.inl">
@@ -1438,5 +1444,6 @@
     <None Include="src\vendor\sgl\glm\gtx\wrap.inl">
       <Filter>Header Files</Filter>
     </None>
+    <None Include="src\Engine\GUI\Shaders\Geometry.shader" />
   </ItemGroup>
 </Project>

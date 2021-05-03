@@ -8,8 +8,8 @@
 
 namespace Histroy
 {
-	Application::Application() {
-		mWindow = new Histroy::Window({ "Histroy", 1400, 900 });
+	Application::Application(){
+		mWindow = new Histroy::Window({ "Histroy", mWindowWidth, mWindowHeight });
 	}
 	Application::~Application() { delete mWindow; }
 
@@ -23,6 +23,7 @@ namespace Histroy
 			HistroyGui::Init(mWindow->GetWindow());
 			Menus::MainMenu();
 			HistroyGui::Render();
+
 
 			mWindow->Update();
 		}
@@ -50,6 +51,8 @@ namespace Histroy
 		dispatcher.Dispatch<KeyPressed>(BIND_EVENT_FUNCTION(OnKeyPressed));
 	}
 
+	int Application::mWindowHeight = 900;
+	int Application::mWindowWidth = 1400;
 }
 
 int main()

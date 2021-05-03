@@ -109,6 +109,7 @@
     <ClCompile Include="src\vendor\sgl\Utilities.cpp" />
     <ClCompile Include="src\vendor\sgl\VertexArray.cpp" />
     <ClCompile Include="src\vendor\sgl\VertexBuffer.cpp" />
+    <ClCompile Include="src\Engine\GUI\Renderer\Elements\Triangle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Engine\GUI\Renderer\HistroyRenderer.h" />
@@ -425,8 +426,10 @@
     <ClInclude Include="src\vendor\sgl\VertexArray.h" />
     <ClInclude Include="src\vendor\sgl\VertexBuffer.h" />
     <ClInclude Include="src\vendor\sgl\VertexBufferLayout.h" />
+    <ClInclude Include="src\Engine\GUI\Renderer\Elements\Triangle.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="src\Engine\GUI\Shaders\Geometry.shader" />
     <None Include="src\vendor\sgl\glm\detail\func_common.inl" />
     <None Include="src\vendor\sgl\glm\detail\func_common_simd.inl" />
     <None Include="src\vendor\sgl\glm\detail\func_exponential.inl" />

@@ -5,6 +5,9 @@
 #include <functional>
 #include <sstream>
 #include <thread>
+#include "SGL.h"
+
+#include "Application/Application.h"
 
 #include <plog/Log.h>
 #include "plog/Initializers/RollingFileInitializer.h"
@@ -18,7 +21,12 @@
 #include "vendor/imgui/imgui_impl_glfw.h"
 #include "vendor/imgui/imgui_impl_opengl3.h"
 
-#include "SGL.h"
+
+#include "glm/glm.hpp"
+#include "glm/gtc/matrix_transform.hpp"
+#include "glm/gtx/string_cast.hpp"
 
 #include "Engine/GUI/imgui/HistroyGui.h"
 #include "Engine/GUI/Menus/Menus.h"
+#include "Engine/GUI/Renderer/Elements/Triangle.h"
+#include "Engine/GUI/Renderer/HistroyRenderer.h"

@@ -3,7 +3,6 @@
 #include "SGL.h"
 VertexBuffer::VertexBuffer(unsigned int size, const void* data):Buffer(size, data)
 {
-	std::cout << "Size: " << mSize << std::endl;
 	GLCall(glGenBuffers(1, &mRendererID));
 	GLCall(glBindBuffer(GL_ARRAY_BUFFER, mRendererID));
 	GLCall(glBufferData(GL_ARRAY_BUFFER, size, data, GL_STATIC_DRAW));

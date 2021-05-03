@@ -1,6 +1,10 @@
 #pragma once
-class HistroyRenderer
+namespace Histroy
 {
-public:
-};
+
+	class HistroyRenderer
+	{
+	public:
+	};
+}
 
