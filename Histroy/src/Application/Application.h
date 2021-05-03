@@ -14,6 +14,7 @@ namespace Histroy
 		//Events
 		bool OnWindowClose(Event& e);
 		bool OnKeyPressed(Event& e);
+		bool OnMouseButtonPressed(Event& e);
 		//Events
 
 		static int mWindowHeight, mWindowWidth;

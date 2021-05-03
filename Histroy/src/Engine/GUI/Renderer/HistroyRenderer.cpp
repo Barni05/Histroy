@@ -9,6 +9,7 @@ namespace Histroy
 		for (auto a : sGeometries)
 		{
 			a->Render();
+			a->ImGuiRender();
 		}
 	}
 	void HistroyRenderer::AddGeometry(Geometry* geometry)
