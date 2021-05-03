@@ -23,7 +23,7 @@ namespace Histroy
 			HistroyGui::Init(mWindow->GetWindow());
 			Menus::MainMenu();
 			HistroyGui::Render();
-
+			HistroyRenderer::Render();
 
 			mWindow->Update();
 		}

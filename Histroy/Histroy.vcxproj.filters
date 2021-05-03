@@ -81,6 +81,9 @@
     <ClCompile Include="src\Engine\GUI\Renderer\Elements\Triangle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Engine\GUI\Renderer\Elements\Geometry.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\hspch.h">
@@ -1026,6 +1029,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Engine\GUI\Renderer\Elements\Triangle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\GUI\Renderer\Elements\Geometry.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

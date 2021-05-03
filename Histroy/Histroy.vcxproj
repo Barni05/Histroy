@@ -88,6 +88,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Engine\GUI\Renderer\Elements\Geometry.cpp" />
     <ClCompile Include="src\Engine\GUI\Renderer\HistroyRenderer.cpp" />
     <ClCompile Include="src\Engine\GUI\Menus\Menus.cpp" />
     <ClCompile Include="src\Application\Application.cpp" />
@@ -112,6 +113,7 @@
     <ClCompile Include="src\Engine\GUI\Renderer\Elements\Triangle.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Engine\GUI\Renderer\Elements\Geometry.h" />
     <ClInclude Include="src\Engine\GUI\Renderer\HistroyRenderer.h" />
     <ClInclude Include="src\Engine\GUI\Menus\Menus.h" />
     <ClInclude Include="src\Application\Application.h" />

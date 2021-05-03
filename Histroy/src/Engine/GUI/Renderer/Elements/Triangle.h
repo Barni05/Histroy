@@ -1,14 +1,14 @@
 #pragma once
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"	
-class Triangle
+#include "Geometry.h"
+class Triangle : public Geometry
 {
 public:
 	Triangle();
 
-	void Render();
+	void Render() override;
 private:
 	float mInitialPosition[6];
-	glm::mat4 mProj, mView, mModel, mMVP;
 };
 

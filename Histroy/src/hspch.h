@@ -30,3 +30,4 @@
 #include "Engine/GUI/Menus/Menus.h"
 #include "Engine/GUI/Renderer/Elements/Triangle.h"
 #include "Engine/GUI/Renderer/HistroyRenderer.h"
+#include "Engine/GUI/Renderer/Elements/Geometry.h"

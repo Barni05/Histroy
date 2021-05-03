@@ -28,7 +28,7 @@ namespace Histroy
 			{
 				if (ImGui::MenuItem("Triangle"))
 				{
-					//Render triangle
+					HistroyRenderer::AddGeometry(new Triangle());
 				}
 				ImGui::EndMenu();
 			}
