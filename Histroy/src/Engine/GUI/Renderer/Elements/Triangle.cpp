@@ -2,20 +2,8 @@
 #include "Triangle.h"
 Triangle::Triangle()
 {
-	std::pair<float, float> positions[3];
-	positions[0] = std::make_pair<float, float>(Histroy::Application::mWindowWidth / 2 / 2, Histroy::Application::mWindowHeight / 2 / 2);
-	positions[1] = std::make_pair<float, float>(Histroy::Application::mWindowWidth / 2 / 2 + Histroy::Application::mWindowWidth/2, Histroy::Application::mWindowHeight / 2 / 2);
-	positions[2] = std::make_pair<float, float>(Histroy::Application::mWindowWidth / 2, Histroy::Application::mWindowHeight / 2 / 2 + Histroy::Application::mWindowHeight / 2);
-	mInitialPosition[0] = positions[0].first;
-	mInitialPosition[1] = positions[0].second;
-	mInitialPosition[2] = positions[1].first;
-	mInitialPosition[3] = positions[1].second;
-	mInitialPosition[4] = positions[2].first;
-	mInitialPosition[5] = positions[2].second;
-	mProj = glm::ortho(0.0f, float(Histroy::Application::mWindowWidth), 0.0f, float(Histroy::Application::mWindowHeight), -1.0f, 1.0f);
-	mView = glm::translate(glm::mat4(1.0f), glm::vec3(0,0,0));
-	mModel = glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, 0));
-	mMVP = mModel * mView * mProj;
+	Init();
+	UpdateTransform();
 	mColor[0] = 1.0f;
 	mColor[1] = 1.0f;
 	mColor[2] = 0.0f;
@@ -23,6 +11,16 @@ Triangle::Triangle()
 }
 
 Triangle::Triangle(float color[4])
+{
+	Init();
+	UpdateTransform();
+	for (int i = 0; i < 4; i++)
+	{
+		mColor[i] = color[i];
+	}
+}
+
+void Triangle::Init()
 {
 	std::pair<float, float> positions[3];
 	positions[0] = std::make_pair<float, float>(Histroy::Application::mWindowWidth / 2 / 2, Histroy::Application::mWindowHeight / 2 / 2);
@@ -34,12 +32,7 @@ Triangle::Triangle(float color[4])
 	mInitialPosition[3] = positions[1].second;
 	mInitialPosition[4] = positions[2].first;
 	mInitialPosition[5] = positions[2].second;
-
-	UpdateTransform();
-	for (int i = 0; i < 4; i++)
-	{
-		mColor[i] = color[i];
-	}
+	mLocation = glm::vec3(0, 0, 0);
 }
 
 void Triangle::Render()
@@ -67,8 +60,8 @@ void Triangle::Render()
 
 void Triangle::ImGuiRender()
 {
-	ImGui::SliderFloat3("Location", &mLocation.x, -1.0f, 1.0f);
-
+	ImGui::SliderFloat2("Location", &mLocation.x, -float(Histroy::Application::mWindowWidth), float(Histroy::Application::mWindowWidth));
+	ImGui::ColorEdit4("Color", mColor);
 }
 
 void Triangle::UpdateTransform()
@@ -76,5 +69,5 @@ void Triangle::UpdateTransform()
 	mProj = glm::ortho(0.0f, float(Histroy::Application::mWindowWidth), 0.0f, float(Histroy::Application::mWindowHeight), -1.0f, 1.0f);
 	mView = glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, 0));
 	mModel = glm::translate(glm::mat4(1.0f), mLocation);
-	mMVP = mModel * mView * mProj;
+	mMVP = mProj * mView * mModel;
 }

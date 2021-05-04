@@ -23,6 +23,8 @@ namespace Histroy
 			glClear(GL_COLOR_BUFFER_BIT);
 			Menus::MainMenu();
 			HistroyGui::BeginRender("Properties");
+			ImGui::SetWindowSize({ 200, 200 });
+			ImGui::SetWindowPos({ 0, float(mWindowHeight)-200 });
 
 			//Render Geometry
 			HistroyRenderer::Render();
@@ -56,16 +58,24 @@ namespace Histroy
 		return true;
 	}
 
+	bool Application::OnWindowResized(Event& e)
+	{
+		mWindowHeight = dynamic_cast<WindowResize&>(e).GetHeight();
+		mWindowWidth = dynamic_cast<WindowResize&>(e).GetWidth();
+		return true;
+	}
+
 	void Application::OnEventHappened(Histroy::Event& e)
 	{
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<WindowClose>(BIND_EVENT_FUNCTION(OnWindowClose));
 		dispatcher.Dispatch<KeyPressed>(BIND_EVENT_FUNCTION(OnKeyPressed));
 		dispatcher.Dispatch<MouseButtonPressed>(BIND_EVENT_FUNCTION(OnMouseButtonPressed));
+		dispatcher.Dispatch<WindowResize>(BIND_EVENT_FUNCTION(OnWindowResized));
 	}
 
-	int Application::mWindowHeight = 900;
-	int Application::mWindowWidth = 1400;
+	int Application::mWindowHeight = 600;
+	int Application::mWindowWidth = 1200;
 }
 
 int main()

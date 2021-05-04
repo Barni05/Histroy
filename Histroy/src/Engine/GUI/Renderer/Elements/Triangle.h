@@ -7,6 +7,7 @@ class Triangle : public Geometry
 public:
 	Triangle();
 	Triangle(float color[4]);
+	void Init();
 
 	void Render() override;
 	void ImGuiRender() override;

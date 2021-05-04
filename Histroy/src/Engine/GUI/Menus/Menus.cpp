@@ -6,7 +6,6 @@ namespace Histroy
 	void Menus::MainMenu()
 	{
 		HistroyGui::NewFrame();
-		ImGui::Begin("Menu");
 		if (ImGui::BeginMainMenuBar())
 		{
 			if (ImGui::BeginMenu("File"))
@@ -36,6 +35,5 @@ namespace Histroy
 			}
 			ImGui::EndMainMenuBar();
 		}
-		ImGui::End();
 	}
 }

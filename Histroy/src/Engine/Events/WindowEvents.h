@@ -7,6 +7,8 @@ namespace Histroy
 	public:
 		WindowResize(int width, int height) : mWidth(width), mHeight(height) {}
 		~WindowResize() {}
+		inline int GetWidth() const { return mWidth; }
+		inline int GetHeight() const { return mHeight; }
 
 		HS_EVENT_FUNCTIONS("Window Resize", EventType::WindowResize)
 			std::string ToString() override
