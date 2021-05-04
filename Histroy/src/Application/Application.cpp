@@ -23,8 +23,8 @@ namespace Histroy
 			glClear(GL_COLOR_BUFFER_BIT);
 			Menus::MainMenu();
 			HistroyGui::BeginRender("Properties");
-			ImGui::SetWindowSize({ 200, 200 });
-			ImGui::SetWindowPos({ 0, float(mWindowHeight)-200 });
+			ImGui::SetWindowSize({ LEFT_WINDOW_INDENT, 350 });
+			ImGui::SetWindowPos({ 0, float(mWindowHeight)-350 });
 
 			//Render Geometry
 			HistroyRenderer::Render();
