@@ -83,17 +83,19 @@ namespace Histroy
 
 		glfwSetMouseButtonCallback(GetWindow(), [](GLFWwindow* window, int button, int action, int mods) {
 			Histroy::WindowData& data = *(Histroy::WindowData*)glfwGetWindowUserPointer(window);
+			double x, y;
+			glfwGetCursorPos(window, &x, &y);
 			switch (action)
 			{
 			case GLFW_PRESS:
 			{
-				Histroy::MouseButtonPressed  press(button);
+				Histroy::MouseButtonPressed  press(button, x, y);
 				data.mCallback(press);
 				break;
 			}
 			case GLFW_RELEASE:
 			{
-				Histroy::MouseButtonReleased release(button);
+				Histroy::MouseButtonReleased release(button, x, y);
 				data.mCallback(release);
 				break;
 			}

@@ -48,13 +48,23 @@ namespace Histroy
 
 	bool Application::OnKeyPressed(Event& e)
 	{
-		std::cout<<e.ToString() << std::endl;
+		for (auto geometry : HistroyRenderer::sGeometries)
+			geometry->OnKeyPressed(e);
 		return true;
 	}
 
 	bool Application::OnMouseButtonPressed(Event& e)
 	{
 		std::cout << e.ToString() << std::endl;
+		for (auto geometry : HistroyRenderer::sGeometries)
+			geometry->OnMouseButtonPressed(e);
+		return true;
+	}
+
+	bool Application::OnMouseButtonReleased(Event& e)
+	{
+		for (auto geometry : HistroyRenderer::sGeometries)
+			geometry->OnMouseButtonReleased(e);
 		return true;
 	}
 
@@ -65,13 +75,24 @@ namespace Histroy
 		return true;
 	}
 
+	bool Application::OnKeyReleased(Event& e)
+	{
+		for (auto geometry : HistroyRenderer::sGeometries)
+		{
+			geometry->OnKeyReleased(e);
+		}
+		return true;
+	}
+
 	void Application::OnEventHappened(Histroy::Event& e)
 	{
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<WindowClose>(BIND_EVENT_FUNCTION(OnWindowClose));
 		dispatcher.Dispatch<KeyPressed>(BIND_EVENT_FUNCTION(OnKeyPressed));
 		dispatcher.Dispatch<MouseButtonPressed>(BIND_EVENT_FUNCTION(OnMouseButtonPressed));
+		dispatcher.Dispatch<KeyReleased>(BIND_EVENT_FUNCTION(OnKeyReleased));
 		dispatcher.Dispatch<WindowResize>(BIND_EVENT_FUNCTION(OnWindowResized));
+		dispatcher.Dispatch<MouseButtonReleased>(BIND_EVENT_FUNCTION(OnMouseButtonReleased));
 	}
 
 	int Application::mWindowHeight = 600;

@@ -71,3 +71,23 @@ void Triangle::UpdateTransform()
 	mModel = glm::translate(glm::mat4(1.0f), mLocation);
 	mMVP = mProj * mView * mModel;
 }
+
+void Triangle::OnKeyPressed(Histroy::Event& e)
+{
+	Histroy::KeyPressed* event = dynamic_cast<Histroy::KeyPressed*>(&e);
+
+}
+
+void Triangle::OnKeyReleased(Histroy::Event& e)
+{
+
+}
+
+void Triangle::OnMouseButtonPressed(Histroy::Event& e)
+{
+}
+
+void Triangle::OnMouseButtonReleased(Histroy::Event& e)
+{
+
+}

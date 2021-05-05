@@ -14,7 +14,9 @@ namespace Histroy
 		//Events
 		bool OnWindowClose(Event& e);
 		bool OnKeyPressed(Event& e);
+		bool OnKeyReleased(Event& e);
 		bool OnMouseButtonPressed(Event& e);
+		bool OnMouseButtonReleased(Event& e);
 		bool OnWindowResized(Event& e);
 		//Events
 

@@ -13,6 +13,10 @@ public:
 	void ImGuiRender() override;
 
 	void UpdateTransform() override;
+	void OnKeyPressed(Histroy::Event& e) override;
+	void OnKeyReleased(Histroy::Event& e) override;
+	void OnMouseButtonPressed(Histroy::Event& e) override;
+	void OnMouseButtonReleased(Histroy::Event& e) override;
 private:
 	float mInitialPosition[6];
 	float mColor[4];

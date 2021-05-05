@@ -8,17 +8,20 @@ namespace Histroy
 	{
 	public:
 		inline int GetButton() const { return mButton; }
+		inline int GetXpos() const { return mXpos; }
+		inline int GetYpos() const { return mYpos; }
 
 		HS_EVENT_FUNCTIONS("Mouse Button", EventType::MouseButton)
 	protected:
-		MouseButton(int button) :mButton(button) {}
+		int mXpos, mYpos;
+		MouseButton(int button, int x, int y) :mButton(button), mXpos(x), mYpos(y) {}
 		int mButton;
 	};
 
 	class MouseButtonPressed : public MouseButton
 	{
 	public:
-		MouseButtonPressed(int button) :MouseButton(button) {}
+		MouseButtonPressed(int button, int x, int y) :MouseButton(button, x, y) {}
 		HS_EVENT_FUNCTIONS("Mouse Button Pressed", EventType::MouseButtonPressed)
 		std::string ToString() override {
 			std::stringstream ss;
@@ -31,7 +34,7 @@ namespace Histroy
 	class MouseButtonReleased : public MouseButton
 	{
 	public:
-		MouseButtonReleased(int button) :MouseButton(button) {}
+		MouseButtonReleased(int button, int x, int y) :MouseButton(button, x, y) {}
 		HS_EVENT_FUNCTIONS("Mouse Button Released", EventType::MouseButtonReleased)
 		std::string ToString() override {
 			std::stringstream ss;
