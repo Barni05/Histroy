@@ -9,6 +9,9 @@ namespace Histroy
 		Application();
 		~Application();
 
+		void SetupPropertiesPage();
+		void SetupWorldPage();
+
 		void Run();
 		void OnEventHappened(Event& e);
 		//Events

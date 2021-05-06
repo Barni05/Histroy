@@ -16,12 +16,15 @@ public:
 	virtual void OnMouseButtonPressed(Histroy::Event& e) {}
 	virtual void OnMouseButtonReleased(Histroy::Event& e) {}
 
+	inline std::string GetID() const { return mID; }
+
 protected:
 	glm::mat4 mModel, mView, mProj, mMVP;
 	glm::vec3 mLocation, mRotation, mScale;
 	std::string mName;
 	std::string mID;
 	static int sGeometryNumber;
+	char* mBufferID;
 
 	bool IsObjectPressed(int, int, float[]);
 };

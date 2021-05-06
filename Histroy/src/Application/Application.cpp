@@ -22,14 +22,10 @@ namespace Histroy
 		{
 			glClear(GL_COLOR_BUFFER_BIT);
 			Menus::MainMenu();
-			HistroyGui::BeginRender("Properties");
-			ImGui::SetWindowSize({ LEFT_WINDOW_INDENT, 350 });
-			ImGui::SetWindowPos({ 0, float(mWindowHeight)-350 });
+			
+			SetupPropertiesPage();
+			SetupWorldPage();
 
-			//Render Geometry
-			HistroyRenderer::Render();
-
-			HistroyGui::EndRender();
 			//Render IMGUI
 			HistroyGui::Render();
 
@@ -37,6 +33,33 @@ namespace Histroy
 		}
 		HistroyGui::Shutdown();
 		glfwTerminate();
+	}
+
+	void Application::SetupPropertiesPage()
+	{
+		HistroyGui::BeginRender("Properties");
+		ImGui::SetWindowSize({ LEFT_WINDOW_INDENT, 350 });
+		ImGui::SetWindowPos({ 0, float(mWindowHeight) - 350 });
+
+		//Render Geometry
+		HistroyRenderer::Render();
+
+		HistroyGui::EndRender();
+	}
+
+	void Application::SetupWorldPage()
+	{
+		HistroyGui::BeginRender("The World");
+		ImGui::SetWindowSize({ LEFT_WINDOW_INDENT, 230 });
+		ImGui::SetWindowPos({ 0, 20 });
+		for (auto geometry : HistroyRenderer::sGeometries)
+		{
+			if (ImGui::Button(geometry->GetID().c_str(), { LEFT_WINDOW_INDENT, 20 }))
+			{
+				Application::sSelectedObject = geometry;
+			}
+		}
+		HistroyGui::EndRender();
 	}
 
 

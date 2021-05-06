@@ -23,6 +23,8 @@ Triangle::Triangle(float color[4])
 void Triangle::Init()
 {
 	mName = "Triangle";
+	mBufferID = new char[256];
+	mBufferID = (char*)mID.c_str();
 	std::pair<float, float> positions[3];
 	positions[0] = std::make_pair<float, float>(Histroy::Application::mWindowWidth / 2 / 2, Histroy::Application::mWindowHeight / 2 / 2);
 	positions[1] = std::make_pair<float, float>(Histroy::Application::mWindowWidth / 2 / 2 + Histroy::Application::mWindowWidth / 2, Histroy::Application::mWindowHeight / 2 / 2);
@@ -64,8 +66,12 @@ void Triangle::Render()
 
 void Triangle::ImGuiRender()
 {
+	ImGui::InputText("Name", mBufferID, 256);
+	mID = std::string(mBufferID);
 	ImGui::SliderFloat2("Location", &mLocation.x, -float(Histroy::Application::mWindowWidth), float(Histroy::Application::mWindowWidth));
 	ImGui::ColorEdit4("Color", mColor);
+	ImGui::BeginPopup("Yes");
+
 }
 
 void Triangle::UpdateTransform()
