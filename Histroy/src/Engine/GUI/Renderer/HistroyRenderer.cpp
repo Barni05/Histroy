@@ -9,8 +9,9 @@ namespace Histroy
 		for (auto a : sGeometries)
 		{
 			a->Render();
-			a->ImGuiRender();
 		}
+		if (Application::sSelectedObject)
+			Application::sSelectedObject->ImGuiRender();
 	}
 	void HistroyRenderer::AddGeometry(Geometry* geometry)
 	{

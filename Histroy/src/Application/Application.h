@@ -21,6 +21,7 @@ namespace Histroy
 		//Events
 
 		static int mWindowHeight, mWindowWidth;
+		static Geometry* sSelectedObject;
 	private:
 		Histroy::Window* mWindow;
 		bool mShouldClose = false;

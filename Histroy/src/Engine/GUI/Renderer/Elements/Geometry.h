@@ -12,8 +12,11 @@ public:
 	virtual void OnKeyReleased(Histroy::Event& e) {}
 	virtual void OnMouseButtonPressed(Histroy::Event& e) {}
 	virtual void OnMouseButtonReleased(Histroy::Event& e) {}
+
 protected:
 	glm::mat4 mModel, mView, mProj, mMVP;
 	glm::vec3 mLocation, mRotation, mScale;
+
+	bool IsObjectPressed(int, int, float[]);
 };
 

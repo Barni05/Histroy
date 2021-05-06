@@ -55,7 +55,6 @@ namespace Histroy
 
 	bool Application::OnMouseButtonPressed(Event& e)
 	{
-		std::cout << e.ToString() << std::endl;
 		for (auto geometry : HistroyRenderer::sGeometries)
 			geometry->OnMouseButtonPressed(e);
 		return true;

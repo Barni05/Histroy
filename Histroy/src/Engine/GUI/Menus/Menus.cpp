@@ -3,6 +3,7 @@
 
 namespace Histroy
 {
+	Geometry* Application::sSelectedObject;
 	void Menus::MainMenu()
 	{
 		HistroyGui::NewFrame();
@@ -29,7 +30,9 @@ namespace Histroy
 				if (ImGui::MenuItem("Triangle"))
 				{
 					float color[4]{ 1.0f, 0.0f, 1.0f, 1.0f };
-					HistroyRenderer::AddGeometry(new Triangle(color));
+					Triangle* triangle = new Triangle(color);
+					Application::sSelectedObject = triangle;
+					HistroyRenderer::AddGeometry(triangle);
 				}
 				ImGui::EndMenu();
 			}

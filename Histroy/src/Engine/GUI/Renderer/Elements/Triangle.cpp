@@ -85,6 +85,12 @@ void Triangle::OnKeyReleased(Histroy::Event& e)
 
 void Triangle::OnMouseButtonPressed(Histroy::Event& e)
 {
+	Histroy::MouseButtonPressed* event = dynamic_cast<Histroy::MouseButtonPressed*>(&e);
+	if (IsObjectPressed(event->GetXpos(), event->GetYpos(), mColor))
+	{
+		std::cout << "Clicked on object" << std::endl;
+		Histroy::Application::sSelectedObject = this;
+	}
 }
 
 void Triangle::OnMouseButtonReleased(Histroy::Event& e)
