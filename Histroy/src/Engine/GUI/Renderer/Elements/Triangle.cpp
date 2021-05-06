@@ -22,6 +22,7 @@ Triangle::Triangle(float color[4])
 
 void Triangle::Init()
 {
+	mName = "Triangle";
 	std::pair<float, float> positions[3];
 	positions[0] = std::make_pair<float, float>(Histroy::Application::mWindowWidth / 2 / 2, Histroy::Application::mWindowHeight / 2 / 2);
 	positions[1] = std::make_pair<float, float>(Histroy::Application::mWindowWidth / 2 / 2 + Histroy::Application::mWindowWidth / 2, Histroy::Application::mWindowHeight / 2 / 2);
@@ -33,6 +34,9 @@ void Triangle::Init()
 	mInitialPosition[4] = positions[2].first;
 	mInitialPosition[5] = positions[2].second;
 	mLocation = glm::vec3(0, 0, 0);
+	std::stringstream ss;
+	ss << mName << "_" << Triangle::sGeometryNumber;
+	mID = ss.str();
 }
 
 void Triangle::Render()
@@ -88,7 +92,6 @@ void Triangle::OnMouseButtonPressed(Histroy::Event& e)
 	Histroy::MouseButtonPressed* event = dynamic_cast<Histroy::MouseButtonPressed*>(&e);
 	if (IsObjectPressed(event->GetXpos(), event->GetYpos(), mColor))
 	{
-		std::cout << "Clicked on object" << std::endl;
 		Histroy::Application::sSelectedObject = this;
 	}
 }

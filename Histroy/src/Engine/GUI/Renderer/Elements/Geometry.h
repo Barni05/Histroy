@@ -5,6 +5,9 @@
 class Geometry
 {
 public:
+	Geometry();
+	~Geometry();
+
 	virtual void Render() = 0;
 	virtual void ImGuiRender() {}
 	virtual void UpdateTransform() {}
@@ -16,6 +19,9 @@ public:
 protected:
 	glm::mat4 mModel, mView, mProj, mMVP;
 	glm::vec3 mLocation, mRotation, mScale;
+	std::string mName;
+	std::string mID;
+	static int sGeometryNumber;
 
 	bool IsObjectPressed(int, int, float[]);
 };

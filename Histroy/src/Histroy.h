@@ -1,4 +1,6 @@
 #pragma once
+#include <iostream>
+
 #include "Engine/Window/Window.h"
 #include "Core.h"
 

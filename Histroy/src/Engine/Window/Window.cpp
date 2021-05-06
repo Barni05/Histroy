@@ -1,3 +1,4 @@
+
 #include "hspch.h"
 #include <GL/glew.h>
 #include "Window.h"
@@ -89,7 +90,7 @@ namespace Histroy
 			{
 			case GLFW_PRESS:
 			{
-				Histroy::MouseButtonPressed  press(button, x, y);
+				Histroy::MouseButtonPressed  press(button, (int)x, Application::mWindowHeight - (int)y);
 				data.mCallback(press);
 				break;
 			}
