@@ -29,10 +29,18 @@ namespace Histroy
 			{
 				if (ImGui::MenuItem("Triangle"))
 				{
-					float color[4]{ 1.0f, 0.0f, 1.0f, 1.0f };
+					float color[4]{ 1.0f};
 					Triangle* triangle = new Triangle(color);
 					Application::sSelectedObject = triangle;
 					HistroyRenderer::AddGeometry(triangle);
+				}
+				else if (ImGui::MenuItem("Square"))
+				{
+					float color[4]{ 1.0f };
+					Square* square = new Square();
+					Application::sSelectedObject = square;
+					HistroyRenderer::AddGeometry(square);
+
 				}
 				ImGui::EndMenu();
 			}

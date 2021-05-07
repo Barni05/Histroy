@@ -13,7 +13,7 @@ public:
 	virtual void UpdateTransform() {}
 	virtual void OnKeyPressed(Histroy::Event& e) {}
 	virtual void OnKeyReleased(Histroy::Event& e) {}
-	virtual void OnMouseButtonPressed(Histroy::Event& e) {}
+	virtual void OnMouseButtonPressed(Histroy::Event& e);
 	virtual void OnMouseButtonReleased(Histroy::Event& e) {}
 
 	inline std::string GetID() const { return mID; }
@@ -21,6 +21,7 @@ public:
 protected:
 	glm::mat4 mModel, mView, mProj, mMVP;
 	glm::vec3 mLocation, mRotation, mScale;
+	float mColor[4];
 	std::string mName;
 	std::string mID;
 	static int sGeometryNumber;

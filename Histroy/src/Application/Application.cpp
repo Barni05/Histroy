@@ -38,8 +38,8 @@ namespace Histroy
 	void Application::SetupPropertiesPage()
 	{
 		HistroyGui::BeginRender("Properties");
-		ImGui::SetWindowSize({ LEFT_WINDOW_INDENT, 350 });
-		ImGui::SetWindowPos({ 0, float(mWindowHeight) - 350 });
+		ImGui::SetWindowSize({ LEFT_WINDOW_INDENT, float(mWindowHeight/2) });
+		ImGui::SetWindowPos({ 0, float(mWindowHeight/2) });
 
 		//Render Geometry
 		HistroyRenderer::Render();
@@ -50,7 +50,7 @@ namespace Histroy
 	void Application::SetupWorldPage()
 	{
 		HistroyGui::BeginRender("The World");
-		ImGui::SetWindowSize({ LEFT_WINDOW_INDENT, 230 });
+		ImGui::SetWindowSize({ LEFT_WINDOW_INDENT, float(mWindowHeight/2)-20.0f });
 		ImGui::SetWindowPos({ 0, 20 });
 		for (auto geometry : HistroyRenderer::sGeometries)
 		{

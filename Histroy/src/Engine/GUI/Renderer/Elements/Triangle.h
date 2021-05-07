@@ -19,6 +19,5 @@ public:
 	void OnMouseButtonReleased(Histroy::Event& e) override;
 private:
 	float mInitialPosition[6];
-	float mColor[4];
 };
 
