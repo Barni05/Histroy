@@ -8,8 +8,7 @@ public:
 	void Init();
 
 	void Render() override;
-
-	void UpdateTransform() override;
+	void ImGuiRender() override;
 private:
 	float mInitialPositions[8];
 };

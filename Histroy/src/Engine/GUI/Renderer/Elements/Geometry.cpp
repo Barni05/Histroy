@@ -23,11 +23,18 @@ bool Geometry::IsObjectPressed(int x, int y, float color[4])
 
 Geometry::Geometry():mName("Geometry")
 {
-	Geometry::sGeometryNumber++;
 }
 
 Geometry::~Geometry()
 {
+}
+
+void Geometry::UpdateTransform()
+{
+	mView = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f));
+	mModel = glm::translate(glm::mat4(1.0f), mLocation);
+	mModel = glm::scale(mModel, mScale);
+	mMVP = mProj * mView * mModel;
 }
 
 void Geometry::OnMouseButtonPressed(Histroy::Event& e)

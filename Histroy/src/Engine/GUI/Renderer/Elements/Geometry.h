@@ -10,7 +10,7 @@ public:
 
 	virtual void Render() = 0;
 	virtual void ImGuiRender() {}
-	virtual void UpdateTransform() {}
+	virtual void UpdateTransform();
 	virtual void OnKeyPressed(Histroy::Event& e) {}
 	virtual void OnKeyReleased(Histroy::Event& e) {}
 	virtual void OnMouseButtonPressed(Histroy::Event& e);

@@ -22,6 +22,7 @@ Triangle::Triangle(float color[4])
 
 void Triangle::Init()
 {
+	Triangle::sGeometryNumber++;
 	mName = "Triangle";
 	mBufferID = new char[256];
 	mBufferID = (char*)mID.c_str();
@@ -36,9 +37,11 @@ void Triangle::Init()
 	mInitialPosition[4] = positions[2].first;
 	mInitialPosition[5] = positions[2].second;
 	mLocation = glm::vec3(0, 0, 0);
+	mScale = glm::vec3(1.0f);
 	std::stringstream ss;
 	ss << mName << "_" << Triangle::sGeometryNumber;
 	mID = ss.str();
+	mProj = glm::ortho(0.0f, float(Histroy::Application::mWindowWidth), 0.0f, float(Histroy::Application::mWindowHeight), -1.0f, 1.0f);
 }
 
 void Triangle::Render()
@@ -69,17 +72,9 @@ void Triangle::ImGuiRender()
 	ImGui::InputText("Name", mBufferID, 256);
 	mID = std::string(mBufferID);
 	ImGui::SliderFloat2("Location", &mLocation.x, -float(Histroy::Application::mWindowWidth), float(Histroy::Application::mWindowWidth));
+	ImGui::InputFloat2("Scale", &mScale.x);
 	ImGui::ColorEdit4("Color", mColor);
-	ImGui::BeginPopup("Yes");
 
-}
-
-void Triangle::UpdateTransform()
-{
-	mProj = glm::ortho(0.0f, float(Histroy::Application::mWindowWidth), 0.0f, float(Histroy::Application::mWindowHeight), -1.0f, 1.0f);
-	mView = glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, 0));
-	mModel = glm::translate(glm::mat4(1.0f), mLocation);
-	mMVP = mProj * mView * mModel;
 }
 
 void Triangle::OnKeyPressed(Histroy::Event& e)
