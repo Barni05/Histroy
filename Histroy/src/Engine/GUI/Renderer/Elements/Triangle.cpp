@@ -73,6 +73,7 @@ void Triangle::ImGuiRender()
 	mID = std::string(mBufferID);
 	ImGui::SliderFloat2("Location", &mLocation.x, -float(Histroy::Application::mWindowWidth), float(Histroy::Application::mWindowWidth));
 	ImGui::InputFloat2("Scale", &mScale.x);
+	ImGui::SliderAngle("Rotation", &mRotation);
 	ImGui::ColorEdit4("Color", mColor);
 
 }
@@ -80,6 +81,10 @@ void Triangle::ImGuiRender()
 void Triangle::OnKeyPressed(Histroy::Event& e)
 {
 	Histroy::KeyPressed* event = dynamic_cast<Histroy::KeyPressed*>(&e);
+	if (event->GetKey() == GLFW_KEY_DELETE)
+	{
+		std::cout << "Object deleted" << std::endl;
+	}
 
 }
 

@@ -117,7 +117,7 @@ namespace Histroy
 		dispatcher.Dispatch<MouseButtonReleased>(BIND_EVENT_FUNCTION(OnMouseButtonReleased));
 	}
 
-	int Application::mWindowHeight = 600;
+	int Application::mWindowHeight = 670;
 	int Application::mWindowWidth = 1200;
 }
 

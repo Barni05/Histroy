@@ -20,7 +20,8 @@ public:
 
 protected:
 	glm::mat4 mModel, mView, mProj, mMVP;
-	glm::vec3 mLocation, mRotation, mScale;
+	glm::vec3 mLocation, mScale;
+	float mRotation;
 	float mColor[4];
 	std::string mName;
 	std::string mID;

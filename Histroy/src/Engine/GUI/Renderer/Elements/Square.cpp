@@ -71,5 +71,6 @@ void Square::ImGuiRender()
 	mID = std::string(mBufferID);
 	ImGui::SliderFloat2("Location", &mLocation.x, -float(Histroy::Application::mWindowWidth), float(Histroy::Application::mWindowWidth));
 	ImGui::InputFloat2("Scale", &mScale.x);
+	ImGui::SliderAngle("Rotation", &mRotation);
 	ImGui::ColorEdit4("Color", mColor);
 }
