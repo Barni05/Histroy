@@ -17,6 +17,9 @@ public:
 	virtual void OnMouseButtonReleased(Histroy::Event& e) {}
 
 	inline std::string GetID() const { return mID; }
+	inline std::string GetName() const { return mName; }
+	inline int GetGeometryNumber() const { return mGeometryNumber; }
+	int AssignIdNumber();
 
 protected:
 	glm::mat4 mModel, mView, mProj, mMVP;
@@ -25,7 +28,7 @@ protected:
 	float mColor[4];
 	std::string mName;
 	std::string mID;
-	static int sGeometryNumber;
+	int mGeometryNumber;
 	char* mBufferID;
 
 	bool IsObjectPressed(int, int, float[]);

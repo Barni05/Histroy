@@ -17,7 +17,6 @@ Square::~Square()
 
 void Square::Init()
 {
-	Square::sGeometryNumber++;
 	mName = "Square";
 	mBufferID = new char[256];
 	mBufferID = (char*)mID.c_str();
@@ -37,7 +36,8 @@ void Square::Init()
 	mLocation = glm::vec3(0, 0, 0);
 	mScale = glm::vec3(1.f);
 	std::stringstream ss;
-	ss << mName << "_" << Square::sGeometryNumber;
+	mGeometryNumber = AssignIdNumber();
+	ss << mName << "_" << mGeometryNumber;
 	mID = ss.str();
 	mProj = glm::ortho(0.0f, float(Histroy::Application::mWindowWidth), 0.0f, float(Histroy::Application::mWindowHeight), -1.0f, 1.0f);
 }

@@ -12,9 +12,20 @@ namespace Histroy
 		}
 		if (Application::sSelectedObject)
 			Application::sSelectedObject->ImGuiRender();
+			
 	}
 	void HistroyRenderer::AddGeometry(Geometry* geometry)
 	{
 		sGeometries.push_back(geometry);
+	}
+	void HistroyRenderer::DeleteGeometry(Geometry* geometry)
+	{
+		for (int i = 0; i < sGeometries.size(); i++)
+		{
+			if (sGeometries[i]->GetID() == geometry->GetID())
+			{
+				sGeometries.erase(sGeometries.begin() + i);
+			}
+		}
 	}
 }

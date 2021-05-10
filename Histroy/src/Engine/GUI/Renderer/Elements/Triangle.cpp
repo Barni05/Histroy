@@ -22,7 +22,6 @@ Triangle::Triangle(float color[4])
 
 void Triangle::Init()
 {
-	Triangle::sGeometryNumber++;
 	mName = "Triangle";
 	mBufferID = new char[256];
 	mBufferID = (char*)mID.c_str();
@@ -39,7 +38,8 @@ void Triangle::Init()
 	mLocation = glm::vec3(0, 0, 0);
 	mScale = glm::vec3(1.0f);
 	std::stringstream ss;
-	ss << mName << "_" << Triangle::sGeometryNumber;
+	mGeometryNumber = AssignIdNumber();
+	ss << mName << "_" << mGeometryNumber;
 	mID = ss.str();
 	mProj = glm::ortho(0.0f, float(Histroy::Application::mWindowWidth), 0.0f, float(Histroy::Application::mWindowHeight), -1.0f, 1.0f);
 }
@@ -78,13 +78,12 @@ void Triangle::ImGuiRender()
 
 }
 
+
+
 void Triangle::OnKeyPressed(Histroy::Event& e)
 {
 	Histroy::KeyPressed* event = dynamic_cast<Histroy::KeyPressed*>(&e);
-	if (event->GetKey() == GLFW_KEY_DELETE)
-	{
-		std::cout << "Object deleted" << std::endl;
-	}
+
 
 }
 

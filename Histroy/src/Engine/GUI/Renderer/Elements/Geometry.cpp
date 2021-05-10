@@ -1,7 +1,6 @@
 #include "hspch.h"
 #include "Geometry.h"
 
-int Geometry::sGeometryNumber = 0;
 
 bool Geometry::IsObjectPressed(int x, int y, float color[4])
 {
@@ -45,4 +44,30 @@ void Geometry::OnMouseButtonPressed(Histroy::Event& e)
 	{
 		Histroy::Application::sSelectedObject = this;
 	}
+}
+
+int Geometry::AssignIdNumber()
+{
+	if (Histroy::HistroyRenderer::sGeometries.size() != 0)
+	{
+		std::vector<int> IDs;
+		for (auto geometries : Histroy::HistroyRenderer::sGeometries)
+		{
+			if (geometries->GetName() == this->GetName())
+			{
+				IDs.push_back(geometries->GetGeometryNumber());
+			}
+		}
+
+		int max = IDs[0];
+		for (int id : IDs)
+		{
+			if (id > max)
+			{
+				max = id;
+			}
+		}
+		return max + 1;
+	}
+	return 1;
 }

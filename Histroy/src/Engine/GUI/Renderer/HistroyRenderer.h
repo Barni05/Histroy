@@ -9,6 +9,7 @@ namespace Histroy
 	public:
 		static void Render();
 		static void AddGeometry(Geometry*);
+		static void DeleteGeometry(Geometry*);
 		static std::vector<Geometry*> sGeometries;
 	};
 }

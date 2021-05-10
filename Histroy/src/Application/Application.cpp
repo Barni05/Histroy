@@ -73,6 +73,10 @@ namespace Histroy
 	{
 		for (auto geometry : HistroyRenderer::sGeometries)
 			geometry->OnKeyPressed(e);
+		if (dynamic_cast<Histroy::KeyPressed*>(&e)->GetKey() == GLFW_KEY_DELETE)
+		{
+			Histroy::HistroyRenderer::DeleteGeometry(sSelectedObject);
+		}
 		return true;
 	}
 
