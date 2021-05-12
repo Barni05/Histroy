@@ -30,11 +30,11 @@ Geometry::~Geometry()
 
 void Geometry::UpdateTransform()
 {
-	mView = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f));
+	mView = glm::translate(glm::mat4(1.0f), glm::vec3(0.f));
 	mModel = glm::translate(glm::mat4(1.0f), mLocation);
 	mModel = glm::rotate(mModel, mRotation, glm::vec3(0.0f, 0.f, 1.f));
 	mModel = glm::scale(mModel, mScale);
-	mMVP = mModel * mProj;
+	mMVP = mProj * mView * mModel;
 }
 
 void Geometry::OnMouseButtonPressed(Histroy::Event& e)

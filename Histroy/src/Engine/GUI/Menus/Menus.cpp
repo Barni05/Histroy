@@ -23,6 +23,10 @@ namespace Histroy
 				{
 
 				}
+				else if (ImGui::MenuItem("Exit"))
+				{
+					Application::CloseWindow();
+				}
 				ImGui::EndMenu();
 			}
 			else if (ImGui::BeginMenu("Add"))
@@ -41,6 +45,13 @@ namespace Histroy
 					Application::sSelectedObject = square;
 					HistroyRenderer::AddGeometry(square);
 
+				}
+				ImGui::EndMenu();
+			}
+			else if (ImGui::BeginMenu("Open"))
+			{
+				if (ImGui::MenuItem("Code Editor"))
+				{
 				}
 				ImGui::EndMenu();
 			}

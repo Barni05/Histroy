@@ -19,10 +19,10 @@ namespace Histroy
 	{
 		Close();
 	}
-	void Window::Init()
+	void Window::Init(GLFWmonitor* monitor)
 	{
 		HS_ASSERT(sIsInitialised, false)
-		mWindow = glfwCreateWindow(mData.width, mData.height, mData.title.c_str(), NULL, NULL);
+		mWindow = glfwCreateWindow(mData.width, mData.height, mData.title.c_str(), monitor, NULL);
 
 
 		HS_ASSERT(mWindow, nullptr)

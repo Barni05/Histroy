@@ -37,6 +37,7 @@ void Triangle::Init()
 	mInitialPosition[5] = positions[2].second;
 	mLocation = glm::vec3(0, 0, 0);
 	mScale = glm::vec3(1.0f);
+	mModel = glm::mat4(1.0f);
 	std::stringstream ss;
 	mGeometryNumber = AssignIdNumber();
 	ss << mName << "_" << mGeometryNumber;

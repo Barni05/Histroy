@@ -5,24 +5,24 @@
 #include <Histroy.h>
 
 #define BIND_EVENT_FUNCTION(func) std::bind(&Application::func, this, std::placeholders::_1)
-
 namespace Histroy
 {
-	Application::Application(){
+	bool Application::mShouldClose = false;
+	Application::Application() {
 		mWindow = new Histroy::Window({ "Histroy", mWindowWidth, mWindowHeight });
 	}
 	Application::~Application() { delete mWindow; }
 
 	void Application::Run() {
 		HS_SET_LOG_DIR(plog::warning, "F:\\DEV\\Projektek\\Histroy Engine\\Histroy\\Logs\\Logs.txt", 10000, 1);
-		mWindow->Init();
+		mWindow->Init(glfwGetPrimaryMonitor());
 		mWindow->SetCallback(BIND_EVENT_FUNCTION(OnEventHappened));
 		HistroyGui::Init(mWindow->GetWindow());
 		while (!mShouldClose)
 		{
 			glClear(GL_COLOR_BUFFER_BIT);
 			Menus::MainMenu();
-			
+
 			SetupPropertiesPage();
 			SetupWorldPage();
 
@@ -38,8 +38,8 @@ namespace Histroy
 	void Application::SetupPropertiesPage()
 	{
 		HistroyGui::BeginRender("Properties");
-		ImGui::SetWindowSize({ LEFT_WINDOW_INDENT, float(mWindowHeight/2) });
-		ImGui::SetWindowPos({ 0, float(mWindowHeight/2) });
+		ImGui::SetWindowSize({ LEFT_WINDOW_INDENT, float(mWindowHeight / 2) });
+		ImGui::SetWindowPos({ 0, float(mWindowHeight / 2) });
 
 		//Render Geometry
 		HistroyRenderer::Render();
@@ -50,7 +50,7 @@ namespace Histroy
 	void Application::SetupWorldPage()
 	{
 		HistroyGui::BeginRender("The World");
-		ImGui::SetWindowSize({ LEFT_WINDOW_INDENT, float(mWindowHeight/2)-20.0f });
+		ImGui::SetWindowSize({ LEFT_WINDOW_INDENT, float(mWindowHeight / 2) - 20.0f });
 		ImGui::SetWindowPos({ 0, 20 });
 		for (auto geometry : HistroyRenderer::sGeometries)
 		{
@@ -121,10 +121,10 @@ namespace Histroy
 		dispatcher.Dispatch<MouseButtonReleased>(BIND_EVENT_FUNCTION(OnMouseButtonReleased));
 	}
 
-	int Application::mWindowHeight = 670;
-	int Application::mWindowWidth = 1200;
-}
+	int Application::mWindowHeight = 1080;
+	int Application::mWindowWidth = 1920;
 
+}
 int main()
 {
 	Histroy::Application* app = new Histroy::Application();

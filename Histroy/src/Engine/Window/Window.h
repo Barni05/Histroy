@@ -19,7 +19,7 @@ namespace Histroy
 		Window(WindowData);
 		~Window();
 
-		void Init();
+		void Init(GLFWmonitor* monitor);
 		void Update();
 		void Close();
 
