@@ -21,10 +21,10 @@ void Square::Init()
 	mBufferID = new char[256];
 	mBufferID = (char*)mID.c_str();
 	std::pair<float, float> positions[4];
-	positions[0] = std::make_pair<float, float>(Histroy::Application::mWindowWidth / 2 / 2, Histroy::Application::mWindowHeight / 2 / 2);
-	positions[1] = std::make_pair<float, float>(Histroy::Application::mWindowWidth / 2 / 2 + Histroy::Application::mWindowWidth / 2, Histroy::Application::mWindowHeight / 2 / 2);
-	positions[2] = std::make_pair<float, float>(Histroy::Application::mWindowWidth / 2 / 2 + Histroy::Application::mWindowWidth / 2, Histroy::Application::mWindowHeight / 2 / 2 + Histroy::Application::mWindowHeight / 2);
-	positions[3] = std::make_pair<float, float>(Histroy::Application::mWindowWidth / 2 / 2, Histroy::Application::mWindowHeight / 2 / 2 + Histroy::Application::mWindowHeight / 2);
+	positions[0] = std::make_pair<float, float>(Histroy::Application::mViewportWidth / 2 / 2, Histroy::Application::mViewportHeight / 2 / 2);
+	positions[1] = std::make_pair<float, float>(Histroy::Application::mViewportWidth / 2 / 2 + Histroy::Application::mViewportWidth / 2, Histroy::Application::mViewportHeight / 2 / 2);
+	positions[2] = std::make_pair<float, float>(Histroy::Application::mViewportWidth / 2 / 2 + Histroy::Application::mViewportWidth / 2, Histroy::Application::mViewportHeight / 2 / 2 + Histroy::Application::mViewportHeight / 2);
+	positions[3] = std::make_pair<float, float>(Histroy::Application::mViewportWidth / 2 / 2, Histroy::Application::mViewportHeight / 2 / 2 + Histroy::Application::mViewportHeight / 2);
 	bool bFirst = true;
 	int pairInd = 0;
 	for (int i = 0; i < 8; i++)
@@ -39,7 +39,7 @@ void Square::Init()
 	mGeometryNumber = AssignIdNumber();
 	ss << mName << "_" << mGeometryNumber;
 	mID = ss.str();
-	mProj = glm::ortho(0.0f, float(Histroy::Application::mWindowWidth), 0.0f, float(Histroy::Application::mWindowHeight), -1.0f, 1.0f);
+	mProj = glm::ortho(0.0f, float(Histroy::Application::mViewportWidth), 0.0f, float(Histroy::Application::mViewportHeight), -1.0f, 1.0f);
 }
 
 void Square::Render()

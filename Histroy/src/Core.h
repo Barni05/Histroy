@@ -25,4 +25,4 @@
 							HS_ERROR(msg);	
 #define HS_FATAL_DEF(msg) HS_SET_LOG_DIR(plog::warning, "F:\\DEV\\Projektek\\Histroy Engine\\Histroy\\Logs\\Logs.txt", 10000, 1);\
 							HS_FATAL(msg);	
-#define LEFT_WINDOW_INDENT 250
+#define BOTTOM_VIEWPORT_DISTANCE 540

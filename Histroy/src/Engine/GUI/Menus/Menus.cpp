@@ -48,13 +48,6 @@ namespace Histroy
 				}
 				ImGui::EndMenu();
 			}
-			else if (ImGui::BeginMenu("Open"))
-			{
-				if (ImGui::MenuItem("Code Editor"))
-				{
-				}
-				ImGui::EndMenu();
-			}
 			ImGui::EndMainMenuBar();
 		}
 	}

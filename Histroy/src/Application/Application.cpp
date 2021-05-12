@@ -28,6 +28,7 @@ namespace Histroy
 
 			//Render IMGUI
 			HistroyGui::Render();
+			RenderSeparator();
 
 			mWindow->Update();
 		}
@@ -38,8 +39,8 @@ namespace Histroy
 	void Application::SetupPropertiesPage()
 	{
 		HistroyGui::BeginRender("Properties");
-		ImGui::SetWindowSize({ LEFT_WINDOW_INDENT, float(mWindowHeight / 2) });
-		ImGui::SetWindowPos({ 0, float(mWindowHeight / 2) });
+		ImGui::SetWindowSize({ (float)mWindowWidth/6, BOTTOM_VIEWPORT_DISTANCE });
+		ImGui::SetWindowPos({ (float)mWindowWidth / 6, BOTTOM_VIEWPORT_DISTANCE });
 
 		//Render Geometry
 		HistroyRenderer::Render();
@@ -50,16 +51,43 @@ namespace Histroy
 	void Application::SetupWorldPage()
 	{
 		HistroyGui::BeginRender("The World");
-		ImGui::SetWindowSize({ LEFT_WINDOW_INDENT, float(mWindowHeight / 2) - 20.0f });
-		ImGui::SetWindowPos({ 0, 20 });
+		ImGui::SetWindowSize({ (float)mWindowWidth/6, BOTTOM_VIEWPORT_DISTANCE });
+		ImGui::SetWindowPos({ 0, BOTTOM_VIEWPORT_DISTANCE });
 		for (auto geometry : HistroyRenderer::sGeometries)
 		{
-			if (ImGui::Button(geometry->GetID().c_str(), { LEFT_WINDOW_INDENT, 20 }))
+			if (ImGui::Button(geometry->GetID().c_str(), { (float)mWindowWidth / 6, 20 }))
 			{
 				Application::sSelectedObject = geometry;
 			}
 		}
 		HistroyGui::EndRender();
+	}
+
+	void Application::RenderSeparator()
+	{
+		float positions[]{
+			(float)(mViewportWidth - mViewportWidth/50), 0,
+			(float)mViewportWidth, 0,
+			mViewportWidth, mViewportHeight-40,
+			(float)(mViewportWidth - mViewportWidth / 50), mViewportHeight-40
+		};
+		unsigned int indicies[]{ 0,1,2, 0, 2, 3 };
+		VertexBuffer vb(8 * sizeof(float), positions);
+		vb.Bind();
+		IndexBuffer ib(6, indicies);
+
+		VertexBufferLayout layout;
+		layout.PushLayout<float>(2, false);
+
+		VertexArray va;
+		va.AddBuffer(vb, layout);
+
+		Shader shader("src/Engine/GUI/Shaders/Geometry.shader");
+		shader.Bind();
+		shader.SetUniformMat4("u_MVP", glm::ortho(0.0f, float(Histroy::Application::mViewportWidth), 0.0f, float(Histroy::Application::mViewportHeight), -1.0f, 1.0f));
+		shader.SetUniform4f("u_Color", 0.16f, 0.29f, 0.47f, 1.f);
+		Renderer renderer;
+		renderer.DrawElements(shader, va, ib);
 	}
 
 
@@ -123,6 +151,8 @@ namespace Histroy
 
 	int Application::mWindowHeight = 1080;
 	int Application::mWindowWidth = 1920;
+	int Application::mViewportHeight = BOTTOM_VIEWPORT_DISTANCE;
+	int Application::mViewportWidth = (float)Histroy::Application::mWindowWidth / 3;
 
 }
 int main()

@@ -58,16 +58,18 @@ int Geometry::AssignIdNumber()
 				IDs.push_back(geometries->GetGeometryNumber());
 			}
 		}
-
-		int max = IDs[0];
-		for (int id : IDs)
+		if (IDs.size() > 0)
 		{
-			if (id > max)
+			int max = IDs[0];
+			for (int id : IDs)
 			{
-				max = id;
+				if (id > max)
+				{
+					max = id;
+				}
 			}
+			return max + 1;
 		}
-		return max + 1;
 	}
 	return 1;
 }

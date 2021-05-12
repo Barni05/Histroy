@@ -11,6 +11,7 @@ namespace Histroy
 
 		void SetupPropertiesPage();
 		void SetupWorldPage();
+		void RenderSeparator();
 
 		void Run();
 		void OnEventHappened(Event& e);
@@ -26,6 +27,7 @@ namespace Histroy
 		static void CloseWindow() { mShouldClose = true; }
 
 		static int mWindowHeight, mWindowWidth;
+		static int mViewportWidth, mViewportHeight;
 		static Geometry* sSelectedObject;
 	private:
 		Histroy::Window* mWindow;

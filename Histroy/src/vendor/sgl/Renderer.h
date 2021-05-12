@@ -11,5 +11,6 @@ public:
 
 	void DrawElements(Shader& shader, VertexArray& va, IndexBuffer& ib);
 	void DrawArrays(Shader& shader, VertexArray& va, VertexBuffer& vb);
+	void DrawPolygons(Shader& shader, VertexArray& va, IndexBuffer& ib);
 };
 

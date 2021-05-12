@@ -24,3 +24,11 @@ void Renderer::DrawArrays(Shader& shader, VertexArray& va, VertexBuffer& vb)
 	vb.Bind();
 	GLCall(glDrawArrays(GL_TRIANGLES, 0, 3));
 }
+
+void Renderer::DrawPolygons(Shader& shader, VertexArray& va, IndexBuffer& ib)
+{
+	shader.Bind();
+	va.Bind();
+	ib.Bind();
+	GLCall(glDrawElements(GL_POLYGON, ib.GetCount(), GL_UNSIGNED_INT, nullptr));
+}

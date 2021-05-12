@@ -106,7 +106,7 @@ namespace Histroy
 	}
 	void Window::Update()
 	{
-		glViewport(LEFT_WINDOW_INDENT, 0, Histroy::Application::mWindowWidth, Histroy::Application::mWindowHeight);
+		glViewport(0, BOTTOM_VIEWPORT_DISTANCE, Application::mViewportWidth, Application::mViewportHeight);
 		glfwSwapBuffers(mWindow);
 		glfwPollEvents();
 	}
