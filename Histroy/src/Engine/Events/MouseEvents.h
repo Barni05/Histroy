@@ -1,7 +1,9 @@
 #pragma once
 #include "Core.h"
 #include "Event.h"
+#include "Engine/Window/Window.h"
 #include <iostream>
+class Histroy::Window;
 namespace Histroy
 {
 	class MouseButton : public Event
@@ -21,7 +23,7 @@ namespace Histroy
 	class MouseButtonPressed : public MouseButton
 	{
 	public:
-		MouseButtonPressed(int button, int x, int y) :MouseButton(button, x, y) {}
+		MouseButtonPressed(int button, int x, int y, Window* window) :MouseButton(button, x, y) { mWindow = window; }
 		HS_EVENT_FUNCTIONS("Mouse Button Pressed", EventType::MouseButtonPressed)
 		std::string ToString() override {
 			std::stringstream ss;
@@ -34,7 +36,7 @@ namespace Histroy
 	class MouseButtonReleased : public MouseButton
 	{
 	public:
-		MouseButtonReleased(int button, int x, int y) :MouseButton(button, x, y) {}
+		MouseButtonReleased(int button, int x, int y, Window* window) :MouseButton(button, x, y) { mWindow = window; }
 		HS_EVENT_FUNCTIONS("Mouse Button Released", EventType::MouseButtonReleased)
 		std::string ToString() override {
 			std::stringstream ss;
@@ -48,7 +50,7 @@ namespace Histroy
 	class MouseScrolled : public Event
 	{
 	public:
-		MouseScrolled(double x, double y) :mXoffset(x), mYoffset(y) {}
+		MouseScrolled(double x, double y, Window* window) :mXoffset(x), mYoffset(y) { mWindow = window; }
 		inline double GetXOffset() const { return mXoffset; }
 		inline double GetYOffset() const { return mYoffset; }
 
@@ -68,7 +70,7 @@ namespace Histroy
 	class MouseMoved : public Event
 	{
 	public:
-		MouseMoved(float x, float y) :mX(x), mY(y) {}
+		MouseMoved(float x, float y, Window* window) :mX(x), mY(y) { mWindow = window; }
 		inline float GetX() const { return mX; };
 		inline float GetY() const { return mY; };
 

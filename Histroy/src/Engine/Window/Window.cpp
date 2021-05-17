@@ -19,45 +19,42 @@ namespace Histroy
 	{
 		Close();
 	}
-	void Window::Init(GLFWmonitor* monitor)
+	void Window::Init(GLFWmonitor* monitor, GLFWwindow* share)
 	{
 		HS_ASSERT(sIsInitialised, false)
-		mWindow = glfwCreateWindow(mData.width, mData.height, mData.title.c_str(), monitor, NULL);
+		mWindow = glfwCreateWindow(mData.width, mData.height, mData.title.c_str(), monitor, share);
 
 
 		HS_ASSERT(mWindow, nullptr)
-		glfwSetWindowUserPointer(mWindow, &mData);
-		glfwMakeContextCurrent(mWindow);
+		glfwSetWindowUserPointer(mWindow, this);
 
-		if (glewInit() != GLEW_OK)
-			std::cout << "Glew Error" << std::endl;
 
 		glfwSetWindowCloseCallback(GetWindow(), [](GLFWwindow* window) {
-			Histroy::WindowData& data = *(Histroy::WindowData*)glfwGetWindowUserPointer(window);
-			Histroy::WindowClose* closeEvent = new Histroy::WindowClose();
-			data.mCallback(*closeEvent);
+			Window* data = (Window*)glfwGetWindowUserPointer(window);
+			Histroy::WindowClose* closeEvent = new Histroy::WindowClose(data);
+			data->GetData().mCallback(*closeEvent);
 			});
 
 		glfwSetKeyCallback(GetWindow(), [](GLFWwindow* window, int key, int scancode, int action, int mods) {
-			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+			Window* data = (Window*)glfwGetWindowUserPointer(window);
 			switch (action)
 			{
 			case GLFW_PRESS:
 			{
-				Histroy::KeyPressed pressed(key, 0);
-				data.mCallback(pressed);
+				Histroy::KeyPressed pressed(key, 0, data);
+				data->GetData().mCallback(pressed);
 				break;
 			}
 			case GLFW_RELEASE:
 			{
-				Histroy::KeyReleased released(key);
-				data.mCallback(released);
+				Histroy::KeyReleased released(key, data);
+				data->GetData().mCallback(released);
 				break;
 			}
 			case GLFW_REPEAT:
 			{
-				Histroy::KeyPressed repeat(key, 1);
-				data.mCallback(repeat);
+				Histroy::KeyPressed repeat(key, 1, data);
+				data->GetData().mCallback(repeat);
 				break;
 			}
 			}
@@ -66,49 +63,56 @@ namespace Histroy
 			});
 
 		glfwSetWindowSizeCallback(GetWindow(), [](GLFWwindow* window, int width, int height) {
-			Histroy::WindowData& data = *(Histroy::WindowData*)glfwGetWindowUserPointer(window);
-			Histroy::WindowResize resize(width, height);
-			data.mCallback(resize);
+			Window* data = (Window*)glfwGetWindowUserPointer(window);
+			Histroy::WindowResize resize(width, height, data);
+			data->GetData().mCallback(resize);
 			});
 
 		glfwSetCursorPosCallback(GetWindow(), [](GLFWwindow* window, double x, double y) {
-			Histroy::WindowData& data = *(Histroy::WindowData*)glfwGetWindowUserPointer(window);
-			Histroy::MouseMoved moved(x, y);
-			data.mCallback(moved);
+			Window* data = (Window*)glfwGetWindowUserPointer(window);
+			Histroy::MouseMoved moved(x, y, data);
+			data->GetData().mCallback(moved);
 			});
 		glfwSetScrollCallback(GetWindow(), [](GLFWwindow* window, double xoffset, double yoffset) {
-			Histroy::WindowData& data = *(Histroy::WindowData*)glfwGetWindowUserPointer(window);
-			Histroy::MouseScrolled scrolled(xoffset, yoffset);
-			data.mCallback(scrolled);
+			Window* data = (Window*)glfwGetWindowUserPointer(window);
+			Histroy::MouseScrolled scrolled(xoffset, yoffset, data);
+			data->GetData().mCallback(scrolled);
 			});
 
 		glfwSetMouseButtonCallback(GetWindow(), [](GLFWwindow* window, int button, int action, int mods) {
-			Histroy::WindowData& data = *(Histroy::WindowData*)glfwGetWindowUserPointer(window);
+			Window* data = (Window*)glfwGetWindowUserPointer(window);
 			double x, y;
 			glfwGetCursorPos(window, &x, &y);
 			switch (action)
 			{
 			case GLFW_PRESS:
 			{
-				Histroy::MouseButtonPressed  press(button, (int)x, Application::mWindowHeight - (int)y);
-				data.mCallback(press);
+				Histroy::MouseButtonPressed  press(button, (int)x, Application::mWindowHeight - (int)y, data);
+				data->GetData().mCallback(press);
 				break;
 			}
 			case GLFW_RELEASE:
 			{
-				Histroy::MouseButtonReleased release(button, x, y);
-				data.mCallback(release);
+				Histroy::MouseButtonReleased release(button, x, y, data);
+				data->GetData().mCallback(release);
 				break;
 			}
 			}
 			});
 		//INPUT CALLBACKS
 	}
+	void Window::MakeContextCurrent()
+	{
+		glfwMakeContextCurrent(this->GetWindow());
+		if (glewInit() != GLEW_OK)
+			std::cout << "Glew Error" << std::endl;
+	}
 	void Window::Update()
 	{
 		glViewport(0, BOTTOM_VIEWPORT_DISTANCE, Application::mViewportWidth, Application::mViewportHeight);
-		glfwSwapBuffers(mWindow);
-		glfwPollEvents();
+		if(mWindow)
+			glfwSwapBuffers(mWindow);
+
 	}
 	void Window::Close()
 	{

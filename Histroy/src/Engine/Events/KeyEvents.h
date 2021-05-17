@@ -1,5 +1,7 @@
 #pragma once
 #include "Event.h"
+#include "Engine/Window/Window.h"
+class Histroy::Window;
 namespace Histroy
 {
 	class KeyEvent : public Event
@@ -17,7 +19,7 @@ namespace Histroy
 	class KeyPressed : public KeyEvent
 	{
 	public:
-		KeyPressed(int key, int repeat) :KeyEvent(key), mRepeat(repeat) {}
+		KeyPressed(int key, int repeat, Window* window) :KeyEvent(key), mRepeat(repeat) { mWindow = window; }
 		inline int GetRepeat() const { return mRepeat; }
 		HS_EVENT_FUNCTIONS("Key Pressed", EventType::KeyPressed)
 
@@ -34,7 +36,7 @@ namespace Histroy
 	class KeyReleased : public KeyEvent
 	{
 	public:
-		KeyReleased(int key) : KeyEvent(key) {}
+		KeyReleased(int key, Window* window) : KeyEvent(key) { mWindow = window; }
 		HS_EVENT_FUNCTIONS("Key Released", EventType::KeyReleased);
 
 		std::string ToString() override 

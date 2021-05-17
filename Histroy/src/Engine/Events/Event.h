@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include "Core.h"
+#include "Engine/Window/Window.h"
 namespace Histroy
 {
 	enum class EventType
@@ -12,14 +13,11 @@ namespace Histroy
 		MouseButton, MouseButtonPressed, MouseButtonReleased, MouseScroll,
 		MouseMove
 	};
-#define HS_EVENT_FUNCTIONS(name, type)		std::string GetName() override {return name;}\
-										static EventType GetStaticType() {return type;}\
-										EventType GetType() override { return GetStaticType(); }
 	class Event
 	{
 		friend class EventDispatcher;
 	public:
-		Event(){}
+		Event():mHandled(false) {}
 
 		~Event() {}
 
@@ -30,6 +28,7 @@ namespace Histroy
 	private:
 	protected:
 		bool mHandled;
+		class Window* mWindow;
 	};
 
 	class EventDispatcher
@@ -53,4 +52,8 @@ namespace Histroy
 		Event& mEvent;
 
 	};
+
+#define HS_EVENT_FUNCTIONS(name, type)		std::string GetName() override {return name;}\
+										static EventType GetStaticType() {return type;}\
+										EventType GetType() override { return GetStaticType(); }
 }

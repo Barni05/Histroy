@@ -8,42 +8,73 @@
 namespace Histroy
 {
 	bool Application::mShouldClose = false;
+	bool Application::bShouldCodeEditorOpen = false;
 	Application::Application() {
 		mWindow = new Histroy::Window({ "Histroy", mWindowWidth, mWindowHeight });
+		mCodeEditor = new Histroy::Window({ "Histroy Code Editor", mWindowWidth, mWindowHeight });
 	}
-	Application::~Application() { delete mWindow; }
+	Application::~Application() { delete mWindow; delete mCodeEditor; }
+
+
+	static bool bHasBeenInitialised = false; //mCodeEditor is initialised or not
+
 
 	void Application::Run() {
 		HS_SET_LOG_DIR(plog::warning, "F:\\DEV\\Projektek\\Histroy Engine\\Histroy\\Logs\\Logs.txt", 10000, 1);
-		mWindow->Init(glfwGetPrimaryMonitor());
+		mWindow->Init(NULL, NULL);
 		mWindow->SetCallback(BIND_EVENT_FUNCTION(OnEventHappened));
+		mCodeEditor->SetCallback(BIND_EVENT_FUNCTION(OnEventHappened));
+		mWindow->MakeContextCurrent();
 		HistroyGui::Init(mWindow->GetWindow());
 		while (!mShouldClose)
 		{
-			glClear(GL_COLOR_BUFFER_BIT);
+
+			mWindow->MakeContextCurrent();
+			
+			HistroyGui::NewFrame();
 			Menus::MainMenu();
 
 			SetupPropertiesPage();
 			SetupWorldPage();
 
-			//Render IMGUI
+			//Render IMGUI		  
 			HistroyGui::Render();
-			RenderSeparator();
+
+			//Render Geometry
+			HistroyRenderer::Render();
 
 			mWindow->Update();
+
+			if (bShouldCodeEditorOpen)
+			{
+				if (!bHasBeenInitialised)
+				{
+					mCodeEditor->Init(NULL, NULL);
+					bHasBeenInitialised = true;
+				}
+				mCodeEditor->MakeContextCurrent();
+				glBegin(GL_TRIANGLES);
+				glVertex2f(-0.5f, -0.5f);
+				glVertex2f(0.5f, -0.5f);
+				glVertex2f(0.f, 0.5f);
+				glEnd();
+				mCodeEditor->Update();
+			}
+
+			glfwPollEvents();
+			glClear(GL_COLOR_BUFFER_BIT);
+
 		}
 		HistroyGui::Shutdown();
 		glfwTerminate();
+
 	}
 
 	void Application::SetupPropertiesPage()
 	{
 		HistroyGui::BeginRender("Properties");
-		ImGui::SetWindowSize({ (float)mWindowWidth/6, BOTTOM_VIEWPORT_DISTANCE });
+		ImGui::SetWindowSize({ (float)mWindowWidth / 6, BOTTOM_VIEWPORT_DISTANCE });
 		ImGui::SetWindowPos({ (float)mWindowWidth / 6, BOTTOM_VIEWPORT_DISTANCE });
-
-		//Render Geometry
-		HistroyRenderer::Render();
 
 		HistroyGui::EndRender();
 	}
@@ -51,7 +82,7 @@ namespace Histroy
 	void Application::SetupWorldPage()
 	{
 		HistroyGui::BeginRender("The World");
-		ImGui::SetWindowSize({ (float)mWindowWidth/6, BOTTOM_VIEWPORT_DISTANCE });
+		ImGui::SetWindowSize({ (float)mWindowWidth / 6, BOTTOM_VIEWPORT_DISTANCE });
 		ImGui::SetWindowPos({ 0, BOTTOM_VIEWPORT_DISTANCE });
 		for (auto geometry : HistroyRenderer::sGeometries)
 		{
@@ -66,10 +97,10 @@ namespace Histroy
 	void Application::RenderSeparator()
 	{
 		float positions[]{
-			(float)(mViewportWidth - mViewportWidth/50), 0,
+			(float)(mViewportWidth - mViewportWidth / 50), 0,
 			(float)mViewportWidth, 0,
-			mViewportWidth, mViewportHeight-40,
-			(float)(mViewportWidth - mViewportWidth / 50), mViewportHeight-40
+			mViewportWidth, mViewportHeight - 40,
+			(float)(mViewportWidth - mViewportWidth / 50), mViewportHeight - 40
 		};
 		unsigned int indicies[]{ 0,1,2, 0, 2, 3 };
 		VertexBuffer vb(8 * sizeof(float), positions);
@@ -128,6 +159,7 @@ namespace Histroy
 		mWindowWidth = dynamic_cast<WindowResize&>(e).GetWidth();
 		return true;
 	}
+
 
 	bool Application::OnKeyReleased(Event& e)
 	{

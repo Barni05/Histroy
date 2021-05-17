@@ -1,11 +1,13 @@
 #pragma once
 #include "Event.h"
+#include "Engine/Window/Window.h"
+class Histroy::Window;
 namespace Histroy
 {
 	class WindowResize : public Event
 	{
 	public:
-		WindowResize(int width, int height) : mWidth(width), mHeight(height) {}
+		WindowResize(int width, int height, Window* window) : mWidth(width), mHeight(height) { mWindow = window; }
 		~WindowResize() {}
 		inline int GetWidth() const { return mWidth; }
 		inline int GetHeight() const { return mHeight; }
@@ -24,7 +26,7 @@ namespace Histroy
 	class WindowClose : public Event
 	{
 	public:
-		WindowClose() {}
+		WindowClose(Window* window) { mWindow = window; }
 		~WindowClose() {}
 
 		HS_EVENT_FUNCTIONS("Window Close", EventType::WindowClose)

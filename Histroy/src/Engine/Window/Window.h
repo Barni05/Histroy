@@ -6,7 +6,6 @@
 typedef std::function<void(Histroy::Event&)> EventCallback;
 namespace Histroy
 {
-	typedef 
 	struct WindowData
 	{
 		std::string title = "Histroy Engine";
@@ -19,12 +18,14 @@ namespace Histroy
 		Window(WindowData);
 		~Window();
 
-		void Init(GLFWmonitor* monitor);
+		void Init(GLFWmonitor* monitor, GLFWwindow* share);
+		void MakeContextCurrent();
 		void Update();
 		void Close();
 
-		GLFWwindow* GetWindow() const { return mWindow; }
-		EventCallback GetCallback() const { return mData.mCallback; }
+		inline GLFWwindow* GetWindow() const { return mWindow; }
+		inline EventCallback GetCallback() const { return mData.mCallback; }
+		inline WindowData GetData() const { return mData; }
 
 		void SetCallback(EventCallback callback);
 

@@ -6,7 +6,6 @@ namespace Histroy
 	Geometry* Application::sSelectedObject;
 	void Menus::MainMenu()
 	{
-		HistroyGui::NewFrame();
 		if (ImGui::BeginMainMenuBar())
 		{
 			if (ImGui::BeginMenu("File"))
@@ -46,6 +45,12 @@ namespace Histroy
 					HistroyRenderer::AddGeometry(square);
 
 				}
+				ImGui::EndMenu();
+			}
+			else if (ImGui::BeginMenu("Open"))
+			{
+				if (ImGui::MenuItem("Code Editor"))
+					Application::bShouldCodeEditorOpen = true;
 				ImGui::EndMenu();
 			}
 			ImGui::EndMainMenuBar();
