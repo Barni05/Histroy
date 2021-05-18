@@ -24,7 +24,6 @@ namespace Histroy
 				}
 				else if (ImGui::MenuItem("Exit"))
 				{
-					Application::CloseWindow();
 				}
 				ImGui::EndMenu();
 			}

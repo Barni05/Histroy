@@ -109,7 +109,7 @@ namespace Histroy
 	}
 	void Window::Update()
 	{
-		glViewport(0, BOTTOM_VIEWPORT_DISTANCE, Application::mViewportWidth, Application::mViewportHeight);
+		glViewport(LEFT_WINDOW_INDENT, 0, Application::mViewportWidth, Application::mViewportHeight);
 		if(mWindow)
 			glfwSwapBuffers(mWindow);
 

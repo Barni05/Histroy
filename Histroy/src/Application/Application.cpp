@@ -7,7 +7,6 @@
 #define BIND_EVENT_FUNCTION(func) std::bind(&Application::func, this, std::placeholders::_1)
 namespace Histroy
 {
-	bool Application::mShouldClose = false;
 	bool Application::bShouldCodeEditorOpen = false;
 	Application::Application() {
 		mWindow = new Histroy::Window({ "Histroy", mWindowWidth, mWindowHeight });
@@ -37,11 +36,12 @@ namespace Histroy
 			SetupPropertiesPage();
 			SetupWorldPage();
 
+			//Render Geometry
+			HistroyRenderer::Render();
+
 			//Render IMGUI		  
 			HistroyGui::Render();
 
-			//Render Geometry
-			HistroyRenderer::Render();
 
 			mWindow->Update();
 
@@ -73,8 +73,8 @@ namespace Histroy
 	void Application::SetupPropertiesPage()
 	{
 		HistroyGui::BeginRender("Properties");
-		ImGui::SetWindowSize({ (float)mWindowWidth / 6, BOTTOM_VIEWPORT_DISTANCE });
-		ImGui::SetWindowPos({ (float)mWindowWidth / 6, BOTTOM_VIEWPORT_DISTANCE });
+		ImGui::SetWindowSize({ LEFT_WINDOW_INDENT, float(mWindowHeight / 2) });
+		ImGui::SetWindowPos({ 0, float(mWindowHeight / 2) });
 
 		HistroyGui::EndRender();
 	}
@@ -82,8 +82,8 @@ namespace Histroy
 	void Application::SetupWorldPage()
 	{
 		HistroyGui::BeginRender("The World");
-		ImGui::SetWindowSize({ (float)mWindowWidth / 6, BOTTOM_VIEWPORT_DISTANCE });
-		ImGui::SetWindowPos({ 0, BOTTOM_VIEWPORT_DISTANCE });
+		ImGui::SetWindowSize({ LEFT_WINDOW_INDENT, float(mWindowHeight / 2) - 20.0f });
+		ImGui::SetWindowPos({ 0, 20 });
 		for (auto geometry : HistroyRenderer::sGeometries)
 		{
 			if (ImGui::Button(geometry->GetID().c_str(), { (float)mWindowWidth / 6, 20 }))
@@ -124,7 +124,6 @@ namespace Histroy
 
 	bool Application::OnWindowClose(Histroy::Event& e)
 	{
-		mShouldClose = true;
 		WindowClose* event = dynamic_cast<WindowClose*>(&e);
 		if (event->GetWindowTitle() == "Histroy Code Editor")
 		{
@@ -190,8 +189,8 @@ namespace Histroy
 
 	int Application::mWindowHeight = 1080;
 	int Application::mWindowWidth = 1920;
-	int Application::mViewportHeight = BOTTOM_VIEWPORT_DISTANCE;
-	int Application::mViewportWidth = (float)Histroy::Application::mWindowWidth / 3;
+	int Application::mViewportHeight = Application::mWindowHeight;
+	int Application::mViewportWidth = Application::mWindowWidth;
 
 }
 int main()
