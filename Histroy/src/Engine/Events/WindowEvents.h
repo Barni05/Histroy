@@ -1,9 +1,9 @@
 #pragma once
 #include "Event.h"
 #include "Engine/Window/Window.h"
-class Histroy::Window;
 namespace Histroy
 {
+	class Window;
 	class WindowResize : public Event
 	{
 	public:
@@ -11,6 +11,8 @@ namespace Histroy
 		~WindowResize() {}
 		inline int GetWidth() const { return mWidth; }
 		inline int GetHeight() const { return mHeight; }
+
+		inline std::string GetWindowTitle() const { return mWindow->GetData().title; }
 
 		HS_EVENT_FUNCTIONS("Window Resize", EventType::WindowResize)
 			std::string ToString() override
@@ -28,6 +30,8 @@ namespace Histroy
 	public:
 		WindowClose(Window* window) { mWindow = window; }
 		~WindowClose() {}
+
+		inline std::string GetWindowTitle() const { return mWindow->GetData().title; }
 
 		HS_EVENT_FUNCTIONS("Window Close", EventType::WindowClose)
 	};

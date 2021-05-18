@@ -26,7 +26,7 @@ namespace Histroy
 		mCodeEditor->SetCallback(BIND_EVENT_FUNCTION(OnEventHappened));
 		mWindow->MakeContextCurrent();
 		HistroyGui::Init(mWindow->GetWindow());
-		while (!mShouldClose)
+		while (!glfwWindowShouldClose(mWindow->GetWindow()))
 		{
 
 			mWindow->MakeContextCurrent();
@@ -125,6 +125,13 @@ namespace Histroy
 	bool Application::OnWindowClose(Histroy::Event& e)
 	{
 		mShouldClose = true;
+		WindowClose* event = dynamic_cast<WindowClose*>(&e);
+		if (event->GetWindowTitle() == "Histroy Code Editor")
+		{
+			glfwDestroyWindow(mCodeEditor->GetWindow());
+			bShouldCodeEditorOpen = false;
+			bHasBeenInitialised = false;
+		}
 		return true;
 	}
 

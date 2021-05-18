@@ -4,6 +4,7 @@
 #include "Engine/Window/Window.h"
 namespace Histroy
 {
+	class Window;
 	enum class EventType
 	{
 		NONE = 0,
@@ -16,6 +17,9 @@ namespace Histroy
 	class Event
 	{
 		friend class EventDispatcher;
+	protected:
+		bool mHandled;
+		Window* mWindow;
 	public:
 		Event():mHandled(false) {}
 
@@ -25,10 +29,6 @@ namespace Histroy
 		virtual EventType GetType() = 0;
 
 		virtual std::string ToString() { return GetName(); }
-	private:
-	protected:
-		bool mHandled;
-		class Window* mWindow;
 	};
 
 	class EventDispatcher

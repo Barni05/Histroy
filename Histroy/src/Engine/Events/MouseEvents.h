@@ -18,6 +18,8 @@ namespace Histroy
 		int mXpos, mYpos;
 		MouseButton(int button, int x, int y) :mButton(button), mXpos(x), mYpos(y) {}
 		int mButton;
+
+		inline std::string GetWindowTitle() const { return mWindow->GetData().title; }
 	};
 
 	class MouseButtonPressed : public MouseButton
@@ -54,6 +56,8 @@ namespace Histroy
 		inline double GetXOffset() const { return mXoffset; }
 		inline double GetYOffset() const { return mYoffset; }
 
+		inline std::string GetWindowTitle() const { return mWindow->GetData().title; }
+
 		HS_EVENT_FUNCTIONS("Mouse Scrolled", EventType::MouseScroll)
 		std::string ToString() override
 		{
@@ -73,6 +77,8 @@ namespace Histroy
 		MouseMoved(float x, float y, Window* window) :mX(x), mY(y) { mWindow = window; }
 		inline float GetX() const { return mX; };
 		inline float GetY() const { return mY; };
+
+		inline std::string GetWindowTitle() const { return mWindow->GetData().title; }
 
 		HS_EVENT_FUNCTIONS("Mouse Moved", EventType::MouseMove)
 			std::string ToString() override

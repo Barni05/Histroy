@@ -1,9 +1,9 @@
 #pragma once
 #include "Event.h"
 #include "Engine/Window/Window.h"
-class Histroy::Window;
 namespace Histroy
 {
+	class Window;
 	class KeyEvent : public Event
 	{
 	public:
@@ -14,6 +14,8 @@ namespace Histroy
 	protected:
 		KeyEvent(int key) :mKey(key) {}
 		int mKey;
+
+		inline std::string GetWindowTitle() const { return mWindow->GetData().title; }
 	};
 
 	class KeyPressed : public KeyEvent
