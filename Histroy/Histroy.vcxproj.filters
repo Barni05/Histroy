@@ -87,6 +87,12 @@
     <ClCompile Include="src\Engine\GUI\Renderer\Elements\Square.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Engine\GUI\CodeTiles\CodeTile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\GUI\CodeTiles\ValueTile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\hspch.h">
@@ -1038,6 +1044,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Engine\GUI\Renderer\Elements\Square.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\GUI\CodeTiles\CodeTile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\GUI\CodeTiles\ValueTile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

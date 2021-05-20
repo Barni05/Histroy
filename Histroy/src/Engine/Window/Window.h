@@ -20,6 +20,7 @@ namespace Histroy
 
 		void Init(GLFWmonitor* monitor, GLFWwindow* share);
 		void MakeContextCurrent();
+		static bool InitGlew();
 		void Update();
 		void Close();
 

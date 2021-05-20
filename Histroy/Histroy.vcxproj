@@ -88,6 +88,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Engine\GUI\CodeTiles\CodeTile.cpp" />
     <ClCompile Include="src\Engine\GUI\Renderer\Elements\Square.cpp" />
     <ClCompile Include="src\Engine\GUI\Renderer\Elements\Geometry.cpp" />
     <ClCompile Include="src\Engine\GUI\Renderer\HistroyRenderer.cpp" />
@@ -112,8 +113,10 @@
     <ClCompile Include="src\vendor\sgl\VertexArray.cpp" />
     <ClCompile Include="src\vendor\sgl\VertexBuffer.cpp" />
     <ClCompile Include="src\Engine\GUI\Renderer\Elements\Triangle.cpp" />
+    <ClCompile Include="src\Engine\GUI\CodeTiles\ValueTile.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Engine\GUI\CodeTiles\CodeTile.h" />
     <ClInclude Include="src\Engine\GUI\Renderer\Elements\Square.h" />
     <ClInclude Include="src\Engine\GUI\Renderer\Elements\Geometry.h" />
     <ClInclude Include="src\Engine\GUI\Renderer\HistroyRenderer.h" />
@@ -431,6 +434,7 @@
     <ClInclude Include="src\vendor\sgl\VertexBuffer.h" />
     <ClInclude Include="src\vendor\sgl\VertexBufferLayout.h" />
     <ClInclude Include="src\Engine\GUI\Renderer\Elements\Triangle.h" />
+    <ClInclude Include="src\Engine\GUI\CodeTiles\ValueTile.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\Engine\GUI\Shaders\Geometry.shader" />

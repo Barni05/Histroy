@@ -24,6 +24,7 @@ namespace Histroy
 		mWindow->SetCallback(BIND_EVENT_FUNCTION(OnEventHappened));
 		mCodeEditor->SetCallback(BIND_EVENT_FUNCTION(OnEventHappened));
 		mWindow->MakeContextCurrent();
+		Window::InitGlew();
 		HistroyGui::Init(mWindow->GetWindow());
 		while (!glfwWindowShouldClose(mWindow->GetWindow()))
 		{
@@ -53,11 +54,6 @@ namespace Histroy
 					bHasBeenInitialised = true;
 				}
 				mCodeEditor->MakeContextCurrent();
-				glBegin(GL_TRIANGLES);
-				glVertex2f(-0.5f, -0.5f);
-				glVertex2f(0.5f, -0.5f);
-				glVertex2f(0.f, 0.5f);
-				glEnd();
 				mCodeEditor->Update();
 			}
 

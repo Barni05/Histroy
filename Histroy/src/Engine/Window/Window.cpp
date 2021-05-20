@@ -104,8 +104,15 @@ namespace Histroy
 	void Window::MakeContextCurrent()
 	{
 		glfwMakeContextCurrent(this->GetWindow());
+	}
+	bool Window::InitGlew()
+	{
 		if (glewInit() != GLEW_OK)
+		{
 			std::cout << "Glew Error" << std::endl;
+			return false;
+		}
+		return true;
 	}
 	void Window::Update()
 	{
