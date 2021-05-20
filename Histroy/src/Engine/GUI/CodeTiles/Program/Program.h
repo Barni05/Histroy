@@ -12,6 +12,5 @@ public:
 	void MouseButtonPressed(Event& e);
 	void MouseButtonReleased(Event& e);
 private:
-	
 };
 

@@ -1,10 +1,13 @@
 #pragma once
 #include "CodeTile.h"
-class EventTile :
-    public CodeTile
+namespace Histroy
 {
-public:
-	void Execute() override;
-	void Render() override;
-};
+	class EventTile :
+		public CodeTile
+	{
+	public:
+		virtual void Execute(Event& e) = 0;
+		void Render() override;
+	};
 
+}

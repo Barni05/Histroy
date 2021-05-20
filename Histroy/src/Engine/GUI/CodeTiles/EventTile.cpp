@@ -1,11 +1,9 @@
 #include "hspch.h"
 #include "EventTile.h"
 
-void EventTile::Execute()
+namespace Histroy
 {
-	this->mNextTile->Execute();
-}
-
-void EventTile::Render()
-{
+	void EventTile::Render()
+	{
+	}
 }

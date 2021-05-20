@@ -6,7 +6,7 @@ namespace Histroy
 	Geometry* Application::sSelectedObject;
 	void Menus::MainMenu()
 	{
-		if (ImGui::BeginMainMenuBar())
+		/*if (ImGui::BeginMainMenuBar())
 		{
 			if (ImGui::BeginMenu("File"))
 			{
@@ -53,6 +53,19 @@ namespace Histroy
 				ImGui::EndMenu();
 			}
 			ImGui::EndMainMenuBar();
+		}*/
+
+		ImGui::BeginMainMenuBar();
+		if (ImGui::BeginMenu("Ramszesz"))
+		{
+			ImGui::MenuItem("JoJo");
+			ImGui::EndMenu();
 		}
+		if (ImGui::BeginMenu("Ramszesz"))
+		{
+			ImGui::MenuItem("Golden Expreienco");
+			ImGui::EndMenu();
+		}
+		ImGui::EndMainMenuBar();
 	}
 }

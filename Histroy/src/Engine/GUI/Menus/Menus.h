@@ -1,6 +1,8 @@
 #pragma once
+#include "hspch.h"
 namespace Histroy
 {
+
 	class Menus
 	{
 	public:

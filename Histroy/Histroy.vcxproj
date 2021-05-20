@@ -88,6 +88,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Engine\GUI\CodeTiles\BeginPlayTile.cpp" />
     <ClCompile Include="src\Engine\GUI\CodeTiles\EventTile.cpp" />
     <ClCompile Include="src\Engine\GUI\CodeTiles\Program\Program.cpp" />
     <ClCompile Include="src\Engine\GUI\CodeTiles\CodeTile.cpp" />
@@ -118,6 +119,7 @@
     <ClCompile Include="src\Engine\GUI\CodeTiles\ValueTile.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Engine\GUI\CodeTiles\BeginPlayTile.h" />
     <ClInclude Include="src\Engine\Events\ApplicationEvents.h" />
     <ClInclude Include="src\Engine\GUI\CodeTiles\EventTile.h" />
     <ClInclude Include="src\Engine\GUI\CodeTiles\Program\Program.h" />
