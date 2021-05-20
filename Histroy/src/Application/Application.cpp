@@ -162,6 +162,17 @@ namespace Histroy
 		return true;
 	}
 
+	bool Application::OnBeginPlay(Event& e)
+	{
+		std::cout << "The play begins" << std::endl;
+		return true;
+	}
+
+	bool Application::OnTick(Event& e)
+	{
+		return true;
+	}
+
 
 	bool Application::OnKeyReleased(Event& e)
 	{
@@ -181,6 +192,7 @@ namespace Histroy
 		dispatcher.Dispatch<KeyReleased>(BIND_EVENT_FUNCTION(OnKeyReleased));
 		dispatcher.Dispatch<WindowResize>(BIND_EVENT_FUNCTION(OnWindowResized));
 		dispatcher.Dispatch<MouseButtonReleased>(BIND_EVENT_FUNCTION(OnMouseButtonReleased));
+		dispatcher.Dispatch<BeginPlay>(BIND_EVENT_FUNCTION(OnBeginPlay));
 	}
 
 	int Application::mWindowHeight = 1080;

@@ -93,6 +93,12 @@
     <ClCompile Include="src\Engine\GUI\CodeTiles\ValueTile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Engine\GUI\CodeTiles\Program\Program.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\GUI\CodeTiles\EventTile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\hspch.h">
@@ -1050,6 +1056,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Engine\GUI\CodeTiles\ValueTile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\GUI\CodeTiles\Program\Program.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\GUI\CodeTiles\EventTile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Events\ApplicationEvents.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -22,6 +22,8 @@ namespace Histroy
 		bool OnMouseButtonPressed(Event& e);
 		bool OnMouseButtonReleased(Event& e);
 		bool OnWindowResized(Event& e);
+		bool OnBeginPlay(Event& e);
+		bool OnTick(Event& e);
 		//Events
 
 		static int mWindowHeight, mWindowWidth;

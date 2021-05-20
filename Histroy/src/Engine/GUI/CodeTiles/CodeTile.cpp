@@ -11,8 +11,6 @@ CodeTile::~CodeTile()
 
 void CodeTile::Execute()
 {
-}
-
-void CodeTile::Render()
-{
+	if(mNextTile)
+		this->mNextTile->Execute();
 }

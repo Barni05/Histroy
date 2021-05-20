@@ -16,6 +16,7 @@
 #include "Engine/Events/KeyEvents.h"
 #include "Engine/Events/WindowEvents.h"
 #include "Engine/Events/MouseEvents.h"
+#include "Engine/Events/ApplicationEvents.h"
 
 #include "vendor/imgui/imgui.h"
 #include "vendor/imgui/imgui_impl_glfw.h"
@@ -33,3 +34,7 @@
 #include "Engine/GUI/Renderer/HistroyRenderer.h"
 #include "Engine/GUI/Renderer/Elements/Geometry.h"
 #include "Engine/GUI/Renderer/Elements/Square.h"
+
+#include "Engine/GUI/CodeTiles/EventTile.h"
+#include "Engine/GUI/CodeTiles/CodeTile.h"
+#include "Engine/GUI/CodeTiles/ValueTile.h"
