@@ -11,7 +11,7 @@ namespace Histroy
 
 		void SetupPropertiesPage();
 		void SetupWorldPage();
-		void RenderSeparator();
+		void SetupMainMenu();
 
 		void Run();
 		void OnEventHappened(Event& e);

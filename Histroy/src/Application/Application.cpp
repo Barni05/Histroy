@@ -32,10 +32,10 @@ namespace Histroy
 			mWindow->MakeContextCurrent();
 			
 			HistroyGui::NewFrame();
-			Menus::MainMenu();
 
 			SetupPropertiesPage();
 			SetupWorldPage();
+			SetupMainMenu();
 
 			//Render Geometry
 			HistroyRenderer::Render();
@@ -90,31 +90,13 @@ namespace Histroy
 		HistroyGui::EndRender();
 	}
 
-	void Application::RenderSeparator()
+	void Application::SetupMainMenu()
 	{
-		float positions[]{
-			(float)(mViewportWidth - mViewportWidth / 50), 0,
-			(float)mViewportWidth, 0,
-			mViewportWidth, mViewportHeight - 40,
-			(float)(mViewportWidth - mViewportWidth / 50), mViewportHeight - 40
-		};
-		unsigned int indicies[]{ 0,1,2, 0, 2, 3 };
-		VertexBuffer vb(8 * sizeof(float), positions);
-		vb.Bind();
-		IndexBuffer ib(6, indicies);
-
-		VertexBufferLayout layout;
-		layout.PushLayout<float>(2, false);
-
-		VertexArray va;
-		va.AddBuffer(vb, layout);
-
-		Shader shader("src/Engine/GUI/Shaders/Geometry.shader");
-		shader.Bind();
-		shader.SetUniformMat4("u_MVP", glm::ortho(0.0f, float(Histroy::Application::mViewportWidth), 0.0f, float(Histroy::Application::mViewportHeight), -1.0f, 1.0f));
-		shader.SetUniform4f("u_Color", 0.16f, 0.29f, 0.47f, 1.f);
-		Renderer renderer;
-		renderer.DrawElements(shader, va, ib);
+		ImGui::BeginMainMenuBar();
+		Menus::AddMenuItem("File", "Save", []() {});
+		Menus::AddMenuItem("File", "Open", []() {});
+		Menus::AddMenuItem("File", "Exit", []() {});
+		ImGui::EndMainMenuBar();
 	}
 
 

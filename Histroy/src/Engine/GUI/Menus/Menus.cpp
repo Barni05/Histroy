@@ -53,19 +53,23 @@ namespace Histroy
 				ImGui::EndMenu();
 			}
 			ImGui::EndMainMenuBar();
-		}*/
-
-		ImGui::BeginMainMenuBar();
-		if (ImGui::BeginMenu("Ramszesz"))
+		}
+		ImGui::EndMainMenuBar();*/
+	}
+	void Menus::AddMenu(const std::string& title)
+	{
+		ImGui::BeginMenu(title.c_str());
+		ImGui::EndMenu();
+	}
+	void Menus::AddMenuItem(const std::string& menuTitle, const std::string& itemTitle, std::function<void()> function)
+	{
+		if (ImGui::BeginMenu(menuTitle.c_str()))
 		{
-			ImGui::MenuItem("JoJo");
+			if (ImGui::MenuItem(itemTitle.c_str()))
+			{
+				function();
+			}
 			ImGui::EndMenu();
 		}
-		if (ImGui::BeginMenu("Ramszesz"))
-		{
-			ImGui::MenuItem("Golden Expreienco");
-			ImGui::EndMenu();
-		}
-		ImGui::EndMainMenuBar();
 	}
 }
