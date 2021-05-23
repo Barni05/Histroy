@@ -2,8 +2,13 @@
 #include "BeginPlayTile.h"
 namespace Histroy
 {
-	void Histroy::BeginPlayTile::Execute(Event& e)
+    BeginPlayTile::BeginPlayTile()
+    {
+    }
+    BeginPlayTile::~BeginPlayTile()
+    {
+    }
+    void Histroy::BeginPlayTile::Execute(Event& e)
 	{
-		this->mNextTile->Execute();
 	}
 }

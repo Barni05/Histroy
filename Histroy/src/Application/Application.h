@@ -12,6 +12,7 @@ namespace Histroy
 		void SetupPropertiesPage();
 		void SetupWorldPage();
 		void SetupMainMenu();
+		void SetupCodeEditor();
 
 		void Run();
 		void OnEventHappened(Event& e);
@@ -32,7 +33,6 @@ namespace Histroy
 		static bool bShouldCodeEditorOpen;
 	private:
 		Histroy::Window* mWindow;
-		Window* mCodeEditor;
 	
 	};
 }

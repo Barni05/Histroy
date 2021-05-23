@@ -1,5 +1,6 @@
 #pragma once
 #include <Histroy.h>
+#include "hspch.h"
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"	
 class Geometry
@@ -30,6 +31,10 @@ protected:
 	std::string mID;
 	int mGeometryNumber;
 	char* mBufferID;
+
+	//Events
+	std::shared_ptr<Histroy::BeginPlayTile> mBeginPlay;
+	std::shared_ptr<Histroy::TickTile> mTick;
 
 	bool IsObjectPressed(int, int, float[]);
 };

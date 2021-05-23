@@ -10,9 +10,8 @@ namespace Histroy
 	bool Application::bShouldCodeEditorOpen = false;
 	Application::Application() {
 		mWindow = new Histroy::Window({ "Histroy", mWindowWidth, mWindowHeight });
-		mCodeEditor = new Histroy::Window({ "Histroy Code Editor", mWindowWidth, mWindowHeight });
 	}
-	Application::~Application() { delete mWindow; delete mCodeEditor; }
+	Application::~Application() { delete mWindow; }
 
 
 	static bool bHasBeenInitialised = false; //mCodeEditor is initialised or not
@@ -22,7 +21,6 @@ namespace Histroy
 		HS_SET_LOG_DIR(plog::warning, "F:\\DEV\\Projektek\\Histroy Engine\\Histroy\\Logs\\Logs.txt", 10000, 1);
 		mWindow->Init(NULL, NULL);
 		mWindow->SetCallback(BIND_EVENT_FUNCTION(OnEventHappened));
-		mCodeEditor->SetCallback(BIND_EVENT_FUNCTION(OnEventHappened));
 		mWindow->MakeContextCurrent();
 		Window::InitGlew();
 		HistroyGui::Init(mWindow->GetWindow());
@@ -36,6 +34,7 @@ namespace Histroy
 			SetupPropertiesPage();
 			SetupWorldPage();
 			SetupMainMenu();
+			SetupCodeEditor();
 
 			//Render Geometry
 			HistroyRenderer::Render();
@@ -43,19 +42,8 @@ namespace Histroy
 			//Render IMGUI		  
 			HistroyGui::Render();
 
-
 			mWindow->Update();
 
-			if (bShouldCodeEditorOpen)
-			{
-				if (!bHasBeenInitialised)
-				{
-					mCodeEditor->Init(NULL, NULL);
-					bHasBeenInitialised = true;
-				}
-				mCodeEditor->MakeContextCurrent();
-				mCodeEditor->Update();
-			}
 
 			glfwPollEvents();
 			glClear(GL_COLOR_BUFFER_BIT);
@@ -71,7 +59,7 @@ namespace Histroy
 		HistroyGui::BeginRender("Properties");
 		ImGui::SetWindowSize({ LEFT_WINDOW_INDENT, float(mWindowHeight / 2) });
 		ImGui::SetWindowPos({ 0, float(mWindowHeight / 2) });
-
+		ImGui::Text("Yessss");
 		HistroyGui::EndRender();
 	}
 
@@ -96,7 +84,26 @@ namespace Histroy
 		Menus::AddMenuItem("File", "Save", []() {});
 		Menus::AddMenuItem("File", "Open", []() {});
 		Menus::AddMenuItem("File", "Exit", []() {});
+		Menus::AddMenuItem("Open", "Code Editor", []() {
+			Application::bShouldCodeEditorOpen = true;
+			});
 		ImGui::EndMainMenuBar();
+	}
+
+	void Application::SetupCodeEditor()
+	{
+		ImGui::Begin("Code Editor", (bool*)false, ImGuiWindowFlags_MenuBar);
+		if (ImGui::BeginMenuBar())
+		{
+			if (ImGui::BeginMenu("Controller"))
+			{
+				ImGui::MenuItem("Loop");
+				ImGui::EndMenu();
+			}
+			ImGui::EndMenuBar();
+		}
+		ImGui::Button("Begin Play");
+		ImGui::End();
 	}
 
 
@@ -105,7 +112,7 @@ namespace Histroy
 		WindowClose* event = dynamic_cast<WindowClose*>(&e);
 		if (event->GetWindowTitle() == "Histroy Code Editor")
 		{
-			glfwDestroyWindow(mCodeEditor->GetWindow());
+			//glfwDestroyWindow(mCodeEditor->GetWindow());
 			bShouldCodeEditorOpen = false;
 			bHasBeenInitialised = false;
 		}

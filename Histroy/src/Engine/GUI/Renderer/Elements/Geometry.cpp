@@ -22,6 +22,8 @@ bool Geometry::IsObjectPressed(int x, int y, float color[4])
 
 Geometry::Geometry():mName("Geometry")
 {
+	mBeginPlay = std::make_shared<Histroy::BeginPlayTile>(new Histroy::BeginPlayTile());
+	mTick = std::make_shared<Histroy::TickTile>(new Histroy::TickTile());
 }
 
 Geometry::~Geometry()

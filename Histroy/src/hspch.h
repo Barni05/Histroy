@@ -38,3 +38,5 @@
 #include "Engine/GUI/CodeTiles/EventTile.h"
 #include "Engine/GUI/CodeTiles/CodeTile.h"
 #include "Engine/GUI/CodeTiles/ValueTile.h"
+#include "Engine/GUI/CodeTiles/TickTile.h"
+#include "Engine/GUI/CodeTiles/BeginPlayTile.h"

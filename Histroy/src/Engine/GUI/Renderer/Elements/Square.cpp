@@ -1,7 +1,7 @@
 #include "hspch.h"
 #include "Square.h"
 
-Square::Square()
+Square::Square():Geometry()
 {
 	Init();
 	UpdateTransform();
@@ -74,5 +74,13 @@ void Square::ImGuiRender()
 	ImGui::InputFloat2("Scale", &mScale.x);
 	ImGui::SliderAngle("Rotation", &mRotation);
 	ImGui::ColorEdit4("Color", mColor);
+	ImGui::End();
+
+	ImGui::Begin("Code Editor");
+	ImGui::Button("Begin Play");
+	for (auto a : mBeginPlay->GetTiles())
+	{
+		ImGui::Text(a->GetTileName().c_str());
+	}
 	ImGui::End();
 }

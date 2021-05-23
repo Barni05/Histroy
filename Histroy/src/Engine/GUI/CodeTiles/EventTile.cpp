@@ -6,4 +6,8 @@ namespace Histroy
 	void EventTile::Render()
 	{
 	}
+    void EventTile::AddTile(CodeTile* tile)
+    {
+		mCodeTiles.push_back(tile);
+    }
 }

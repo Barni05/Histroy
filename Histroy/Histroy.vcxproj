@@ -88,6 +88,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Engine\GUI\CodeEditor.cpp" />
     <ClCompile Include="src\Engine\GUI\CodeTiles\BeginPlayTile.cpp" />
     <ClCompile Include="src\Engine\GUI\CodeTiles\EventTile.cpp" />
     <ClCompile Include="src\Engine\GUI\CodeTiles\Program\Program.cpp" />
@@ -117,8 +118,10 @@
     <ClCompile Include="src\vendor\sgl\VertexBuffer.cpp" />
     <ClCompile Include="src\Engine\GUI\Renderer\Elements\Triangle.cpp" />
     <ClCompile Include="src\Engine\GUI\CodeTiles\ValueTile.cpp" />
+    <ClCompile Include="src\Engine\GUI\CodeTiles\TickTile.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Engine\GUI\CodeEditor.h" />
     <ClInclude Include="src\Engine\GUI\CodeTiles\BeginPlayTile.h" />
     <ClInclude Include="src\Engine\Events\ApplicationEvents.h" />
     <ClInclude Include="src\Engine\GUI\CodeTiles\EventTile.h" />
@@ -442,6 +445,7 @@
     <ClInclude Include="src\vendor\sgl\VertexBufferLayout.h" />
     <ClInclude Include="src\Engine\GUI\Renderer\Elements\Triangle.h" />
     <ClInclude Include="src\Engine\GUI\CodeTiles\ValueTile.h" />
+    <ClInclude Include="src\Engine\GUI\CodeTiles\TickTile.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\Engine\GUI\Shaders\Geometry.shader" />
