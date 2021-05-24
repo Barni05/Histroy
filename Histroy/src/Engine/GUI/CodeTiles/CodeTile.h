@@ -3,6 +3,7 @@
 class Geometry;
 namespace Histroy
 {
+	class Geometry;
 	class CodeTile
 	{
 	public:

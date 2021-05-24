@@ -1,113 +1,115 @@
 #include "hspch.h"
 #include "Triangle.h"
-Triangle::Triangle():Geometry()
+namespace Histroy
 {
-	Init();
-	UpdateTransform();
-	mColor[0] = 1.0f;
-	mColor[1] = 1.0f;
-	mColor[2] = 0.0f;
-	mColor[3] = 1.0f;
-}
-
-Triangle::Triangle(float color[4])
-{
-	Init();
-	UpdateTransform();
-	for (int i = 0; i < 4; i++)
+	Triangle::Triangle() :Geometry()
 	{
-		mColor[i] = color[i];
+		Init();
+		UpdateTransform();
+		mColor[0] = 1.0f;
+		mColor[1] = 1.0f;
+		mColor[2] = 0.0f;
+		mColor[3] = 1.0f;
 	}
-}
 
-void Triangle::Init()
-{
-	mName = "Triangle";
-	mBufferID = new char[256];
-	mBufferID = (char*)mID.c_str();
-	std::pair<float, float> positions[3];
-	positions[0] = std::make_pair<float, float>(Histroy::Application::mViewportWidth / 2 / 2, Histroy::Application::mViewportHeight / 2 / 2);
-	positions[1] = std::make_pair<float, float>(Histroy::Application::mViewportWidth / 2 / 2 + Histroy::Application::mViewportWidth / 2, Histroy::Application::mViewportHeight / 2 / 2);
-	positions[2] = std::make_pair<float, float>(Histroy::Application::mViewportWidth / 2, Histroy::Application::mViewportHeight / 2 / 2 + Histroy::Application::mViewportHeight / 2);
-	mInitialPosition[0] = positions[0].first;
-	mInitialPosition[1] = positions[0].second;
-	mInitialPosition[2] = positions[1].first;
-	mInitialPosition[3] = positions[1].second;
-	mInitialPosition[4] = positions[2].first;
-	mInitialPosition[5] = positions[2].second;
-	mLocation = glm::vec3(0, 0, 0);
-	mScale = glm::vec3(1.0f);
-	mModel = glm::mat4(1.0f);
-	std::stringstream ss;
-	mGeometryNumber = AssignIdNumber();
-	ss << mName << "_" << mGeometryNumber;
-	mID = ss.str();
-	mProj = glm::ortho(0.0f, float(Histroy::Application::mViewportWidth), 0.0f, float(Histroy::Application::mViewportHeight), -1.0f, 1.0f);
-}
-
-void Triangle::Render()
-{
-	VertexBuffer vb(6 * sizeof(float), mInitialPosition);
-	vb.Bind();
-	unsigned int indicies[] = { 0,1,2};
-	IndexBuffer ib(3, indicies);
-	ib.Bind();
-	VertexBufferLayout layout;
-	layout.PushLayout<float>(2, false);
-
-	VertexArray va;
-	va.Bind();
-	va.AddBuffer(vb, layout);
-
-	Shader shader("src/Engine/GUI/Shaders/Geometry.shader");
-	shader.Bind();
-	shader.SetUniform4f("u_Color", mColor[0], mColor[1], mColor[2], mColor[3]);
-	UpdateTransform();
-	shader.SetUniformMat4("u_MVP", mMVP);
-	Renderer renderer;
-	renderer.DrawElements(shader, va, ib);
-}
-
-void Triangle::ImGuiRender()
-{
-	ImGui::Begin("Properties");
-	ImGui::InputText("Name", mBufferID, 256);
-	mID = std::string(mBufferID);
-	ImGui::SliderFloat2("Location", &mLocation.x, -float(Histroy::Application::mWindowWidth), float(Histroy::Application::mWindowWidth));
-	ImGui::InputFloat2("Scale", &mScale.x);
-	ImGui::SliderAngle("Rotation", &mRotation);
-	ImGui::ColorEdit4("Color", mColor);
-	ImGui::End();
-
-	ImGui::Begin("Code Editor",(bool*)false, ImGuiWindowFlags_MenuBar);
-	ImGui::Button("Begin Play");
-	ImGui::End();
-}
-
-
-
-void Triangle::OnKeyPressed(Histroy::Event& e)
-{
-	Histroy::KeyPressed* event = dynamic_cast<Histroy::KeyPressed*>(&e);
-
-
-}
-
-void Triangle::OnKeyReleased(Histroy::Event& e)
-{
-
-}
-
-void Triangle::OnMouseButtonPressed(Histroy::Event& e)
-{
-	Histroy::MouseButtonPressed* event = dynamic_cast<Histroy::MouseButtonPressed*>(&e);
-	if (IsObjectPressed(event->GetXpos(), event->GetYpos(), mColor))
+	Triangle::Triangle(float color[4])
 	{
-		Histroy::Application::sSelectedObject = this;
+		Init();
+		UpdateTransform();
+		for (int i = 0; i < 4; i++)
+		{
+			mColor[i] = color[i];
+		}
 	}
-}
 
-void Triangle::OnMouseButtonReleased(Histroy::Event& e)
-{
+	void Triangle::Init()
+	{
+		mName = "Triangle";
+		mBufferID = new char[256];
+		mBufferID = (char*)mID.c_str();
+		std::pair<float, float> positions[3];
+		positions[0] = std::make_pair<float, float>(Histroy::Application::mViewportWidth / 2 / 2, Histroy::Application::mViewportHeight / 2 / 2);
+		positions[1] = std::make_pair<float, float>(Histroy::Application::mViewportWidth / 2 / 2 + Histroy::Application::mViewportWidth / 2, Histroy::Application::mViewportHeight / 2 / 2);
+		positions[2] = std::make_pair<float, float>(Histroy::Application::mViewportWidth / 2, Histroy::Application::mViewportHeight / 2 / 2 + Histroy::Application::mViewportHeight / 2);
+		mInitialPosition[0] = positions[0].first;
+		mInitialPosition[1] = positions[0].second;
+		mInitialPosition[2] = positions[1].first;
+		mInitialPosition[3] = positions[1].second;
+		mInitialPosition[4] = positions[2].first;
+		mInitialPosition[5] = positions[2].second;
+		mLocation = glm::vec3(0, 0, 0);
+		mScale = glm::vec3(1.0f);
+		mModel = glm::mat4(1.0f);
+		std::stringstream ss;
+		mGeometryNumber = AssignIdNumber();
+		ss << mName << "_" << mGeometryNumber;
+		mID = ss.str();
+		mProj = glm::ortho(0.0f, float(Histroy::Application::mViewportWidth), 0.0f, float(Histroy::Application::mViewportHeight), -1.0f, 1.0f);
+	}
 
+	void Triangle::Render()
+	{
+		VertexBuffer vb(6 * sizeof(float), mInitialPosition);
+		vb.Bind();
+		unsigned int indicies[] = { 0,1,2 };
+		IndexBuffer ib(3, indicies);
+		ib.Bind();
+		VertexBufferLayout layout;
+		layout.PushLayout<float>(2, false);
+
+		VertexArray va;
+		va.Bind();
+		va.AddBuffer(vb, layout);
+
+		Shader shader("src/Engine/GUI/Shaders/Geometry.shader");
+		shader.Bind();
+		shader.SetUniform4f("u_Color", mColor[0], mColor[1], mColor[2], mColor[3]);
+		UpdateTransform();
+		shader.SetUniformMat4("u_MVP", mMVP);
+		Renderer renderer;
+		renderer.DrawElements(shader, va, ib);
+	}
+
+	void Triangle::ImGuiRender()
+	{
+		ImGui::Begin("Properties");
+		ImGui::InputText("Name", mBufferID, 256);
+		mID = std::string(mBufferID);
+		ImGui::SliderFloat2("Location", &mLocation.x, -float(Histroy::Application::mWindowWidth), float(Histroy::Application::mWindowWidth));
+		ImGui::InputFloat2("Scale", &mScale.x);
+		ImGui::SliderAngle("Rotation", &mRotation);
+		ImGui::ColorEdit4("Color", mColor);
+		ImGui::End();
+
+		mCodeEditor->RenderImGui();
+
+	}
+
+
+
+	void Triangle::OnKeyPressed(Histroy::Event& e)
+	{
+		Histroy::KeyPressed* event = dynamic_cast<Histroy::KeyPressed*>(&e);
+
+
+	}
+
+	void Triangle::OnKeyReleased(Histroy::Event& e)
+	{
+
+	}
+
+	void Triangle::OnMouseButtonPressed(Histroy::Event& e)
+	{
+		Histroy::MouseButtonPressed* event = dynamic_cast<Histroy::MouseButtonPressed*>(&e);
+		if (IsObjectPressed(event->GetXpos(), event->GetYpos(), mColor))
+		{
+			Histroy::Application::sSelectedObject = this;
+		}
+	}
+
+	void Triangle::OnMouseButtonReleased(Histroy::Event& e)
+	{
+
+	}
 }

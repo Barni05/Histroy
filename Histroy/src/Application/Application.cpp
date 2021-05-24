@@ -59,7 +59,6 @@ namespace Histroy
 		HistroyGui::BeginRender("Properties");
 		ImGui::SetWindowSize({ LEFT_WINDOW_INDENT, float(mWindowHeight / 2) });
 		ImGui::SetWindowPos({ 0, float(mWindowHeight / 2) });
-		ImGui::Text("Yessss");
 		HistroyGui::EndRender();
 	}
 

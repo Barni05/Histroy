@@ -4,8 +4,9 @@
 
 namespace Histroy
 {
-    EventTile::EventTile(Geometry* actor, const std::string& name):mActor(actor), mEventName(name)
+    EventTile::EventTile(Geometry* actor, const std::string& name): mEventName(name)
     {
+		mActor = actor;
     }
     EventTile::~EventTile()
 	{

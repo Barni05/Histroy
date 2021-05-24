@@ -3,6 +3,7 @@
 #include "CodeTile.h"
 namespace Histroy
 {
+	class Geometry;
 	class EventTile
 	{
 	public:
@@ -11,9 +12,10 @@ namespace Histroy
 		virtual void Execute(Event& e) = 0;
 		void AddTile(CodeTile* tile);
 		inline std::vector<CodeTile*> GetTiles() const { return mCodeTiles; }
+		inline std::string GetName() const { return mEventName; }
 	protected:
 		std::vector<CodeTile*> mCodeTiles;
-		class Geometry* mActor;
+		Geometry* mActor;
 		std::string mEventName;
 	};
 

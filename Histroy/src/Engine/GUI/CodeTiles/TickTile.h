@@ -4,6 +4,7 @@
 class EventTile;
 namespace Histroy
 {
+	class Geometry;
 	class TickTile : public EventTile
 	{
 	public:

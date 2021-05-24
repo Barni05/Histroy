@@ -3,6 +3,7 @@
 #include "EventTile.h"
 namespace Histroy
 {
+	class Geometry;
 	class BeginPlayTile : public EventTile
 	{
 	public:
