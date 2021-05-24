@@ -12,9 +12,10 @@ namespace Histroy
 		void RenderImGui();
 	private:
 		//Events
-		std::shared_ptr<Histroy::BeginPlayTile> mBeginPlay;
-		std::shared_ptr<Histroy::TickTile> mTick;
+		std::vector<std::shared_ptr<EventTile>> mEvents;
 		std::shared_ptr<Histroy::EventTile> mSelectedEvent;
+
+		int GetMostInstruction(); //takes the number of instructions of all events and returns the biggest
 	};
 
 }
