@@ -2,13 +2,13 @@
 #include "BeginPlayTile.h"
 namespace Histroy
 {
-    BeginPlayTile::BeginPlayTile()
-    {
-    }
+	BeginPlayTile::BeginPlayTile(Geometry* actor, const std::string& name):EventTile(actor, name)
+	{
+	}
     BeginPlayTile::~BeginPlayTile()
-    {
-    }
-    void Histroy::BeginPlayTile::Execute(Event& e)
+	{
+	}
+	void Histroy::BeginPlayTile::Execute(Event& e)
 	{
 	}
 }

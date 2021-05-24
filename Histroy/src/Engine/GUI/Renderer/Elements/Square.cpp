@@ -76,11 +76,11 @@ void Square::ImGuiRender()
 	ImGui::ColorEdit4("Color", mColor);
 	ImGui::End();
 
-	ImGui::Begin("Code Editor");
+	ImGui::Begin("Code Editor", (bool*)false, ImGuiWindowFlags_MenuBar);
 	ImGui::Button("Begin Play");
-	for (auto a : mBeginPlay->GetTiles())
+	/*for (auto a : mBeginPlay->GetTiles())
 	{
 		ImGui::Text(a->GetTileName().c_str());
-	}
+	}*/
 	ImGui::End();
 }

@@ -87,6 +87,14 @@ namespace Histroy
 		Menus::AddMenuItem("Open", "Code Editor", []() {
 			Application::bShouldCodeEditorOpen = true;
 			});
+		Menus::AddMenuItem("Add", "Triangle", []() {float color[4]{ 1.0f };
+		Triangle* triangle = new Triangle(color);
+		Application::sSelectedObject = triangle;
+		HistroyRenderer::AddGeometry(triangle); });
+		Menus::AddMenuItem("Add", "Square", []() {float color[4]{ 1.0f };
+		Square* square = new Square();
+		Application::sSelectedObject = square;
+		HistroyRenderer::AddGeometry(square); });
 		ImGui::EndMainMenuBar();
 	}
 
@@ -102,7 +110,6 @@ namespace Histroy
 			}
 			ImGui::EndMenuBar();
 		}
-		ImGui::Button("Begin Play");
 		ImGui::End();
 	}
 

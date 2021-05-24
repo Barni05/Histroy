@@ -6,7 +6,8 @@ namespace Histroy
 	class BeginPlayTile : public EventTile
 	{
 	public:
-		BeginPlayTile();
+		BeginPlayTile(Geometry* actor, const std::string& name);
+
 		~BeginPlayTile();
 		void Execute(Event& e) override;
 

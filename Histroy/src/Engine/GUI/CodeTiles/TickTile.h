@@ -7,7 +7,7 @@ namespace Histroy
 	class TickTile : public EventTile
 	{
 	public:
-		TickTile();
+		TickTile(Geometry* actor, const std::string& name);
 		~TickTile();
 		void Execute(Event& e) override;
 	};

@@ -1,6 +1,6 @@
 #include "hspch.h"
 #include "Triangle.h"
-Triangle::Triangle()
+Triangle::Triangle():Geometry()
 {
 	Init();
 	UpdateTransform();
@@ -77,6 +77,10 @@ void Triangle::ImGuiRender()
 	ImGui::InputFloat2("Scale", &mScale.x);
 	ImGui::SliderAngle("Rotation", &mRotation);
 	ImGui::ColorEdit4("Color", mColor);
+	ImGui::End();
+
+	ImGui::Begin("Code Editor",(bool*)false, ImGuiWindowFlags_MenuBar);
+	ImGui::Button("Begin Play");
 	ImGui::End();
 }
 
