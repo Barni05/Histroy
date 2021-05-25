@@ -17,6 +17,11 @@ namespace Histroy
 	void CodeEditor::RenderImGui()
 	{
 		ImGui::Begin("Code Editor", (bool*)false, ImGuiWindowFlags_MenuBar);
+		//Menu
+		Menus::AddMenuItem("Mobility", "Move To", [=]() {
+			mSelectedEvent->AddTile(new MoveToTile(100, 100, 0.1));
+			});
+
 		std::string text = "Selected Event: " + mSelectedEvent->GetName();
 		ImGui::Text(text.c_str());
 		ImGui::SameLine();

@@ -34,7 +34,6 @@ namespace Histroy
 			SetupPropertiesPage();
 			SetupWorldPage();
 			SetupMainMenu();
-			SetupCodeEditor();
 
 			//Render Geometry
 			HistroyRenderer::Render();
@@ -95,21 +94,6 @@ namespace Histroy
 		Application::sSelectedObject = square;
 		HistroyRenderer::AddGeometry(square); });
 		ImGui::EndMainMenuBar();
-	}
-
-	void Application::SetupCodeEditor()
-	{
-		ImGui::Begin("Code Editor", (bool*)false, ImGuiWindowFlags_MenuBar);
-		if (ImGui::BeginMenuBar())
-		{
-			if (ImGui::BeginMenu("Controller"))
-			{
-				ImGui::MenuItem("Loop");
-				ImGui::EndMenu();
-			}
-			ImGui::EndMenuBar();
-		}
-		ImGui::End();
 	}
 
 

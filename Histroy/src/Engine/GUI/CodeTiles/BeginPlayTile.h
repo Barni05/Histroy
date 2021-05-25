@@ -10,7 +10,6 @@ namespace Histroy
 		BeginPlayTile(Geometry* actor, const std::string& name);
 
 		~BeginPlayTile();
-		void Execute(Event& e) override;
 
 	private:
 	};

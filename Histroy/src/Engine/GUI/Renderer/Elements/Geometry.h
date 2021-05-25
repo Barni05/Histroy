@@ -23,8 +23,14 @@ namespace Histroy
 
 		inline std::string GetID() const { return mID; }
 		inline std::string GetName() const { return mName; }
+		inline glm::vec3 GetLocation() const { return mLocation; }
 		inline int GetGeometryNumber() const { return mGeometryNumber; }
 		int AssignIdNumber();
+
+		inline void SetLocation(int x, int y)
+		{
+			mLocation = glm::vec3(x, y, 0);
+		}
 
 	protected:
 		glm::mat4 mModel, mView, mProj, mMVP;

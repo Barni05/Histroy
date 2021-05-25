@@ -40,5 +40,6 @@
 #include "Engine/GUI/CodeTiles/ValueTile.h"
 #include "Engine/GUI/CodeTiles/TickTile.h"
 #include "Engine/GUI/CodeTiles/BeginPlayTile.h"
+#include "Engine/GUI/CodeTiles/MoveToTile.h"
 
 #include "Engine/GUI/CodeEditor.h"

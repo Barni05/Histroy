@@ -2,12 +2,18 @@
 #include "CodeTile.h"
 namespace Histroy
 {
-	CodeTile::CodeTile(class Geometry* actor, const std::string& name) :mActor(actor),mTileName(name)
+    CodeTile::CodeTile()
+    {
+		mEvent = nullptr;
+		mTileName = "Tile";
+    }
+    CodeTile::CodeTile(class EventTile* event, const std::string& name) :mEvent(event),mTileName(name)
 	{
 	}
 
     CodeTile::~CodeTile()
 	{
+		delete mEvent;
 	}
 
 	void CodeTile::Execute()

@@ -8,7 +8,4 @@ namespace Histroy
     BeginPlayTile::~BeginPlayTile()
 	{
 	}
-	void Histroy::BeginPlayTile::Execute(Event& e)
-	{
-	}
 }
