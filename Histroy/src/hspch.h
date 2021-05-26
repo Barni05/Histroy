@@ -42,4 +42,6 @@
 #include "Engine/GUI/CodeTiles/BeginPlayTile.h"
 #include "Engine/GUI/CodeTiles/MoveToTile.h"
 
-#include "Engine/GUI/CodeEditor.h"
+#include "Engine/GUI/CodeTiles/Program/Program.h"
+
+#include "Engine/GUI/CodeHandler.h"

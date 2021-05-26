@@ -23,7 +23,7 @@ namespace Histroy
 
 	Geometry::Geometry() :mName("Geometry")
 	{
-		mCodeEditor = std::make_shared<Histroy::CodeEditor>();
+		mCodeEditor = std::make_shared<Histroy::CodeHandler>();
 		mCodeEditor->Init(this);
 	}
 

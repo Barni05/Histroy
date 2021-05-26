@@ -2,11 +2,11 @@
 #include "hspch.h"
 namespace Histroy
 {
-	class CodeEditor
+	class CodeHandler
 	{
 	public:
-		CodeEditor();
-		~CodeEditor();
+		CodeHandler();
+		~CodeHandler();
 
 		void Init(Geometry* actor);
 		void RenderImGui();

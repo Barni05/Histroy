@@ -1,8 +1,10 @@
 #pragma once
 #include <Histroy.h>
 #include "Core.h"
+#include "hspch.h"
 namespace Histroy
 {
+	class Program;
 	class Application
 	{
 	public:
@@ -30,6 +32,7 @@ namespace Histroy
 		static int mViewportWidth, mViewportHeight;
 		static Geometry* sSelectedObject;
 		static bool bShouldCodeEditorOpen;
+		static Program sProgram;
 	private:
 		Histroy::Window* mWindow;
 	

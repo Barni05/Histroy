@@ -8,6 +8,8 @@
 namespace Histroy
 {
 	bool Application::bShouldCodeEditorOpen = false;
+	Program Application::sProgram;
+
 	Application::Application() {
 		mWindow = new Histroy::Window({ "Histroy", mWindowWidth, mWindowHeight });
 	}
@@ -82,17 +84,19 @@ namespace Histroy
 		Menus::AddMenuItem("File", "Save", []() {});
 		Menus::AddMenuItem("File", "Open", []() {});
 		Menus::AddMenuItem("File", "Exit", []() {});
-		Menus::AddMenuItem("Open", "Code Editor", []() {
-			Application::bShouldCodeEditorOpen = true;
+		Menus::AddMenuItem("Tools", "Play", [=]() {
+			
 			});
 		Menus::AddMenuItem("Add", "Triangle", []() {float color[4]{ 1.0f };
 		Triangle* triangle = new Triangle(color);
 		Application::sSelectedObject = triangle;
-		HistroyRenderer::AddGeometry(triangle); });
+		HistroyRenderer::AddGeometry(triangle);
+		Application::sProgram.AddActor(triangle); });
 		Menus::AddMenuItem("Add", "Square", []() {float color[4]{ 1.0f };
 		Square* square = new Square();
 		Application::sSelectedObject = square;
-		HistroyRenderer::AddGeometry(square); });
+		HistroyRenderer::AddGeometry(square);
+		Application::sProgram.AddActor(square); });
 		ImGui::EndMainMenuBar();
 	}
 

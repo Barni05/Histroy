@@ -102,7 +102,7 @@
     <ClCompile Include="src\Engine\GUI\CodeTiles\BeginPlayTile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Engine\GUI\CodeEditor.cpp">
+    <ClCompile Include="src\Engine\GUI\CodeHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Engine\GUI\CodeTiles\TickTile.cpp">
@@ -1082,7 +1082,7 @@
     <ClInclude Include="src\Engine\GUI\CodeTiles\BeginPlayTile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Engine\GUI\CodeEditor.h">
+    <ClInclude Include="src\Engine\GUI\CodeHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Engine\GUI\CodeTiles\TickTile.h">

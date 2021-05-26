@@ -42,7 +42,7 @@ namespace Histroy
 		int mGeometryNumber;
 		char* mBufferID;
 
-		std::shared_ptr<class CodeEditor> mCodeEditor;
+		std::shared_ptr<class CodeHandler> mCodeEditor;
 
 		bool IsObjectPressed(int, int, float[]);
 	};

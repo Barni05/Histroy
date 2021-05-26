@@ -1,20 +1,20 @@
 #include "hspch.h"
-#include "CodeEditor.h"
+#include "CodeHandler.h"
 namespace Histroy
 {
-	CodeEditor::CodeEditor()
+	CodeHandler::CodeHandler()
 	{
 	}
-	CodeEditor::~CodeEditor()
+	CodeHandler::~CodeHandler()
 	{
 	}
-	void CodeEditor::Init(Geometry* actor)
+	void CodeHandler::Init(Geometry* actor)
 	{
 		mEvents.push_back(std::make_shared<BeginPlayTile>(actor, "Begin Play"));
 		mEvents.push_back(std::make_shared<TickTile>(actor, "Tick"));
 		mSelectedEvent = mEvents[0];
 	}
-	void CodeEditor::RenderImGui()
+	void CodeHandler::RenderImGui()
 	{
 		ImGui::Begin("Code Editor", (bool*)false, ImGuiWindowFlags_MenuBar);
 		//Menu
@@ -56,7 +56,7 @@ namespace Histroy
 		}
 		ImGui::End();
 	}
-	int CodeEditor::GetMostInstruction()
+	int CodeHandler::GetMostInstruction()
 	{
 		std::vector<int> instructions;
 		for (auto a : mEvents)
