@@ -4,7 +4,6 @@
 #include "Application.h"
 #include <Histroy.h>
 
-#define BIND_EVENT_FUNCTION(func) std::bind(&Application::func, this, std::placeholders::_1)
 namespace Histroy
 {
 	bool Application::bShouldCodeEditorOpen = false;
@@ -22,7 +21,7 @@ namespace Histroy
 	void Application::Run() {
 		HS_SET_LOG_DIR(plog::warning, "F:\\DEV\\Projektek\\Histroy Engine\\Histroy\\Logs\\Logs.txt", 10000, 1);
 		mWindow->Init(NULL, NULL);
-		mWindow->SetCallback(BIND_EVENT_FUNCTION(OnEventHappened));
+		mWindow->SetCallback(BIND_EVENT_FUNCTION(&Application::OnEventHappened));
 		mWindow->MakeContextCurrent();
 		Window::InitGlew();
 		HistroyGui::Init(mWindow->GetWindow());
@@ -85,7 +84,8 @@ namespace Histroy
 		Menus::AddMenuItem("File", "Open", []() {});
 		Menus::AddMenuItem("File", "Exit", []() {});
 		Menus::AddMenuItem("Tools", "Play", [=]() {
-			
+			BeginPlay* bp = new BeginPlay(mWindow);
+			sProgram.BeginPlay(*bp);
 			});
 		Menus::AddMenuItem("Add", "Triangle", []() {float color[4]{ 1.0f };
 		Triangle* triangle = new Triangle(color);
@@ -145,11 +145,6 @@ namespace Histroy
 		return true;
 	}
 
-	bool Application::OnBeginPlay(Event& e)
-	{
-		std::cout << "The play begins" << std::endl;
-		return true;
-	}
 
 	bool Application::OnTick(Event& e)
 	{
@@ -169,13 +164,12 @@ namespace Histroy
 	void Application::OnEventHappened(Histroy::Event& e)
 	{
 		EventDispatcher dispatcher(e);
-		dispatcher.Dispatch<WindowClose>(BIND_EVENT_FUNCTION(OnWindowClose));
-		dispatcher.Dispatch<KeyPressed>(BIND_EVENT_FUNCTION(OnKeyPressed));
-		dispatcher.Dispatch<MouseButtonPressed>(BIND_EVENT_FUNCTION(OnMouseButtonPressed));
-		dispatcher.Dispatch<KeyReleased>(BIND_EVENT_FUNCTION(OnKeyReleased));
-		dispatcher.Dispatch<WindowResize>(BIND_EVENT_FUNCTION(OnWindowResized));
-		dispatcher.Dispatch<MouseButtonReleased>(BIND_EVENT_FUNCTION(OnMouseButtonReleased));
-		dispatcher.Dispatch<BeginPlay>(BIND_EVENT_FUNCTION(OnBeginPlay));
+		dispatcher.Dispatch<WindowClose>(BIND_EVENT_FUNCTION(&Application::OnWindowClose));
+		dispatcher.Dispatch<KeyPressed>(BIND_EVENT_FUNCTION(&Application::OnKeyPressed));
+		dispatcher.Dispatch<MouseButtonPressed>(BIND_EVENT_FUNCTION(&Application::OnMouseButtonPressed));
+		dispatcher.Dispatch<KeyReleased>(BIND_EVENT_FUNCTION(&Application::OnKeyReleased));
+		dispatcher.Dispatch<WindowResize>(BIND_EVENT_FUNCTION(&Application::OnWindowResized));
+		dispatcher.Dispatch<MouseButtonReleased>(BIND_EVENT_FUNCTION(&Application::OnMouseButtonReleased));
 	}
 
 	int Application::mWindowHeight = 1080;

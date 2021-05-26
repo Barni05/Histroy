@@ -20,6 +20,7 @@ namespace Histroy
 		virtual void OnKeyReleased(Histroy::Event& e) {}
 		virtual void OnMouseButtonPressed(Histroy::Event& e);
 		virtual void OnMouseButtonReleased(Histroy::Event& e) {}
+		void EventHappened(Event& e);
 
 		inline std::string GetID() const { return mID; }
 		inline std::string GetName() const { return mName; }
@@ -42,7 +43,7 @@ namespace Histroy
 		int mGeometryNumber;
 		char* mBufferID;
 
-		std::shared_ptr<class CodeHandler> mCodeEditor;
+		std::shared_ptr<class CodeHandler> mCodeHandler;
 
 		bool IsObjectPressed(int, int, float[]);
 	};

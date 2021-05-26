@@ -77,6 +77,6 @@ namespace Histroy
 		ImGui::ColorEdit4("Color", mColor);
 		ImGui::End();
 
-		mCodeEditor->RenderImGui();
+		mCodeHandler->RenderImGui();
 	}
 }

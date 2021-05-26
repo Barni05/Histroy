@@ -23,8 +23,8 @@ namespace Histroy
 
 	Geometry::Geometry() :mName("Geometry")
 	{
-		mCodeEditor = std::make_shared<Histroy::CodeHandler>();
-		mCodeEditor->Init(this);
+		mCodeHandler = std::make_shared<Histroy::CodeHandler>();
+		mCodeHandler->Init(this);
 	}
 
 	Geometry::~Geometry()
@@ -48,6 +48,11 @@ namespace Histroy
 			Histroy::Application::sSelectedObject = this;
 		}
 	}
+
+    void Geometry::EventHappened(Event& e)
+    {
+		mCodeHandler->EventHappened(e);
+    }
 
 	int Geometry::AssignIdNumber()
 	{

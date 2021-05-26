@@ -4,6 +4,10 @@ namespace Histroy
 {
 	void Program::BeginPlay(Event& e)
 	{
+		for (auto actor : mActors)
+		{
+			actor->EventHappened(e);
+		}
 	}
 
 	void Program::Tick(Event& e)

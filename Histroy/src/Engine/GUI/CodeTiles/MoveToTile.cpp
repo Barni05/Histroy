@@ -4,6 +4,7 @@ namespace Histroy
 {
 	MoveToTile::MoveToTile(int x, int y, float speed):mX(x), mY(y), mSpeed(speed)
 	{
+		mTileName = "Move To";
 	}
 
 	MoveToTile::~MoveToTile()

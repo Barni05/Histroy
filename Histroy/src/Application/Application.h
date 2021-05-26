@@ -4,6 +4,7 @@
 #include "hspch.h"
 namespace Histroy
 {
+#define BIND_EVENT_FUNCTION(func) std::bind(func, this, std::placeholders::_1)
 	class Program;
 	class Application
 	{
@@ -24,7 +25,6 @@ namespace Histroy
 		bool OnMouseButtonPressed(Event& e);
 		bool OnMouseButtonReleased(Event& e);
 		bool OnWindowResized(Event& e);
-		bool OnBeginPlay(Event& e);
 		bool OnTick(Event& e);
 		//Events
 
