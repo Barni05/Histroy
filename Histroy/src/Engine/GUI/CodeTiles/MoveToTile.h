@@ -7,12 +7,12 @@ namespace Histroy
 		public CodeTile
 	{
 	public:
-		MoveToTile(int x, int y, float speed);
+		MoveToTile(EventTile* event, int x, int y, float speed);
 		~MoveToTile();
 
 		void Execute() override;
 	private:
-		int mX, mY;
+		float mX, mY;
 		float mSpeed; //speed = pixel per frame
 	};
 
