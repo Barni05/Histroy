@@ -18,6 +18,7 @@ namespace Histroy
 
 		void Run();
 		void OnEventHappened(Event& e);
+		static void PlayGame();
 		//Events
 		bool OnWindowClose(Event& e);
 		bool OnKeyPressed(Event& e);
@@ -28,11 +29,13 @@ namespace Histroy
 		bool OnTick(Event& e);
 		//Events
 
+
 		static int mWindowHeight, mWindowWidth;
 		static int mViewportWidth, mViewportHeight;
 		static Geometry* sSelectedObject;
 		static bool bShouldCodeEditorOpen;
 		static Program sProgram;
+		static std::vector<std::thread> sThreads;
 	private:
 		Histroy::Window* mWindow;
 	

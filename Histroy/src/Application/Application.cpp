@@ -6,6 +6,7 @@
 
 namespace Histroy
 {
+
 	bool Application::bShouldCodeEditorOpen = false;
 	Program Application::sProgram;
 
@@ -43,7 +44,6 @@ namespace Histroy
 			HistroyGui::Render();
 
 			mWindow->Update();
-
 
 			glfwPollEvents();
 			glClear(GL_COLOR_BUFFER_BIT);
@@ -86,6 +86,8 @@ namespace Histroy
 		Menus::AddMenuItem("Tools", "Play", [=]() {
 			BeginPlay* bp = new BeginPlay(mWindow);
 			sProgram.BeginPlay(*bp);
+			std::thread t2(PlayGame);
+			t2.join();
 			});
 		Menus::AddMenuItem("Add", "Triangle", []() {float color[4]{ 1.0f };
 		Triangle* triangle = new Triangle(color);
@@ -152,6 +154,7 @@ namespace Histroy
 	}
 
 
+
 	bool Application::OnKeyReleased(Event& e)
 	{
 		for (auto geometry : HistroyRenderer::sGeometries)
@@ -170,6 +173,17 @@ namespace Histroy
 		dispatcher.Dispatch<KeyReleased>(BIND_EVENT_FUNCTION(&Application::OnKeyReleased));
 		dispatcher.Dispatch<WindowResize>(BIND_EVENT_FUNCTION(&Application::OnWindowResized));
 		dispatcher.Dispatch<MouseButtonReleased>(BIND_EVENT_FUNCTION(&Application::OnMouseButtonReleased));
+	}
+
+	void Application::PlayGame()
+	{
+		Window* gameViewport = new Window({ "Viewport", 800, 800 });
+		gameViewport->Init(nullptr, nullptr);
+		while (!glfwWindowShouldClose(gameViewport->GetWindow()))
+		{
+			glClear(GL_COLOR_BUFFER_BIT);
+			gameViewport->MakeContextCurrent();
+		}
 	}
 
 	int Application::mWindowHeight = 1080;

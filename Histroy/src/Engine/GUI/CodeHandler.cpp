@@ -20,7 +20,7 @@ namespace Histroy
 		//Menu
 		ImGui::BeginMenuBar();
 		Menus::AddMenuItem("Mobility", "Move To", [=]() {
-			mSelectedEvent->AddTile(new MoveToTile(mSelectedEvent.get(), 100, 100, 0.1f));
+			mSelectedEvent->AddTile(new MoveToTile(mSelectedEvent.get(), 100, 100, 0.01f));
 			});
 		ImGui::EndMenuBar();
 		std::string text = "Selected Event: " + mSelectedEvent->GetName();

@@ -15,15 +15,19 @@ namespace Histroy
 
 	void MoveToTile::Execute()
 	{
-		float tempX, tempY;
-		tempX = mEvent->GetActor()->GetLocation().x;
-		tempY = mEvent->GetActor()->GetLocation().y;
-		while (int(tempX) != int(mX) && int(tempY)!=int(mY))
-		{
-			tempX += mSpeed;
-			tempY += mSpeed;
-			mEvent->GetActor()->SetLocation(tempX, tempY);
-			mEvent->GetActor()->Render();
-		}
+
+		std::thread t1([=]() {
+			float tempX, tempY;
+			tempX = mEvent->GetActor()->GetLocation().x;
+			tempY = mEvent->GetActor()->GetLocation().y;
+			while (int(tempX)!=int(mX) && int(tempY) != int(mY))
+			{
+				tempX += mSpeed;
+				tempY += mSpeed;
+				//std::cout << "Angelo" << std::endl;
+				mEvent->GetActor()->SetLocation(tempX, tempY);
+			}
+			});
+		t1.detach();
 	}
 }

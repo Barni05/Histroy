@@ -60,7 +60,7 @@ namespace Histroy
 		VertexArray va;
 		va.Bind();
 		va.AddBuffer(vb, layout);
-
+		//std::cout << "Location:" << mLocation.x << ", " << mLocation.y << std::endl;
 		Shader shader("src/Engine/GUI/Shaders/Geometry.shader");
 		shader.Bind();
 		shader.SetUniform4f("u_Color", mColor[0], mColor[1], mColor[2], mColor[3]);
