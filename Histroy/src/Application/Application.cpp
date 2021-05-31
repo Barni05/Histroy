@@ -7,11 +7,28 @@
 namespace Histroy
 {
 
-	bool Application::bShouldCodeEditorOpen = false;
 	Program Application::sProgram;
+	WindowDetails Application::mEditorDetails;
+	WindowDetails Application::mGameViewportDetails;
+	Window* Application::mWindow;
+	Window* Application::mGameViewport;
 
 	Application::Application() {
-		mWindow = new Histroy::Window({ "Histroy", *mWindowWidth, *mWindowHeight });
+		mEditorDetails.height = 1080;
+		mEditorDetails.width = 1920;
+		mEditorDetails.viewportHeight = mEditorDetails.height - 20;
+		mEditorDetails.viewportWidth = mEditorDetails.width - LEFT_WINDOW_INDENT;
+		mEditorDetails.x = LEFT_WINDOW_INDENT;
+		mEditorDetails.y = 0;
+
+		mGameViewportDetails.height = 1080;
+		mGameViewportDetails.width = 1000;
+		mGameViewportDetails.viewportHeight = mGameViewportDetails.height;
+		mGameViewportDetails.viewportWidth = mGameViewportDetails.width;
+		mGameViewportDetails.x = 0;
+		mGameViewportDetails.y = 0;
+
+		mWindow = new Histroy::Window({ "Histroy", mEditorDetails.width, mEditorDetails.height });
 	}
 	Application::~Application() { delete mWindow; }
 
@@ -39,11 +56,12 @@ namespace Histroy
 
 			//Render Geometry
 			HistroyRenderer::Render();
+			HistroyRenderer::RenderImGui();
 
 			//Render IMGUI		  
 			HistroyGui::Render();
 
-			mWindow->Update();
+			mWindow->Update(mEditorDetails.x, mEditorDetails.y, mEditorDetails.viewportWidth, mEditorDetails.viewportHeight);
 
 			glfwPollEvents();
 			glClear(GL_COLOR_BUFFER_BIT);
@@ -57,19 +75,19 @@ namespace Histroy
 	void Application::SetupPropertiesPage()
 	{
 		HistroyGui::BeginRender("Properties");
-		ImGui::SetWindowSize({ LEFT_WINDOW_INDENT, float(*mWindowHeight / 2) });
-		ImGui::SetWindowPos({ 0, float(*mWindowHeight / 2) });
+		ImGui::SetWindowSize({ LEFT_WINDOW_INDENT, float(mEditorDetails.width / 2) });
+		ImGui::SetWindowPos({ 0, float(mEditorDetails.height / 2) });
 		HistroyGui::EndRender();
 	}
 
 	void Application::SetupWorldPage()
 	{
 		HistroyGui::BeginRender("The World");
-		ImGui::SetWindowSize({ LEFT_WINDOW_INDENT, float(*mWindowHeight / 2) - 20.0f });
+		ImGui::SetWindowSize({ LEFT_WINDOW_INDENT, float(mEditorDetails.height / 2) - 20.0f });
 		ImGui::SetWindowPos({ 0, 20 });
 		for (auto geometry : HistroyRenderer::sGeometries)
 		{
-			if (ImGui::Button(geometry->GetID().c_str(), { (float)*mWindowWidth / 6, 20 }))
+			if (ImGui::Button(geometry->GetID().c_str(), { (float)mEditorDetails.width / 6, 20 }))
 			{
 				Application::sSelectedObject = geometry;
 			}
@@ -108,8 +126,6 @@ namespace Histroy
 		WindowClose* event = dynamic_cast<WindowClose*>(&e);
 		if (event->GetWindowTitle() == "Histroy Code Editor")
 		{
-			//glfwDestroyWindow(mCodeEditor->GetWindow());
-			bShouldCodeEditorOpen = false;
 			bHasBeenInitialised = false;
 		}
 		return true;
@@ -143,6 +159,8 @@ namespace Histroy
 	bool Application::OnWindowResized(Event& e)
 	{
 		e.GetWindow()->SetSize(dynamic_cast<WindowResize*>(&e)->GetWidth(), dynamic_cast<WindowResize*>(&e)->GetHeight());
+		UpdateWindowSizes("Histroy", mEditorDetails, *dynamic_cast<WindowResize*>(&e));
+		UpdateWindowSizes("Game Viewport", mGameViewportDetails, *dynamic_cast<WindowResize*>(&e));
 		return true;
 	}
 
@@ -176,16 +194,18 @@ namespace Histroy
 
 	void Application::PlayGame()
 	{
-		Window* gameViewport = new Window({ "Viewport", 800, 800 });
-		gameViewport->SetCallback(&Application::OnEventHappened);
-		gameViewport->Init(nullptr, nullptr);
-		while (!glfwWindowShouldClose(gameViewport->GetWindow()))
+		mGameViewport = new Window({ "Game Viewport", mGameViewportDetails.width, mGameViewportDetails.height });
+		mGameViewport->SetCallback(&Application::OnEventHappened);
+		mGameViewport->Init(nullptr, nullptr);
+		mGameViewport->MakeContextCurrent();
+		Window::InitGlew();
+		while (!glfwWindowShouldClose(mGameViewport->GetWindow()))
 		{
 
-			gameViewport->MakeContextCurrent();
+			mGameViewport->MakeContextCurrent();
 			HistroyRenderer::Render();
 
-			gameViewport->Update();
+			mGameViewport->Update(mGameViewportDetails.x, mGameViewportDetails.y, mGameViewportDetails.viewportWidth, mGameViewportDetails.viewportHeight);
 
 			glfwPollEvents();
 			glClear(GL_COLOR_BUFFER_BIT);
@@ -193,11 +213,15 @@ namespace Histroy
 		}
 	}
 
-
-	int* Application::mWindowHeight = new int(1080);
-	int* Application::mWindowWidth = new int(1920);
-	int Application::mViewportHeight = *Application::mWindowHeight;
-	int Application::mViewportWidth = *Application::mWindowWidth-LEFT_WINDOW_INDENT;
+	void Application::UpdateWindowSizes(const std::string& windowName, WindowDetails& detailsToUpdate, WindowResize& rs)
+	{
+		if (rs.GetWindowTitle() == windowName)
+		{
+			std::cout << windowName << std::endl;
+			detailsToUpdate.height = rs.GetHeight();
+			detailsToUpdate.width = rs.GetWidth();
+		}
+	}
 
 }
 int main()

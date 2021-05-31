@@ -21,7 +21,7 @@ namespace Histroy
 		void Init(GLFWmonitor* monitor, GLFWwindow* share);
 		void MakeContextCurrent();
 		static bool InitGlew();
-		void Update();
+		void Update(int x, int y, int width, int height);
 		void Close();
 
 		inline void SetSize(int x, int y) { mData.height = y; mData.width = x; }

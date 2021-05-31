@@ -5,6 +5,13 @@
 namespace Histroy
 {
 #define BIND_EVENT_FUNCTION(func) std::bind(func, this, std::placeholders::_1)
+
+	struct WindowDetails
+	{
+		int width, height;
+		int viewportWidth, viewportHeight;
+		int x, y;
+	};
 	class Program;
 	class Application
 	{
@@ -12,13 +19,15 @@ namespace Histroy
 		Application();
 		~Application();
 
-		void SetupPropertiesPage();
-		void SetupWorldPage();
-		void SetupMainMenu();
+		static void SetupPropertiesPage();
+		static void SetupWorldPage();
+		static void SetupMainMenu();
 
 		void Run();
 		static void OnEventHappened(Event& e);
 		static void PlayGame();
+		static void UpdateWindowSizes(const std::string& windowName, WindowDetails& detailsToUpdate, WindowResize& rs);
+
 		//Events
 		static bool OnWindowClose(Event& e);
 		static bool OnKeyPressed(Event& e);
@@ -30,14 +39,13 @@ namespace Histroy
 		//Events
 
 
-		static int* mWindowHeight, *mWindowWidth;
-		static int mViewportWidth, mViewportHeight;
+		static WindowDetails mEditorDetails;
+		static WindowDetails mGameViewportDetails;
 		static Geometry* sSelectedObject;
-		static bool bShouldCodeEditorOpen;
 		static Program sProgram;
-		static std::vector<std::thread> sThreads;
 	private:
-		Histroy::Window* mWindow;
+		static Histroy::Window* mWindow;
+		static Window* mGameViewport;
 	
 	};
 }

@@ -11,6 +11,7 @@ namespace Histroy
 		static void AddGeometry(Geometry*);
 		static void DeleteGeometry(Geometry*);
 		static std::vector<Geometry*> sGeometries;
+		static void RenderImGui();
 	};
 }
 

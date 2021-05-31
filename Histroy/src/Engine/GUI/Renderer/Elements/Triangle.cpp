@@ -28,9 +28,9 @@ namespace Histroy
 		mBufferID = new char[256];
 		mBufferID = (char*)mID.c_str();
 		std::pair<float, float> positions[3];
-		positions[0] = std::make_pair<float, float>(Histroy::Application::mViewportWidth / 2 / 2, Histroy::Application::mViewportHeight / 2 / 2);
-		positions[1] = std::make_pair<float, float>(Histroy::Application::mViewportWidth / 2 / 2 + Histroy::Application::mViewportWidth / 2, Histroy::Application::mViewportHeight / 2 / 2);
-		positions[2] = std::make_pair<float, float>(Histroy::Application::mViewportWidth / 2, Histroy::Application::mViewportHeight / 2 / 2 + Histroy::Application::mViewportHeight / 2);
+		positions[0] = std::make_pair<float, float>(Histroy::Application::mEditorDetails.viewportWidth / 2 / 2, Histroy::Application::mEditorDetails.viewportHeight / 2 / 2);
+		positions[1] = std::make_pair<float, float>(Histroy::Application::mEditorDetails.viewportWidth / 2 / 2 + Histroy::Application::mEditorDetails.viewportWidth / 2, Histroy::Application::mEditorDetails.viewportHeight / 2 / 2);
+		positions[2] = std::make_pair<float, float>(Histroy::Application::mEditorDetails.viewportWidth / 2, Histroy::Application::mEditorDetails.viewportHeight / 2 / 2 + Histroy::Application::mEditorDetails.viewportHeight / 2);
 		mInitialPosition[0] = positions[0].first;
 		mInitialPosition[1] = positions[0].second;
 		mInitialPosition[2] = positions[1].first;
@@ -44,7 +44,7 @@ namespace Histroy
 		mGeometryNumber = AssignIdNumber();
 		ss << mName << "_" << mGeometryNumber;
 		mID = ss.str();
-		mProj = glm::ortho(0.0f, float(Histroy::Application::mViewportWidth), 0.0f, float(Histroy::Application::mViewportHeight), -1.0f, 1.0f);
+		mProj = glm::ortho(0.0f, float(Histroy::Application::mEditorDetails.viewportWidth), 0.0f, float(Histroy::Application::mEditorDetails.viewportHeight), -1.0f, 1.0f);
 	}
 
 	void Triangle::Render()
@@ -75,7 +75,7 @@ namespace Histroy
 		ImGui::Begin("Properties");
 		ImGui::InputText("Name", mBufferID, 256);
 		mID = std::string(mBufferID);
-		ImGui::SliderFloat2("Location", &mLocation.x, -float(*Histroy::Application::mWindowWidth), float(*Histroy::Application::mWindowWidth));
+		ImGui::SliderFloat2("Location", &mLocation.x, -float(Histroy::Application::mEditorDetails.width), float(Histroy::Application::mEditorDetails.width));
 		ImGui::InputFloat2("Scale", &mScale.x);
 		ImGui::SliderAngle("Rotation", &mRotation);
 		ImGui::ColorEdit4("Color", mColor);

@@ -87,7 +87,7 @@ namespace Histroy
 			{
 			case GLFW_PRESS:
 			{
-				Histroy::MouseButtonPressed  press(button, (int)x, *Application::mWindowHeight - (int)y, data);
+				Histroy::MouseButtonPressed  press(button, (int)x, Application::mEditorDetails.height - (int)y, data);
 				data->GetData().mCallback(press);
 				break;
 			}
@@ -114,9 +114,9 @@ namespace Histroy
 		}
 		return true;
 	}
-	void Window::Update()
+	void Window::Update(int x, int y, int width, int height)
 	{
-		glViewport(LEFT_WINDOW_INDENT, 0, Application::mViewportWidth, Application::mViewportHeight);
+		glViewport(x, y, width, height);
 		if(mWindow)
 			glfwSwapBuffers(mWindow);
 
