@@ -11,7 +11,7 @@ namespace Histroy
 	Program Application::sProgram;
 
 	Application::Application() {
-		mWindow = new Histroy::Window({ "Histroy", mWindowWidth, mWindowHeight });
+		mWindow = new Histroy::Window({ "Histroy", *mWindowWidth, *mWindowHeight });
 	}
 	Application::~Application() { delete mWindow; }
 
@@ -22,7 +22,7 @@ namespace Histroy
 	void Application::Run() {
 		HS_SET_LOG_DIR(plog::warning, "F:\\DEV\\Projektek\\Histroy Engine\\Histroy\\Logs\\Logs.txt", 10000, 1);
 		mWindow->Init(NULL, NULL);
-		mWindow->SetCallback(BIND_EVENT_FUNCTION(&Application::OnEventHappened));
+		mWindow->SetCallback(&Application::OnEventHappened);
 		mWindow->MakeContextCurrent();
 		Window::InitGlew();
 		HistroyGui::Init(mWindow->GetWindow());
@@ -57,19 +57,19 @@ namespace Histroy
 	void Application::SetupPropertiesPage()
 	{
 		HistroyGui::BeginRender("Properties");
-		ImGui::SetWindowSize({ LEFT_WINDOW_INDENT, float(mWindowHeight / 2) });
-		ImGui::SetWindowPos({ 0, float(mWindowHeight / 2) });
+		ImGui::SetWindowSize({ LEFT_WINDOW_INDENT, float(*mWindowHeight / 2) });
+		ImGui::SetWindowPos({ 0, float(*mWindowHeight / 2) });
 		HistroyGui::EndRender();
 	}
 
 	void Application::SetupWorldPage()
 	{
 		HistroyGui::BeginRender("The World");
-		ImGui::SetWindowSize({ LEFT_WINDOW_INDENT, float(mWindowHeight / 2) - 20.0f });
+		ImGui::SetWindowSize({ LEFT_WINDOW_INDENT, float(*mWindowHeight / 2) - 20.0f });
 		ImGui::SetWindowPos({ 0, 20 });
 		for (auto geometry : HistroyRenderer::sGeometries)
 		{
-			if (ImGui::Button(geometry->GetID().c_str(), { (float)mWindowWidth / 6, 20 }))
+			if (ImGui::Button(geometry->GetID().c_str(), { (float)*mWindowWidth / 6, 20 }))
 			{
 				Application::sSelectedObject = geometry;
 			}
@@ -87,7 +87,7 @@ namespace Histroy
 			BeginPlay* bp = new BeginPlay(mWindow);
 			sProgram.BeginPlay(*bp);
 			std::thread t2(PlayGame);
-			t2.join();
+			t2.detach();
 			});
 		Menus::AddMenuItem("Add", "Triangle", []() {float color[4]{ 1.0f };
 		Triangle* triangle = new Triangle(color);
@@ -142,8 +142,7 @@ namespace Histroy
 
 	bool Application::OnWindowResized(Event& e)
 	{
-		mWindowHeight = dynamic_cast<WindowResize&>(e).GetHeight();
-		mWindowWidth = dynamic_cast<WindowResize&>(e).GetWidth();
+		e.GetWindow()->SetSize(dynamic_cast<WindowResize*>(&e)->GetWidth(), dynamic_cast<WindowResize*>(&e)->GetHeight());
 		return true;
 	}
 
@@ -167,29 +166,38 @@ namespace Histroy
 	void Application::OnEventHappened(Histroy::Event& e)
 	{
 		EventDispatcher dispatcher(e);
-		dispatcher.Dispatch<WindowClose>(BIND_EVENT_FUNCTION(&Application::OnWindowClose));
-		dispatcher.Dispatch<KeyPressed>(BIND_EVENT_FUNCTION(&Application::OnKeyPressed));
-		dispatcher.Dispatch<MouseButtonPressed>(BIND_EVENT_FUNCTION(&Application::OnMouseButtonPressed));
-		dispatcher.Dispatch<KeyReleased>(BIND_EVENT_FUNCTION(&Application::OnKeyReleased));
-		dispatcher.Dispatch<WindowResize>(BIND_EVENT_FUNCTION(&Application::OnWindowResized));
-		dispatcher.Dispatch<MouseButtonReleased>(BIND_EVENT_FUNCTION(&Application::OnMouseButtonReleased));
+		dispatcher.Dispatch<WindowClose>(&Application::OnWindowClose);
+		dispatcher.Dispatch<KeyPressed>(&Application::OnKeyPressed);
+		dispatcher.Dispatch<MouseButtonPressed>(&Application::OnMouseButtonPressed);
+		dispatcher.Dispatch<KeyReleased>(&Application::OnKeyReleased);
+		dispatcher.Dispatch<WindowResize>(&Application::OnWindowResized);
+		dispatcher.Dispatch<MouseButtonReleased>(&Application::OnMouseButtonReleased);
 	}
 
 	void Application::PlayGame()
 	{
 		Window* gameViewport = new Window({ "Viewport", 800, 800 });
+		gameViewport->SetCallback(&Application::OnEventHappened);
 		gameViewport->Init(nullptr, nullptr);
 		while (!glfwWindowShouldClose(gameViewport->GetWindow()))
 		{
-			glClear(GL_COLOR_BUFFER_BIT);
+
 			gameViewport->MakeContextCurrent();
+			HistroyRenderer::Render();
+
+			gameViewport->Update();
+
+			glfwPollEvents();
+			glClear(GL_COLOR_BUFFER_BIT);
+
 		}
 	}
 
-	int Application::mWindowHeight = 1080;
-	int Application::mWindowWidth = 1920;
-	int Application::mViewportHeight = Application::mWindowHeight;
-	int Application::mViewportWidth = Application::mWindowWidth;
+
+	int* Application::mWindowHeight = new int(1080);
+	int* Application::mWindowWidth = new int(1920);
+	int Application::mViewportHeight = *Application::mWindowHeight;
+	int Application::mViewportWidth = *Application::mWindowWidth-LEFT_WINDOW_INDENT;
 
 }
 int main()

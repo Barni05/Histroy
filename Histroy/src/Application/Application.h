@@ -17,20 +17,20 @@ namespace Histroy
 		void SetupMainMenu();
 
 		void Run();
-		void OnEventHappened(Event& e);
+		static void OnEventHappened(Event& e);
 		static void PlayGame();
 		//Events
-		bool OnWindowClose(Event& e);
-		bool OnKeyPressed(Event& e);
-		bool OnKeyReleased(Event& e);
-		bool OnMouseButtonPressed(Event& e);
-		bool OnMouseButtonReleased(Event& e);
-		bool OnWindowResized(Event& e);
-		bool OnTick(Event& e);
+		static bool OnWindowClose(Event& e);
+		static bool OnKeyPressed(Event& e);
+		static bool OnKeyReleased(Event& e);
+		static bool OnMouseButtonPressed(Event& e);
+		static bool OnMouseButtonReleased(Event& e);
+		static bool OnWindowResized(Event& e);
+		static bool OnTick(Event& e);
 		//Events
 
 
-		static int mWindowHeight, mWindowWidth;
+		static int* mWindowHeight, *mWindowWidth;
 		static int mViewportWidth, mViewportHeight;
 		static Geometry* sSelectedObject;
 		static bool bShouldCodeEditorOpen;

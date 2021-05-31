@@ -87,7 +87,7 @@ namespace Histroy
 			{
 			case GLFW_PRESS:
 			{
-				Histroy::MouseButtonPressed  press(button, (int)x, Application::mWindowHeight - (int)y, data);
+				Histroy::MouseButtonPressed  press(button, (int)x, *Application::mWindowHeight - (int)y, data);
 				data->GetData().mCallback(press);
 				break;
 			}

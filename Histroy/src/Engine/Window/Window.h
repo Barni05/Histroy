@@ -24,6 +24,8 @@ namespace Histroy
 		void Update();
 		void Close();
 
+		inline void SetSize(int x, int y) { mData.height = y; mData.width = x; }
+
 		inline GLFWwindow* GetWindow() const { return mWindow; }
 		inline EventCallback GetCallback() const { return mData.mCallback; }
 		inline WindowData GetData() const { return mData; }

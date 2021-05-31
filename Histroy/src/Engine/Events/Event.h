@@ -29,6 +29,7 @@ namespace Histroy
 		virtual EventType GetType() = 0;
 
 		virtual std::string ToString() { return GetName(); }
+		virtual Window* GetWindow() { return mWindow; }
 	};
 
 	class EventDispatcher
@@ -55,5 +56,6 @@ namespace Histroy
 
 #define HS_EVENT_FUNCTIONS(name, type)		std::string GetName() override {return name;}\
 										static EventType GetStaticType() {return type;}\
-										EventType GetType() override { return GetStaticType(); }
+										EventType GetType() override { return GetStaticType(); }\
+										Window* GetWindow() override { return mWindow; }
 }
