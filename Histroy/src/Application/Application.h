@@ -26,6 +26,7 @@ namespace Histroy
 		void Run();
 		static void OnEventHappened(Event& e);
 		static void PlayGame();
+		static void UpdateViewports();//Updates the sizes of the viewports
 		static void UpdateWindowSizes(const std::string& windowName, WindowDetails& detailsToUpdate, WindowResize& rs);
 
 		//Events

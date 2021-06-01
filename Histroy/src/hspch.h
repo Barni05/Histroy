@@ -5,6 +5,7 @@
 #include <functional>
 #include <sstream>
 #include <thread>
+#include <chrono> 
 #include "SGL.h"
 
 #include "Application/Application.h"

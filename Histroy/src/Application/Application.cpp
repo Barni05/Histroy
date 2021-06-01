@@ -16,17 +16,9 @@ namespace Histroy
 	Application::Application() {
 		mEditorDetails.height = 1080;
 		mEditorDetails.width = 1920;
-		mEditorDetails.viewportHeight = mEditorDetails.height - 20;
-		mEditorDetails.viewportWidth = mEditorDetails.width - LEFT_WINDOW_INDENT;
-		mEditorDetails.x = LEFT_WINDOW_INDENT;
-		mEditorDetails.y = 0;
-
 		mGameViewportDetails.height = 1080;
 		mGameViewportDetails.width = 1000;
-		mGameViewportDetails.viewportHeight = mGameViewportDetails.height;
-		mGameViewportDetails.viewportWidth = mGameViewportDetails.width;
-		mGameViewportDetails.x = 0;
-		mGameViewportDetails.y = 0;
+		UpdateViewports();
 
 		mWindow = new Histroy::Window({ "Histroy", mEditorDetails.width, mEditorDetails.height });
 	}
@@ -161,6 +153,7 @@ namespace Histroy
 		e.GetWindow()->SetSize(dynamic_cast<WindowResize*>(&e)->GetWidth(), dynamic_cast<WindowResize*>(&e)->GetHeight());
 		UpdateWindowSizes("Histroy", mEditorDetails, *dynamic_cast<WindowResize*>(&e));
 		UpdateWindowSizes("Game Viewport", mGameViewportDetails, *dynamic_cast<WindowResize*>(&e));
+		UpdateViewports();
 		return true;
 	}
 
@@ -192,6 +185,7 @@ namespace Histroy
 		dispatcher.Dispatch<MouseButtonReleased>(&Application::OnMouseButtonReleased);
 	}
 
+
 	void Application::PlayGame()
 	{
 		mGameViewport = new Window({ "Game Viewport", mGameViewportDetails.width, mGameViewportDetails.height });
@@ -199,11 +193,12 @@ namespace Histroy
 		mGameViewport->Init(nullptr, nullptr);
 		mGameViewport->MakeContextCurrent();
 		Window::InitGlew();
+		BeginPlay bp(mGameViewport);
+		sProgram.BeginPlay(bp);
 		while (!glfwWindowShouldClose(mGameViewport->GetWindow()))
 		{
 
 			mGameViewport->MakeContextCurrent();
-			HistroyRenderer::Render();
 
 			mGameViewport->Update(mGameViewportDetails.x, mGameViewportDetails.y, mGameViewportDetails.viewportWidth, mGameViewportDetails.viewportHeight);
 
@@ -211,6 +206,20 @@ namespace Histroy
 			glClear(GL_COLOR_BUFFER_BIT);
 
 		}
+	}
+
+	void Application::UpdateViewports()
+	{
+
+		mEditorDetails.viewportHeight = mEditorDetails.height - 20;
+		mEditorDetails.viewportWidth = mEditorDetails.width - LEFT_WINDOW_INDENT;
+		mEditorDetails.x = LEFT_WINDOW_INDENT;
+		mEditorDetails.y = 0;
+
+		mGameViewportDetails.viewportHeight = mGameViewportDetails.height;
+		mGameViewportDetails.viewportWidth = mGameViewportDetails.width;
+		mGameViewportDetails.x = 0;
+		mGameViewportDetails.y = 0;
 	}
 
 	void Application::UpdateWindowSizes(const std::string& windowName, WindowDetails& detailsToUpdate, WindowResize& rs)

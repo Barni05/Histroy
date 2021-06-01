@@ -6,6 +6,8 @@ namespace Histroy
 	{
 		mTileName = "Move To";
 		mEvent = event;
+		currLocX = mEvent->GetActor()->GetLocation().x;
+		currLocY = mEvent->GetActor()->GetLocation().y;
 	}
 
 	MoveToTile::~MoveToTile()
@@ -13,21 +15,21 @@ namespace Histroy
 		delete mEvent;
 	}
 
+	void MoveToTile::HeadTowardsGoal()
+	{
+		currLocX += mSpeed;
+		currLocY += mSpeed;
+		mEvent->GetActor()->SetLocation(currLocX, currLocY);
+	}
+
 	void MoveToTile::Execute()
 	{
-
-		std::thread t1([=]() {
-			float tempX, tempY;
-			tempX = mEvent->GetActor()->GetLocation().x;
-			tempY = mEvent->GetActor()->GetLocation().y;
-			while (int(tempX)!=int(mX) && int(tempY) != int(mY))
-			{
-				tempX += mSpeed;
-				tempY += mSpeed;
-				//std::cout << "Angelo" << std::endl;
-				mEvent->GetActor()->SetLocation(tempX, tempY);
-			}
-			});
-		t1.detach();
+		std::thread t([=]() {
+			while (int(currLocX) != int(mX) && int(currLocY) != int(mY))
+				HeadTowardsGoal();
+			std::cout << "Before" << std::endl;
+			std::this_thread::sleep_for(std::chrono::seconds(1));
+			std::cout << "After" << std::endl; });
+		t.detach();
 	}
 }

@@ -10,9 +10,11 @@ namespace Histroy
 		MoveToTile(EventTile* event, int x, int y, float speed);
 		~MoveToTile();
 
+		void HeadTowardsGoal();
 		void Execute() override;
 	private:
 		float mX, mY;
+		float currLocX, currLocY;
 		float mSpeed; //speed = pixel per frame
 	};
 
