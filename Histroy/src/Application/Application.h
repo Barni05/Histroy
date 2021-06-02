@@ -13,6 +13,7 @@ namespace Histroy
 		int x, y;
 	};
 	class Program;
+	class GameLayer;
 	class Application
 	{
 	public:
@@ -25,9 +26,10 @@ namespace Histroy
 
 		void Run();
 		static void OnEventHappened(Event& e);
-		static void PlayGame();
 		static void UpdateViewports();//Updates the sizes of the viewports
 		static void UpdateWindowSizes(const std::string& windowName, WindowDetails& detailsToUpdate, WindowResize& rs);
+		static void AddGeometry(Geometry* geometry);
+		static void DeleteGeometry(Geometry* geometry);
 
 		//Events
 		static bool OnWindowClose(Event& e);
@@ -41,12 +43,11 @@ namespace Histroy
 
 
 		static WindowDetails mEditorDetails;
-		static WindowDetails mGameViewportDetails;
 		static Geometry* sSelectedObject;
-		static Program sProgram;
+		static GameLayer* sGameLayer;
+		static std::vector<Geometry*> sGeometries;
 	private:
 		static Histroy::Window* mWindow;
-		static Window* mGameViewport;
 	
 	};
 }

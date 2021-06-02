@@ -88,6 +88,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Engine\Layers\GameLayer.cpp" />
     <ClCompile Include="src\Engine\GUI\CodeTiles\MoveToTile.cpp" />
     <ClCompile Include="src\Engine\GUI\CodeHandler.cpp" />
     <ClCompile Include="src\Engine\GUI\CodeTiles\BeginPlayTile.cpp" />
@@ -122,6 +123,7 @@
     <ClCompile Include="src\Engine\GUI\CodeTiles\TickTile.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Engine\Layers\GameLayer.h" />
     <ClInclude Include="src\Engine\GUI\CodeTiles\MoveToTile.h" />
     <ClInclude Include="src\Engine\GUI\CodeHandler.h" />
     <ClInclude Include="src\Engine\GUI\CodeTiles\BeginPlayTile.h" />

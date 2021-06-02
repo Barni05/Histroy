@@ -57,10 +57,10 @@ namespace Histroy
 
 	int Geometry::AssignIdNumber()
 	{
-		if (Histroy::HistroyRenderer::sGeometries.size() != 0)
+		if (Application::sGeometries.size() != 0)
 		{
 			std::vector<int> IDs;
-			for (auto geometries : Histroy::HistroyRenderer::sGeometries)
+			for (auto geometries : Application::sGeometries)
 			{
 				if (geometries->GetName() == this->GetName())
 				{

@@ -12,6 +12,7 @@ namespace Histroy
 		void Init();
 
 		void Render() override;
+		Geometry* clone() override { return new Triangle(*this); }
 		void ImGuiRender() override;
 
 

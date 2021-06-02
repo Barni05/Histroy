@@ -10,6 +10,7 @@ namespace Histroy
 		void Init();
 
 		void Render() override;
+		Geometry* clone() override { return new Square(*this); }
 		void ImGuiRender() override;
 	private:
 		float mInitialPositions[8];

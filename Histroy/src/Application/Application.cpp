@@ -7,20 +7,18 @@
 namespace Histroy
 {
 
-	Program Application::sProgram;
 	WindowDetails Application::mEditorDetails;
-	WindowDetails Application::mGameViewportDetails;
 	Window* Application::mWindow;
-	Window* Application::mGameViewport;
+	GameLayer* Application::sGameLayer;
+	std::vector<Geometry*> Application::sGeometries;
 
 	Application::Application() {
 		mEditorDetails.height = 1080;
 		mEditorDetails.width = 1920;
-		mGameViewportDetails.height = 1080;
-		mGameViewportDetails.width = 1000;
 		UpdateViewports();
 
 		mWindow = new Histroy::Window({ "Histroy", mEditorDetails.width, mEditorDetails.height });
+		sGameLayer = new GameLayer();
 	}
 	Application::~Application() { delete mWindow; }
 
@@ -47,7 +45,7 @@ namespace Histroy
 			SetupMainMenu();
 
 			//Render Geometry
-			HistroyRenderer::Render();
+			HistroyRenderer::Render(sGeometries);
 			HistroyRenderer::RenderImGui();
 
 			//Render IMGUI		  
@@ -77,7 +75,7 @@ namespace Histroy
 		HistroyGui::BeginRender("The World");
 		ImGui::SetWindowSize({ LEFT_WINDOW_INDENT, float(mEditorDetails.height / 2) - 20.0f });
 		ImGui::SetWindowPos({ 0, 20 });
-		for (auto geometry : HistroyRenderer::sGeometries)
+		for (auto geometry : sGeometries)
 		{
 			if (ImGui::Button(geometry->GetID().c_str(), { (float)mEditorDetails.width / 6, 20 }))
 			{
@@ -94,21 +92,16 @@ namespace Histroy
 		Menus::AddMenuItem("File", "Open", []() {});
 		Menus::AddMenuItem("File", "Exit", []() {});
 		Menus::AddMenuItem("Tools", "Play", [=]() {
-			BeginPlay* bp = new BeginPlay(mWindow);
-			sProgram.BeginPlay(*bp);
-			std::thread t2(PlayGame);
-			t2.detach();
+			sGameLayer->PlayGame();
 			});
 		Menus::AddMenuItem("Add", "Triangle", []() {float color[4]{ 1.0f };
 		Triangle* triangle = new Triangle(color);
 		Application::sSelectedObject = triangle;
-		HistroyRenderer::AddGeometry(triangle);
-		Application::sProgram.AddActor(triangle); });
+		AddGeometry(triangle); });
 		Menus::AddMenuItem("Add", "Square", []() {float color[4]{ 1.0f };
 		Square* square = new Square();
 		Application::sSelectedObject = square;
-		HistroyRenderer::AddGeometry(square);
-		Application::sProgram.AddActor(square); });
+		AddGeometry(square); });
 		ImGui::EndMainMenuBar();
 	}
 
@@ -125,25 +118,25 @@ namespace Histroy
 
 	bool Application::OnKeyPressed(Event& e)
 	{
-		for (auto geometry : HistroyRenderer::sGeometries)
+		for (auto geometry : sGeometries)
 			geometry->OnKeyPressed(e);
 		if (dynamic_cast<Histroy::KeyPressed*>(&e)->GetKey() == GLFW_KEY_DELETE)
 		{
-			Histroy::HistroyRenderer::DeleteGeometry(sSelectedObject);
+			DeleteGeometry(sSelectedObject);
 		}
 		return true;
 	}
 
 	bool Application::OnMouseButtonPressed(Event& e)
 	{
-		for (auto geometry : HistroyRenderer::sGeometries)
+		for (auto geometry : sGeometries)
 			geometry->OnMouseButtonPressed(e);
 		return true;
 	}
 
 	bool Application::OnMouseButtonReleased(Event& e)
 	{
-		for (auto geometry : HistroyRenderer::sGeometries)
+		for (auto geometry : sGeometries)
 			geometry->OnMouseButtonReleased(e);
 		return true;
 	}
@@ -152,7 +145,7 @@ namespace Histroy
 	{
 		e.GetWindow()->SetSize(dynamic_cast<WindowResize*>(&e)->GetWidth(), dynamic_cast<WindowResize*>(&e)->GetHeight());
 		UpdateWindowSizes("Histroy", mEditorDetails, *dynamic_cast<WindowResize*>(&e));
-		UpdateWindowSizes("Game Viewport", mGameViewportDetails, *dynamic_cast<WindowResize*>(&e));
+		UpdateWindowSizes("Game Viewport", sGameLayer->mGameViewportDetails, *dynamic_cast<WindowResize*>(&e));
 		UpdateViewports();
 		return true;
 	}
@@ -167,7 +160,7 @@ namespace Histroy
 
 	bool Application::OnKeyReleased(Event& e)
 	{
-		for (auto geometry : HistroyRenderer::sGeometries)
+		for (auto geometry : sGeometries)
 		{
 			geometry->OnKeyReleased(e);
 		}
@@ -185,29 +178,20 @@ namespace Histroy
 		dispatcher.Dispatch<MouseButtonReleased>(&Application::OnMouseButtonReleased);
 	}
 
-
-	void Application::PlayGame()
+	void Application::AddGeometry(Geometry* geometry)
 	{
-		mGameViewport = new Window({ "Game Viewport", mGameViewportDetails.width, mGameViewportDetails.height });
-		mGameViewport->SetCallback(&Application::OnEventHappened);
-		mGameViewport->Init(nullptr, nullptr);
-		mGameViewport->MakeContextCurrent();
-		Window::InitGlew();
-		BeginPlay bp(mGameViewport);
-		sProgram.BeginPlay(bp);
-		while (!glfwWindowShouldClose(mGameViewport->GetWindow()))
+		sGeometries.push_back(geometry);
+	}
+	void Application::DeleteGeometry(Geometry* geometry)
+	{
+		for (int i = 0; i < sGeometries.size(); i++)
 		{
-
-			mGameViewport->MakeContextCurrent();
-
-			mGameViewport->Update(mGameViewportDetails.x, mGameViewportDetails.y, mGameViewportDetails.viewportWidth, mGameViewportDetails.viewportHeight);
-
-			glfwPollEvents();
-			glClear(GL_COLOR_BUFFER_BIT);
-
+			if (sGeometries[i]->GetID() == geometry->GetID())
+			{
+				sGeometries.erase(sGeometries.begin() + i);
+			}
 		}
 	}
-
 	void Application::UpdateViewports()
 	{
 
@@ -215,11 +199,6 @@ namespace Histroy
 		mEditorDetails.viewportWidth = mEditorDetails.width - LEFT_WINDOW_INDENT;
 		mEditorDetails.x = LEFT_WINDOW_INDENT;
 		mEditorDetails.y = 0;
-
-		mGameViewportDetails.viewportHeight = mGameViewportDetails.height;
-		mGameViewportDetails.viewportWidth = mGameViewportDetails.width;
-		mGameViewportDetails.x = 0;
-		mGameViewportDetails.y = 0;
 	}
 
 	void Application::UpdateWindowSizes(const std::string& windowName, WindowDetails& detailsToUpdate, WindowResize& rs)

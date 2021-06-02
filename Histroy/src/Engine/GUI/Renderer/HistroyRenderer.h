@@ -7,10 +7,7 @@ namespace Histroy
 	class HistroyRenderer
 	{
 	public:
-		static void Render();
-		static void AddGeometry(Geometry*);
-		static void DeleteGeometry(Geometry*);
-		static std::vector<Geometry*> sGeometries;
+		static void Render(std::vector<Geometry*> geometries);
 		static void RenderImGui();
 	};
 }

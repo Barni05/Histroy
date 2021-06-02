@@ -14,6 +14,7 @@ namespace Histroy
 		~Geometry();
 
 		virtual void Render() = 0;
+		virtual Geometry* clone() = 0;
 		virtual void ImGuiRender() {}
 		virtual void UpdateTransform();
 		virtual void OnKeyPressed(Histroy::Event& e) {}
