@@ -2,16 +2,16 @@
 #include "CodeTile.h"
 namespace Histroy
 {
-    CodeTile::CodeTile()
-    {
+	CodeTile::CodeTile()
+	{
 		mEvent = nullptr;
 		mTileName = "Tile";
-    }
-    CodeTile::CodeTile(class EventTile* event, const std::string& name) :mEvent(event),mTileName(name)
+	}
+	CodeTile::CodeTile(class EventTile* event, const std::string& name) :mEvent(event), mTileName(name)
 	{
 	}
 
-    CodeTile::~CodeTile()
+	CodeTile::~CodeTile()
 	{
 		delete mEvent;
 	}

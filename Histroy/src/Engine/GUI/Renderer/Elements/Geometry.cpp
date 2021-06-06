@@ -38,7 +38,6 @@ namespace Histroy
 		mModel = glm::rotate(mModel, mRotation, glm::vec3(0.0f, 0.f, 1.f));
 		mModel = glm::scale(mModel, mScale);
 		mMVP = mProj * mView * mModel;
-		//std::cout << "Location: " << mLocation.x << ", " << mLocation.y << std::endl;
 	}
 
 	void Geometry::OnMouseButtonPressed(Histroy::Event& e)
@@ -54,7 +53,6 @@ namespace Histroy
     {
 		mCodeHandler->EventHappened(e);
     }
-
 	int Geometry::AssignIdNumber()
 	{
 		if (Application::sGeometries.size() != 0)

@@ -14,7 +14,7 @@ namespace Histroy
 		void MouseButtonPressed(Event& e);
 		void MouseButtonReleased(Event& e);
 
-		inline void SetActors(std::vector<Geometry*> actors) { mActors = actors; }
+		void SetActors(std::vector<Geometry*> actors);
 		inline void AddActor(Geometry* actor) { mActors.push_back(actor); }
 	private:
 		std::vector<Geometry*> mActors;

@@ -29,4 +29,12 @@ namespace Histroy
 	void Program::MouseButtonReleased(Event& e)
 	{
 	}
+    void Program::SetActors(std::vector<Geometry*> actors)
+    {
+		mActors.clear();
+		for (auto actor : actors)
+		{
+			mActors.push_back(actor);
+		}
+    }
 }

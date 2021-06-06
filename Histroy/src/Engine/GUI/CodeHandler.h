@@ -12,6 +12,8 @@ namespace Histroy
 		void RenderImGui();
 		void EventHappened(Event& e);
 
+		inline std::vector<std::shared_ptr<EventTile>> GetEvents() const { return mEvents; }
+
 		//Events
 		bool OnBeginPlay(Event& e);
 	private:

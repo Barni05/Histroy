@@ -114,6 +114,9 @@
     <ClCompile Include="src\Engine\Layers\GameLayer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Engine\GUI\CodeTiles\ExecutableTile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\hspch.h">
@@ -1095,6 +1098,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Engine\Layers\GameLayer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\GUI\CodeTiles\ExecutableTile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

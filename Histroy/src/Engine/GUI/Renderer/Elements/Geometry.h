@@ -7,6 +7,7 @@
 #include "Engine/GUI/CodeTiles/BeginPlayTile.h"
 namespace Histroy
 {
+	class CodeHandler;
 	class Geometry
 	{
 	public:
@@ -22,6 +23,10 @@ namespace Histroy
 		virtual void OnMouseButtonPressed(Histroy::Event& e);
 		virtual void OnMouseButtonReleased(Histroy::Event& e) {}
 		void EventHappened(Event& e);
+
+
+		inline std::shared_ptr<CodeHandler> GetCodeHandler() const { return mCodeHandler; }
+		inline void SetCodeHandler(std::shared_ptr<CodeHandler> codeHandler) { mCodeHandler = codeHandler; }
 
 		inline std::string GetID() const { return mID; }
 		inline std::string GetName() const { return mName; }
@@ -44,7 +49,7 @@ namespace Histroy
 		int mGeometryNumber;
 		char* mBufferID;
 
-		std::shared_ptr<class CodeHandler> mCodeHandler;
+		std::shared_ptr<CodeHandler> mCodeHandler;
 
 		bool IsObjectPressed(int, int, float[]);
 	};

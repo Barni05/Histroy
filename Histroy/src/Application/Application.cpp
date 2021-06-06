@@ -205,7 +205,6 @@ namespace Histroy
 	{
 		if (rs.GetWindowTitle() == windowName)
 		{
-			std::cout << windowName << std::endl;
 			detailsToUpdate.height = rs.GetHeight();
 			detailsToUpdate.width = rs.GetWidth();
 		}

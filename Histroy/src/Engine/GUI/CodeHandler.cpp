@@ -4,12 +4,14 @@ namespace Histroy
 {
 	CodeHandler::CodeHandler()
 	{
+
 	}
 	CodeHandler::~CodeHandler()
 	{
 	}
 	void CodeHandler::Init(Geometry* actor)
 	{
+		mEvents.clear();
 		mEvents.push_back(std::make_shared<BeginPlayTile>(actor, "Begin Play"));
 		mEvents.push_back(std::make_shared<TickTile>(actor, "Tick"));
 		mSelectedEvent = mEvents[0];
@@ -20,7 +22,7 @@ namespace Histroy
 		//Menu
 		ImGui::BeginMenuBar();
 		Menus::AddMenuItem("Mobility", "Move To", [=]() {
-			mSelectedEvent->AddTile(new MoveToTile(mSelectedEvent.get(), 100, 100, 0.00001f));
+			mSelectedEvent->AddTile(new MoveToTile(mSelectedEvent.get(), 300, 300, 0.1f));
 			});
 		ImGui::EndMenuBar();
 		std::string text = "Selected Event: " + mSelectedEvent->GetName();
@@ -66,7 +68,7 @@ namespace Histroy
 	}
 	bool CodeHandler::OnBeginPlay(Event& e)
 	{
-		auto bp = GetEventByName("Begin Play");
+		EventTile* bp = GetEventByName("Begin Play").get();
 		if (bp)
 		{
 			bp->Execute(e);

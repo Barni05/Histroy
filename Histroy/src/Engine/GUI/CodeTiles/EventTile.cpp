@@ -15,6 +15,7 @@ namespace Histroy
     {
 		for (auto tile : mCodeTiles)
 		{
+			mCurrTile = tile;
 			tile->Execute();
 		}
     }

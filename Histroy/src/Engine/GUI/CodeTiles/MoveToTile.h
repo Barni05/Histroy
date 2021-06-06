@@ -1,16 +1,15 @@
 #pragma once
-#include "CodeTile.h"
+#include "ExecutableTile.h"
 #include "hspch.h"
 namespace Histroy
 {
-	class MoveToTile :
-		public CodeTile
+	class ExecutableTile;
+	class MoveToTile : public ExecutableTile
 	{
 	public:
 		MoveToTile(EventTile* event, int x, int y, float speed);
 		~MoveToTile();
 
-		void HeadTowardsGoal();
 		void Execute() override;
 	private:
 		float mX, mY;
