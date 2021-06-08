@@ -4,7 +4,7 @@ namespace Histroy
 {
 	CodeHandler::CodeHandler()
 	{
-
+		bDetailsOpen = false;
 	}
 	CodeHandler::~CodeHandler()
 	{
@@ -22,8 +22,20 @@ namespace Histroy
 		//Menu
 		ImGui::BeginMenuBar();
 		Menus::AddMenuItem("Mobility", "Move To", [=]() {
-			mSelectedEvent->AddTile(new MoveToTile(mSelectedEvent.get(), 300, 300, 0.1f));
+			MoveToTile* tile = new MoveToTile(mSelectedEvent.get(), 300, 300, 0.1f);
+			mTileDetails = std::bind(&CodeTile::RenderImGui, tile);
+			bDetailsOpen = true;
+			mSelectedEvent->AddTile(tile);
 			});
+		if (mTileDetails && bDetailsOpen)
+		{
+			ImGui::OpenPopup("Details");
+			if (ImGui::BeginPopupModal("Details", &bDetailsOpen))
+			{
+				mTileDetails();
+				ImGui::EndPopup();
+			}
+		}
 		ImGui::EndMenuBar();
 		std::string text = "Selected Event: " + mSelectedEvent->GetName();
 		ImGui::Text(text.c_str());
@@ -53,7 +65,11 @@ namespace Histroy
 					ImGui::TableSetColumnIndex(col);
 					std::vector<CodeTile*> currentTiles = mEvents[col]->GetTiles();
 					if(currentTiles.size()!=0)
-						ImGui::Text(i<currentTiles.size() ? currentTiles[i]->GetTileName().c_str() : "");
+						if (ImGui::Button(i < currentTiles.size() ? currentTiles[i]->GetTileName().c_str() : ""))
+						{
+							bDetailsOpen = true;
+							mTileDetails = std::bind(&CodeTile::RenderImGui, currentTiles[i]);
+						}
 				}
 			}
 			

@@ -8,7 +8,6 @@ namespace Histroy
 		~GameLayer();
 
 		void UpdateViewport();
-		void UpdateCodeTiles();
 		void PlayGame();
 		void CopyActors();
 

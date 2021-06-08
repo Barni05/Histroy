@@ -21,13 +21,6 @@ namespace Histroy
 		mGameViewportDetails.x = 0;
 		mGameViewportDetails.y = 0;
 	}
-	void GameLayer::UpdateCodeTiles()
-	{
-		for (auto actor : mActors)
-		{
-			//actor->UpdateCode();
-		}
-	}
 	void GameLayer::PlayGame()
 	{
 		std::thread t(Start, this);
@@ -60,7 +53,6 @@ namespace Histroy
 
 		BeginPlay bp(layer->mGameViewport);
 		layer->mProgram.BeginPlay(bp);
-		std::cout << "MOveToTile:" << layer->mActors[0]->GetLocation().x << ";" << layer->mActors[0]->GetLocation().y << std::endl;
 
 		while (!glfwWindowShouldClose(layer->mGameViewport->GetWindow()))
 		{

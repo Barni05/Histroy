@@ -9,7 +9,7 @@ namespace Histroy
 	public:
 		MoveToTile(EventTile* event, int x, int y, float speed);
 		~MoveToTile();
-
+		void RenderImGui() override;
 		void Execute() override;
 	private:
 		float mX, mY;

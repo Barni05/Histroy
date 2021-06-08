@@ -19,4 +19,7 @@ namespace Histroy
 	void CodeTile::Execute()
 	{
 	}
+    void CodeTile::RenderImGui()
+    {
+    }
 }

@@ -20,6 +20,8 @@ namespace Histroy
 		//Events
 		std::vector<std::shared_ptr<EventTile>> mEvents;
 		std::shared_ptr<Histroy::EventTile> mSelectedEvent;
+		std::function<void()> mTileDetails;
+		bool bDetailsOpen;
 
 		int GetMostInstruction(); //takes the number of instructions of all events and returns the biggest
 		std::shared_ptr<EventTile> GetEventByName(const std::string& name);
