@@ -7,15 +7,15 @@ namespace Histroy
 	class MoveToTile : public ExecutableTile
 	{
 	public:
-		MoveToTile(EventTile* event, int x, int y, float speed);
+		MoveToTile(EventTile* event, glm::vec2 dest, float speed);
 		~MoveToTile();
 		void RenderImGui() override;
 		void Execute() override;
 
 
 	private:
-		float mX, mY;
-		float currLocX, currLocY;
+		glm::vec2 mDestination;
+		glm::vec2 mCurrLoc;
 		float mSpeed; //speed = pixel per frame
 	};
 
