@@ -23,7 +23,6 @@ namespace Histroy
 	void MoveToTile::Execute()
 	{
 		std::thread t([=]() {
-			int a = 0;
 			while (int(currLocX) != int(mX) && int(currLocY) != int(mY))
 			{
 				currLocX += mSpeed;
@@ -31,14 +30,7 @@ namespace Histroy
 				mEvent->GetActor()->SetLocation(currLocX, currLocY);
 				std::this_thread::sleep_for(std::chrono::microseconds(2));
 			}
-			for (auto actor : Application::sGeometries)
-			{
-				if (mEvent->GetActor()->GetID() == actor->GetID())
-				{
-					currLocX = actor->GetLocation().x;
-					currLocY = actor->GetLocation().y;
-				}
-			}
+			ExecutableTile::QueryCurrLocation(this, currLocX, currLocY);
 			});
 		t.detach();
 	}

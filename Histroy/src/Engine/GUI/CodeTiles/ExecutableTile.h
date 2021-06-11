@@ -6,7 +6,7 @@ namespace Histroy
 	class ExecutableTile : public CodeTile
 	{
 	public:
-		virtual void UpdateExecution();
+		static void QueryCurrLocation(ExecutableTile* tile, float& x, float& y);
 
 	};
 
